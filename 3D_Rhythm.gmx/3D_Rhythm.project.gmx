@@ -4,10 +4,25 @@
     <Config>Configs\Default</Config>
   </Configs>
   <NewExtensions/>
-  <sounds name="sound"/>
+  <sounds name="sound">
+    <sound>sound\snd_LOCA</sound>
+  </sounds>
   <sprites name="sprites"/>
   <backgrounds name="background"/>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <script>scripts\draw_cube.gml</script>
+  </scripts>
+  <objects name="objects">
+    <object>objects\obj_Camera</object>
+    <object>objects\obj_Cube</object>
+    <object>objects\obj_Spawner</object>
+    <object>objects\obj_Music</object>
+    <object>objects\obj_HUD</object>
+  </objects>
+  <rooms name="rooms">
+    <room>rooms\Main</room>
+  </rooms>
   <help>
     <rtf>help.rtf</rtf>
   </help>
