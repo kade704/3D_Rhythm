@@ -13,6 +13,9 @@
   <scripts name="scripts">
     <script>scripts\draw_cube.gml</script>
   </scripts>
+  <fonts name="fonts">
+    <font>fonts\ft_GeoSans</font>
+  </fonts>
   <objects name="objects">
     <object>objects\obj_Camera</object>
     <object>objects\obj_Cube</object>
@@ -22,6 +25,7 @@
   </objects>
   <rooms name="rooms">
     <room>rooms\Main</room>
+    <room>rooms\room1</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>1000000000</depth>
+  <depth>10000000</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -26,6 +26,14 @@
           <argument>
             <kind>1</kind>
             <string>/// Variables
+
+Px = 0;
+Py = 0;
+Pz = 0;
+
+Vx = 0;
+Vy = 0;
+Vz = 0;
 
 Yaw = 0;
 Pitch = 0;

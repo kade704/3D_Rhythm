@@ -27,13 +27,19 @@
             <kind>1</kind>
             <string>/// Variables
 
-px = 0;
-py = 0;
-pz = 0;
+Px = 0;
+Py = 0;
+Pz = 0;
 
-Size = 60;
+Vx = 0;
+Vy = 0;
+Vz = 0;
 
-ScaleSpeed = 0.7;
+LifeRate = 0;
+SpawnTime = 0;
+
+StartSize = 200;
+CurrentSize = StartSize;
 </string>
           </argument>
         </arguments>
@@ -56,9 +62,13 @@ ScaleSpeed = 0.7;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>Size -= ScaleSpeed;
+            <string>CurrentSize = (1 - ((current_time - SpawnTime) / LifeRate)) * StartSize;
 
-if(Size &lt; 0) instance_destroy(self);
+if(CurrentSize &lt; 0) instance_destroy(self);
+
+Px += Vx;
+Py += Vy;
+Pz += Vz;
 </string>
           </argument>
         </arguments>
@@ -81,12 +91,15 @@ if(Size &lt; 0) instance_destroy(self);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var cx = window_get_width() / 2;
+            <string>var g = (1 - abs(CurrentSize - 30) / (StartSize - 30)) * 255;
+
+var cx = window_get_width() / 2;
 var cy = window_get_height() / 2;
 
 d3d_transform_set_identity();
 d3d_transform_add_translation(cx, cy, 0);
-draw_cube(Size);
+d3d_transform_add_translation(Px, Py, Pz);
+draw_cube(CurrentSize, make_colour_rgb(g, g, g));
 d3d_transform_set_identity();
 </string>
           </argument>
