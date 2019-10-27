@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>10000000</depth>
+  <depth>0</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -35,41 +35,8 @@ Vx = 0;
 Vy = 0;
 Vz = 0;
 
-Yaw = 0;
-Pitch = 0;
-Roll = 0;
-
-Scale = 500;
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Initialize d3d
-
-d3d_start();
-d3d_set_perspective(true);
-d3d_set_hidden(true);
-d3d_set_lighting(false);
-d3d_set_culling(false);
-d3d_set_shading(false);
-draw_set_colour(c_white);
-
+Size = 30;
+Color = make_colour_rgb(128, 255, 0);
 </string>
           </argument>
         </arguments>
@@ -92,8 +59,9 @@ draw_set_colour(c_white);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Pitch += 0.1;
-//Yaw += 0.2;
+            <string>Px += Vx;
+Py += Vy;
+Pz += Vz;
 </string>
           </argument>
         </arguments>
@@ -116,14 +84,14 @@ draw_set_colour(c_white);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var vx = lengthdir_x(lengthdir_x(1, Yaw), Pitch) * Scale;
-var vy = lengthdir_x(lengthdir_y(1, Yaw), Pitch) * Scale;
-var vz = lengthdir_y(1, Pitch)                   * Scale;
-
-var cx = window_get_width() / 2;
+            <string>var cx = window_get_width() / 2;
 var cy = window_get_height() / 2;
 
-d3d_set_projection(cx + vx, cy + vy, vz, cx, cy, 0, 0, 0, 1);
+d3d_transform_set_identity();
+d3d_transform_add_translation(cx, cy, 0);
+d3d_transform_add_translation(Px, Py, Pz);
+draw_cube(Size, Color);
+d3d_transform_set_identity();
 </string>
           </argument>
         </arguments>

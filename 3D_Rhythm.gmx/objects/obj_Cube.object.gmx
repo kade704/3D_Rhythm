@@ -31,15 +31,9 @@ Px = 0;
 Py = 0;
 Pz = 0;
 
-Vx = 0;
-Vy = 0;
-Vz = 0;
-
-LifeRate = 0;
-SpawnTime = 0;
-
-StartSize = 200;
-CurrentSize = StartSize;
+Rx = 0;
+Ry = 0;
+Rz = 0;
 </string>
           </argument>
         </arguments>
@@ -62,13 +56,10 @@ CurrentSize = StartSize;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>CurrentSize = (1 - ((current_time - SpawnTime) / LifeRate)) * StartSize;
+            <string>Py = cos(current_time * 0.01) * 15;
+Pz = sin(current_time * 0.01) * 15;
 
-if(CurrentSize &lt; 0) instance_destroy(self);
-
-Px += Vx;
-Py += Vy;
-Pz += Vz;
+Rx = point_direction(0, 0, Px, Py);
 </string>
           </argument>
         </arguments>
@@ -91,15 +82,16 @@ Pz += Vz;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var g = (1 - abs(CurrentSize - 30) / (StartSize - 30)) * 255;
-
-var cx = window_get_width() / 2;
+            <string>var cx = window_get_width() / 2;
 var cy = window_get_height() / 2;
 
 d3d_transform_set_identity();
+d3d_transform_set_rotation_x(Rx);
+d3d_transform_set_rotation_x(Ry);
+d3d_transform_set_rotation_x(Rz);
 d3d_transform_add_translation(cx, cy, 0);
 d3d_transform_add_translation(Px, Py, Pz);
-draw_cube(CurrentSize, make_colour_rgb(g, g, g));
+draw_cube(30, make_colour_rgb(255, 128, 0));
 d3d_transform_set_identity();
 </string>
           </argument>

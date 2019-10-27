@@ -29,7 +29,7 @@
 
 MusicBpm[0] = 134;
 
-//audio_play_sound(snd_LOCA, 10, false);
+audio_play_sound(snd_LOCA, 10, false);
 </string>
           </argument>
         </arguments>

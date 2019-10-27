@@ -27,6 +27,8 @@
             <kind>1</kind>
             <string>SpawnRate = (1 / (obj_Music.MusicBpm[obj_Music.CurrentMusic] / 60)) * 1000;
 NextSpawnTime = SpawnRate;
+
+instance_create(0, 0, obj_Trigger);
 </string>
           </argument>
         </arguments>

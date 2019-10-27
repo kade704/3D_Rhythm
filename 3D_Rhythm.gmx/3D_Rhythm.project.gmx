@@ -19,6 +19,7 @@
   <objects name="objects">
     <object>objects\obj_Camera</object>
     <object>objects\obj_Cube</object>
+    <object>objects\obj_Trigger</object>
     <object>objects\obj_Spawner</object>
     <object>objects\obj_Music</object>
     <object>objects\obj_HUD</object>
