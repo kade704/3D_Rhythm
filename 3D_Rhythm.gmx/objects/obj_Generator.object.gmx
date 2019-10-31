@@ -51,10 +51,22 @@ show_debug_message(Length);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>a = matrix_build(10, 0, 0, 0, 0, 0, 1, 1, 1);
-
-matrix_set(matrix_world, a);
+            <string>d3d_transform_set_identity();
+matrix = matrix_get(matrix_world);
 draw_quad(10, make_colour_rgb(255, 255, 255));
+
+matrix = matrix_multiply(matrix, matrix_build(10, 0, 0, 0, 0, 0, 1, 1, 1));
+
+draw_quad(10, make_colour_rgb(255, 255, 255));
+matrix = matrix_multiply(matrix, matrix_build(5, 5, 0, 0, 0, 0, 1, 1, 1));
+matrix = matrix_multiply(matrix, matrix_build(0, 0, 0, 0, 0, 90, 1, 1, 1));
+matrix = matrix_multiply(matrix, matrix_build(0, 0, 0, 0, 20, 90, 1, 1, 1));
+
+
+matrix_set(matrix_world, matrix);
+draw_quad(10, make_colour_rgb(255, 255, 255));
+
+d3d_transform_set_identity();
 </string>
           </argument>
         </arguments>
