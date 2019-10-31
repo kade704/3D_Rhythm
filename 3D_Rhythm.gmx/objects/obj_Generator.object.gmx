@@ -25,16 +25,16 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>SpawnRate = (1 / (obj_Music.MusicBpm[obj_Music.CurrentMusic] / 60)) * 1000;
-NextSpawnTime = SpawnRate;
+            <string>Data = get_song_data("asd.txt");
+Length = array_height_2d(Data);
+show_debug_message(Length);
 
-instance_create(0, 0, obj_Trigger);
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="3" enumb="0">
+    <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -51,14 +51,10 @@ instance_create(0, 0, obj_Trigger);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(NextSpawnTime &lt; current_time) 
-{
-    NextSpawnTime += SpawnRate;
-    var cube = instance_create(0, 0, obj_Cube); 
-    cube.LifeRate = SpawnRate * 4;
-    cube.SpawnTime = current_time;
-    show_debug_message(current_time);
-}
+            <string>a = matrix_build(10, 0, 0, 0, 0, 0, 1, 1, 1);
+
+matrix_set(matrix_world, a);
+draw_quad(10, make_colour_rgb(255, 255, 255));
 </string>
           </argument>
         </arguments>

@@ -12,6 +12,8 @@
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\draw_cube.gml</script>
+    <script>scripts\draw_quad.gml</script>
+    <script>scripts\get_song_data.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_GeoSans</font>
@@ -19,14 +21,12 @@
   <objects name="objects">
     <object>objects\obj_Camera</object>
     <object>objects\obj_Cube</object>
-    <object>objects\obj_Trigger</object>
-    <object>objects\obj_Spawner</object>
     <object>objects\obj_Music</object>
     <object>objects\obj_HUD</object>
+    <object>objects\obj_Generator</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\Main</room>
-    <room>rooms\room1</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

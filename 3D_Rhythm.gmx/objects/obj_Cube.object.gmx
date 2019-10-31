@@ -32,7 +32,7 @@ Py = 0;
 Pz = 0;
 
 Rx = 0;
-Ry = 0;
+Ry = 90;
 Rz = 0;
 </string>
           </argument>
@@ -56,11 +56,7 @@ Rz = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>Py = cos(current_time * 0.01) * 15;
-Pz = sin(current_time * 0.01) * 15;
-
-Rx = point_direction(0, 0, Px, Py);
-</string>
+            <string></string>
           </argument>
         </arguments>
       </action>
@@ -86,12 +82,11 @@ Rx = point_direction(0, 0, Px, Py);
 var cy = window_get_height() / 2;
 
 d3d_transform_set_identity();
-d3d_transform_set_rotation_x(Rx);
-d3d_transform_set_rotation_x(Ry);
-d3d_transform_set_rotation_x(Rz);
-d3d_transform_add_translation(cx, cy, 0);
+d3d_transform_add_rotation_x(Rx);
+d3d_transform_add_rotation_y(Ry);
+d3d_transform_add_rotation_z(Rz);
 d3d_transform_add_translation(Px, Py, Pz);
-draw_cube(30, make_colour_rgb(255, 128, 0));
+draw_cube(10, make_colour_rgb(128, 255, 0), current_time * -0.1);
 d3d_transform_set_identity();
 </string>
           </argument>

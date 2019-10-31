@@ -31,15 +31,9 @@ Px = 0;
 Py = 0;
 Pz = 0;
 
-Vx = 0;
-Vy = 0;
-Vz = 0;
+Angle = 0;
 
-Yaw = 0;
-Pitch = 0;
-Roll = 0;
-
-Scale = 500;
+Scale = 150;
 </string>
           </argument>
         </arguments>
@@ -92,8 +86,10 @@ draw_set_colour(c_white);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Pitch += 0.1;
-//Yaw += 0.2;
+            <string>var a = keyboard_check_direct(ord('A'));
+var d = keyboard_check_direct(ord('D'));
+
+Angle += (-a + d) * 0.5;
 </string>
           </argument>
         </arguments>
@@ -116,14 +112,11 @@ draw_set_colour(c_white);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var vx = lengthdir_x(lengthdir_x(1, Yaw), Pitch) * Scale;
-var vy = lengthdir_x(lengthdir_y(1, Yaw), Pitch) * Scale;
-var vz = lengthdir_y(1, Pitch)                   * Scale;
+            <string>var vx = cos(degtorad(Angle)) * Scale;
+var vy = sin(degtorad(Angle)) * Scale;
+var vz = Scale;
 
-var cx = window_get_width() / 2;
-var cy = window_get_height() / 2;
-
-d3d_set_projection(cx + vx, cy + vy, vz, cx, cy, 0, 0, 0, 1);
+d3d_set_projection(vx, vy, vz, 0, 0, 0, 0, 0, 1);
 </string>
           </argument>
         </arguments>
