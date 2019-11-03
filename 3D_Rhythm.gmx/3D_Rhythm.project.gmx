@@ -13,10 +13,12 @@
   <scripts name="scripts">
     <script>scripts\draw_cube.gml</script>
     <script>scripts\draw_quad.gml</script>
+    <script>scripts\draw_axis.gml</script>
     <script>scripts\get_song_data.gml</script>
     <script>scripts\rotate_x.gml</script>
     <script>scripts\rotate_y.gml</script>
     <script>scripts\rotate_z.gml</script>
+    <script>scripts\cross.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_GeoSans</font>
@@ -27,6 +29,7 @@
     <object>objects\obj_Music</object>
     <object>objects\obj_HUD</object>
     <object>objects\obj_Generator</object>
+    <object>objects\obj_Axis</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\Main</room>

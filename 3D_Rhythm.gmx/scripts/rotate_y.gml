@@ -1,4 +1,7 @@
-var angle = argument0;
+var vx = argument0;
+var vy = argument1;
+var vz = argument2;
+var angle = argument3;
 
 _matrix[0, 0] = cos(degtorad(angle));
 _matrix[0, 1] = 0;
@@ -20,5 +23,9 @@ _matrix[3, 1] = 0;
 _matrix[3, 2] = 0;
 _matrix[3, 3] = 1;
 
-matrix = matrix_multiply(matrix, _matrix);
-matrix_set(matrix_world, matrix);
+for(var i = 0; i < 4; i++)
+{
+    result[i] = (_matrix[i, 0] * vx) + (_matrix[i, 1] * vy) + (_matrix[i, 2] * vz) + (_matrix[i, 3] * 1)
+}
+
+return result;

@@ -51,22 +51,37 @@ show_debug_message(Length);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>d3d_transform_set_identity();
-matrix = matrix_get(matrix_world);
-draw_quad(10, make_colour_rgb(255, 255, 255));
+            <string>var colour = make_colour_rgb(255, 255, 255);
 
-matrix = matrix_multiply(matrix, matrix_build(10, 0, 0, 0, 0, 0, 1, 1, 1));
+vertices[0, 0] = 0;
+vertices[0, 1] = -5;
+vertices[0, 2] = 0;
 
-draw_quad(10, make_colour_rgb(255, 255, 255));
-matrix = matrix_multiply(matrix, matrix_build(5, 5, 0, 0, 0, 0, 1, 1, 1));
-matrix = matrix_multiply(matrix, matrix_build(0, 0, 0, 0, 0, 90, 1, 1, 1));
-matrix = matrix_multiply(matrix, matrix_build(0, 0, 0, 0, 20, 90, 1, 1, 1));
+vertices[1, 0] = 0;
+vertices[1, 1] = 5;
+vertices[1, 2] = 0;
 
-
-matrix_set(matrix_world, matrix);
-draw_quad(10, make_colour_rgb(255, 255, 255));
+var length = array_height_2d(vertices);
 
 d3d_transform_set_identity();
+d3d_primitive_begin(pr_linelist);
+for(var i = 0; i &lt; lenght; i++)
+{
+    d3d_vertex_colour(vertices[i, 0], vertices[i, 1], vertices[i, 2], colour, 1);
+}
+d3d_primitive_end();
+d3d_transform_set_identity();
+
+
+
+
+
+
+
+
+
+
+
 </string>
           </argument>
         </arguments>
