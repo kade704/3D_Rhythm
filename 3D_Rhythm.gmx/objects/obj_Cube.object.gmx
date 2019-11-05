@@ -27,13 +27,8 @@
             <kind>1</kind>
             <string>/// Variables
 
-Px = 0;
-Py = 0;
-Pz = 0;
-
-Rx = 0;
-Ry = 90;
-Rz = 0;
+global.CubeIndex = 1;
+global.CubeAngle = 0;
 </string>
           </argument>
         </arguments>
@@ -56,7 +51,24 @@ Rz = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string></string>
+            <string>global.CubeAngle += -keyboard_check(ord('Q')) * 4;
+global.CubeAngle %= 360;
+if(keyboard_check_pressed(vk_left) &amp;&amp; global.CubeIndex &gt; 1)
+{
+    global.CubeIndex--;
+    if(global.Data[global.CubeIndex - 1, 1] == 0.5)
+        global.CubeAngle = -45;
+    else global.CubeAngle = 0;
+}
+if(keyboard_check_pressed(vk_right) &amp;&amp; global.CubeIndex &lt; global.Length)
+{
+    global.CubeIndex++;
+    if(global.Data[global.CubeIndex - 1, 1] == 0.5)
+        global.CubeAngle = -45;
+    else global.CubeAngle = 0;
+}
+
+</string>
           </argument>
         </arguments>
       </action>
@@ -78,16 +90,7 @@ Rz = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var cx = window_get_width() / 2;
-var cy = window_get_height() / 2;
-
-d3d_transform_set_identity();
-d3d_transform_add_rotation_x(Rx);
-d3d_transform_add_rotation_y(Ry);
-d3d_transform_add_rotation_z(Rz);
-d3d_transform_add_translation(Px, Py, Pz);
-draw_cube(10, make_colour_rgb(128, 255, 0), current_time * -0.1);
-d3d_transform_set_identity();
+            <string>draw_cube(global.CubeIndex * 4, make_colour_rgb(122, 122, 255), global.CubeAngle);
 </string>
           </argument>
         </arguments>

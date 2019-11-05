@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>global.EnableAxis = true;
+            <string>global.EnableAxis = false;
 </string>
           </argument>
         </arguments>

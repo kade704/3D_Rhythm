@@ -27,13 +27,17 @@
             <kind>1</kind>
             <string>/// Variables
 
-global.Px = 0;
-global.Py = 0;
-global.Pz = 0;
+CameraX = 0;
+CameraY = 0;
+CameraZ = 0;
 
-Angle = 0;
+TargetX = 0;
+TargetY = 0;
+TargetZ = 0;
 
-Scale = 150;
+Scale = 120;
+Angle = -40;
+SmoothSpeed = 0.1;
 </string>
           </argument>
         </arguments>
@@ -86,14 +90,31 @@ draw_set_colour(c_white);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var a = keyboard_check_direct(ord('A'));
-var d = keyboard_check_direct(ord('D'));
+            <string>var index = global.CubeIndex * 4;
 
-Angle += (-a + d) * 0.5;
+var vx = global.Vertices[index + 1, 0] - global.Vertices[index + 2, 0];
+var vy = global.Vertices[index + 1, 1] - global.Vertices[index + 2, 1];
+var vz = global.Vertices[index + 1, 2] - global.Vertices[index + 2, 2];
+var vv = normalize(vx, vy, vz);
 
-var global.Px = cos(degtorad(Angle)) * Scale;
-var global.Py = sin(degtorad(Angle)) * Scale;
-var global.Pz = Scale;
+var px = global.Vertices[index + 1, 0] + (vx / 2);
+var py = global.Vertices[index + 1, 1] + (vy / 2);
+var pz = global.Vertices[index + 1, 2] + (vz / 2);
+
+show_debug_message(px);
+show_debug_message(py);
+show_debug_message(pz);
+show_debug_message("");
+
+var u = normalize(global.Vertices[index + 0, 0] - global.Vertices[index + 3, 0], global.Vertices[index + 0, 1] - global.Vertices[index + 3, 1], global.Vertices[index + 0, 2] - global.Vertices[index + 3, 2]);
+var v = rotate_axis(vv[0] * Scale, vv[1] * Scale, vv[2] * Scale, u[0], u[1], u[2], Angle);
+
+TargetX = lerp(TargetX, px, SmoothSpeed);
+TargetY = lerp(TargetY, py, SmoothSpeed);
+TargetZ = lerp(TargetZ, pz, SmoothSpeed);
+CameraX = lerp(CameraX, px + v[0], SmoothSpeed);
+CameraY = lerp(CameraY, py + v[1], SmoothSpeed);
+CameraZ = lerp(CameraZ, pz + v[2], SmoothSpeed);
 </string>
           </argument>
         </arguments>
@@ -116,7 +137,9 @@ var global.Pz = Scale;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>d3d_set_projection(global.Px, global.Py, global.Pz, 0, 0, 0, 0, 0, 1);
+            <string>var aspect = window_get_width() / window_get_height();
+
+d3d_set_projection_ext(CameraX, CameraY, CameraZ, TargetX, TargetY, TargetZ, 0, 0, 1, 45, aspect, 0.1, 1000);
 </string>
           </argument>
         </arguments>

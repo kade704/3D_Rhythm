@@ -26,9 +26,9 @@
           <argument>
             <kind>1</kind>
             <string>/// Load Song and Initialization Data
-Data = get_song_data("asd.txt");
-Length = array_height_2d(Data);
-Vertices = noone;
+global.Data = get_song_data("asd.txt");
+global.Length = array_height_2d(global.Data);
+global.Vertices = noone;
 </string>
           </argument>
         </arguments>
@@ -49,97 +49,97 @@ Vertices = noone;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Initialization Vertices
+            <string>///Initialization global.Vertices
 
-Vertices[0, 0] = 0;
-Vertices[0, 1] = -5;
-Vertices[0, 2] = 0;
+global.Vertices[0, 0] = 0;
+global.Vertices[0, 1] = -5;
+global.Vertices[0, 2] = 0;
 
-Vertices[1, 0] = 0;
-Vertices[1, 1] = 5;
-Vertices[1, 2] = 0;
+global.Vertices[1, 0] = 0;
+global.Vertices[1, 1] = 5;
+global.Vertices[1, 2] = 0;
 
-Vertices[2, 0] = 10;
-Vertices[2, 1] = -5;
-Vertices[2, 2] = 0;
+global.Vertices[2, 0] = 10;
+global.Vertices[2, 1] = -5;
+global.Vertices[2, 2] = 0;
 
-Vertices[3, 0] = 10;
-Vertices[3, 1] = 5;
-Vertices[3, 2] = 0;
+global.Vertices[3, 0] = 10;
+global.Vertices[3, 1] = 5;
+global.Vertices[3, 2] = 0;
 
-for(var i = 0; i &lt; Length; i++)
+for(var i = 0; i &lt; global.Length; i++)
 {
     var current = i * 4;
     var next = (i + 1) * 4;
 
-    if(Data[i, 0] == -1)
+    if(global.Data[i, 0] == -1)
     {  
-        var u = normalize(Vertices[current + 2, 0] - Vertices[current, 0], Vertices[current + 2, 1] - Vertices[current, 1], Vertices[current + 2, 2] - Vertices[current, 2]);
+        var u = normalize(global.Vertices[current + 2, 0] - global.Vertices[current, 0], global.Vertices[current + 2, 1] - global.Vertices[current, 1], global.Vertices[current + 2, 2] - global.Vertices[current, 2]);
     
-        var v1 = rotate_axis(Vertices[current, 0] - Vertices[current + 1, 0], Vertices[current, 1] - Vertices[current + 1, 1], Vertices[current, 2] - Vertices[current + 1, 2], u[0], u[1], u[2], 90 - (Data[i, 1] * 90));
-        var v2 = rotate_axis(Vertices[current + 2, 0] - Vertices[current + 3, 0], Vertices[current + 2, 1] - Vertices[current + 3, 1], Vertices[current + 2, 2] - Vertices[current + 3, 2], u[0], u[1], u[2], 90 - (Data[i, 1] * 90));
+        var v1 = rotate_axis(global.Vertices[current, 0] - global.Vertices[current + 1, 0], global.Vertices[current, 1] - global.Vertices[current + 1, 1], global.Vertices[current, 2] - global.Vertices[current + 1, 2], u[0], u[1], u[2], 90 - (global.Data[i, 1] * 90));
+        var v2 = rotate_axis(global.Vertices[current + 2, 0] - global.Vertices[current + 3, 0], global.Vertices[current + 2, 1] - global.Vertices[current + 3, 1], global.Vertices[current + 2, 2] - global.Vertices[current + 3, 2], u[0], u[1], u[2], 90 - (global.Data[i, 1] * 90));
     
-        Vertices[next, 0] = Vertices[current, 0];
-        Vertices[next, 1] = Vertices[current, 1];
-        Vertices[next, 2] = Vertices[current, 2];
+        global.Vertices[next, 0] = global.Vertices[current, 0];
+        global.Vertices[next, 1] = global.Vertices[current, 1];
+        global.Vertices[next, 2] = global.Vertices[current, 2];
         
-        Vertices[next + 1, 0] = Vertices[current + 2, 0];
-        Vertices[next + 1, 1] = Vertices[current + 2, 1];
-        Vertices[next + 1, 2] = Vertices[current + 2, 2];
+        global.Vertices[next + 1, 0] = global.Vertices[current + 2, 0];
+        global.Vertices[next + 1, 1] = global.Vertices[current + 2, 1];
+        global.Vertices[next + 1, 2] = global.Vertices[current + 2, 2];
         
-        Vertices[next + 2, 0] = Vertices[current + 0, 0] + v1[0]; 
-        Vertices[next + 2, 1] = Vertices[current + 0, 1] + v1[1];
-        Vertices[next + 2, 2] = Vertices[current + 0, 2] + v1[2];
+        global.Vertices[next + 2, 0] = global.Vertices[current + 0, 0] + v1[0]; 
+        global.Vertices[next + 2, 1] = global.Vertices[current + 0, 1] + v1[1];
+        global.Vertices[next + 2, 2] = global.Vertices[current + 0, 2] + v1[2];
             
-        Vertices[next + 3, 0] = Vertices[current + 2, 0] + v2[0]; 
-        Vertices[next + 3, 1] = Vertices[current + 2, 1] + v2[1];
-        Vertices[next + 3, 2] = Vertices[current + 2, 2] + v2[2];
+        global.Vertices[next + 3, 0] = global.Vertices[current + 2, 0] + v2[0]; 
+        global.Vertices[next + 3, 1] = global.Vertices[current + 2, 1] + v2[1];
+        global.Vertices[next + 3, 2] = global.Vertices[current + 2, 2] + v2[2];
     }
-    else if(Data[i, 0] == 1)
+    else if(global.Data[i, 0] == 1)
     {
-        var u = normalize(Vertices[current + 3, 0] - Vertices[current + 1, 0], Vertices[current + 3, 1] - Vertices[current + 1, 1], Vertices[current + 3, 2] - Vertices[current + 1, 2]);
+        var u = normalize(global.Vertices[current + 3, 0] - global.Vertices[current + 1, 0], global.Vertices[current + 3, 1] - global.Vertices[current + 1, 1], global.Vertices[current + 3, 2] - global.Vertices[current + 1, 2]);
     
-        var v1 = rotate_axis(Vertices[current + 3, 0] - Vertices[current + 2, 0], Vertices[current + 3, 1] - Vertices[current + 2, 1], Vertices[current + 3, 2] - Vertices[current + 2, 2], u[0], u[1], u[2], 90 - (Data[i, 1] * 90));
-        var v2 = rotate_axis(Vertices[current + 1, 0] - Vertices[current, 0], Vertices[current + 1, 1] - Vertices[current, 1], Vertices[current + 1, 2] - Vertices[current, 2], u[0], u[1], u[2], 90 - (Data[i, 1] * 90));
+        var v1 = rotate_axis(global.Vertices[current + 3, 0] - global.Vertices[current + 2, 0], global.Vertices[current + 3, 1] - global.Vertices[current + 2, 1], global.Vertices[current + 3, 2] - global.Vertices[current + 2, 2], u[0], u[1], u[2], 90 - (global.Data[i, 1] * 90));
+        var v2 = rotate_axis(global.Vertices[current + 1, 0] - global.Vertices[current, 0], global.Vertices[current + 1, 1] - global.Vertices[current, 1], global.Vertices[current + 1, 2] - global.Vertices[current, 2], u[0], u[1], u[2], 90 - (global.Data[i, 1] * 90));
     
-        Vertices[next, 0] = Vertices[current + 3, 0];
-        Vertices[next, 1] = Vertices[current + 3, 1];
-        Vertices[next, 2] = Vertices[current + 3, 2];
+        global.Vertices[next, 0] = global.Vertices[current + 3, 0];
+        global.Vertices[next, 1] = global.Vertices[current + 3, 1];
+        global.Vertices[next, 2] = global.Vertices[current + 3, 2];
         
-        Vertices[next + 1, 0] = Vertices[current + 1, 0];
-        Vertices[next + 1, 1] = Vertices[current + 1, 1];
-        Vertices[next + 1, 2] = Vertices[current + 1, 2];
+        global.Vertices[next + 1, 0] = global.Vertices[current + 1, 0];
+        global.Vertices[next + 1, 1] = global.Vertices[current + 1, 1];
+        global.Vertices[next + 1, 2] = global.Vertices[current + 1, 2];
         
-        Vertices[next + 2, 0] = Vertices[current + 3, 0] + v1[0]; 
-        Vertices[next + 2, 1] = Vertices[current + 3, 1] + v1[1];
-        Vertices[next + 2, 2] = Vertices[current + 3, 2] + v1[2];
+        global.Vertices[next + 2, 0] = global.Vertices[current + 3, 0] + v1[0]; 
+        global.Vertices[next + 2, 1] = global.Vertices[current + 3, 1] + v1[1];
+        global.Vertices[next + 2, 2] = global.Vertices[current + 3, 2] + v1[2];
             
-        Vertices[next + 3, 0] = Vertices[current + 1, 0] + v2[0]; 
-        Vertices[next + 3, 1] = Vertices[current + 1, 1] + v2[1];
-        Vertices[next + 3, 2] = Vertices[current + 1, 2] + v2[2];
+        global.Vertices[next + 3, 0] = global.Vertices[current + 1, 0] + v2[0]; 
+        global.Vertices[next + 3, 1] = global.Vertices[current + 1, 1] + v2[1];
+        global.Vertices[next + 3, 2] = global.Vertices[current + 1, 2] + v2[2];
     }
     else
     {
-        var u = normalize(Vertices[current + 2, 0] - Vertices[current + 3, 0], Vertices[current + 2, 1] - Vertices[current + 3, 1], Vertices[current + 2, 2] - Vertices[current + 3, 2]);
+        var u = normalize(global.Vertices[current + 2, 0] - global.Vertices[current + 3, 0], global.Vertices[current + 2, 1] - global.Vertices[current + 3, 1], global.Vertices[current + 2, 2] - global.Vertices[current + 3, 2]);
     
-        var v1 = rotate_axis(Vertices[current + 2, 0] - Vertices[current, 0], Vertices[current + 2, 1] - Vertices[current, 1], Vertices[current + 2, 2] - Vertices[current, 2], u[0], u[1], u[2], 90 - (Data[i, 1] * 90));
-        var v2 = rotate_axis(Vertices[current + 3, 0] - Vertices[current + 1, 0], Vertices[current + 3, 1] - Vertices[current + 1, 1], Vertices[current + 3, 2] - Vertices[current + 1, 2], u[0], u[1], u[2], 90 - (Data[i, 1] * 90));
+        var v1 = rotate_axis(global.Vertices[current + 2, 0] - global.Vertices[current, 0], global.Vertices[current + 2, 1] - global.Vertices[current, 1], global.Vertices[current + 2, 2] - global.Vertices[current, 2], u[0], u[1], u[2], 90 - (global.Data[i, 1] * 90));
+        var v2 = rotate_axis(global.Vertices[current + 3, 0] - global.Vertices[current + 1, 0], global.Vertices[current + 3, 1] - global.Vertices[current + 1, 1], global.Vertices[current + 3, 2] - global.Vertices[current + 1, 2], u[0], u[1], u[2], 90 - (global.Data[i, 1] * 90));
     
-        Vertices[next, 0] = Vertices[current + 2, 0];
-        Vertices[next, 1] = Vertices[current + 2, 1];
-        Vertices[next, 2] = Vertices[current + 2, 2];
+        global.Vertices[next, 0] = global.Vertices[current + 2, 0];
+        global.Vertices[next, 1] = global.Vertices[current + 2, 1];
+        global.Vertices[next, 2] = global.Vertices[current + 2, 2];
         
-        Vertices[next + 1, 0] = Vertices[current + 3, 0];
-        Vertices[next + 1, 1] = Vertices[current + 3, 1];
-        Vertices[next + 1, 2] = Vertices[current + 3, 2];
+        global.Vertices[next + 1, 0] = global.Vertices[current + 3, 0];
+        global.Vertices[next + 1, 1] = global.Vertices[current + 3, 1];
+        global.Vertices[next + 1, 2] = global.Vertices[current + 3, 2];
         
-        Vertices[next + 2, 0] = Vertices[current + 2, 0] + v1[0]; 
-        Vertices[next + 2, 1] = Vertices[current + 2, 1] + v1[1];
-        Vertices[next + 2, 2] = Vertices[current + 2, 2] + v1[2];
+        global.Vertices[next + 2, 0] = global.Vertices[current + 2, 0] + v1[0]; 
+        global.Vertices[next + 2, 1] = global.Vertices[current + 2, 1] + v1[1];
+        global.Vertices[next + 2, 2] = global.Vertices[current + 2, 2] + v1[2];
             
-        Vertices[next + 3, 0] = Vertices[current + 3, 0] + v2[0]; 
-        Vertices[next + 3, 1] = Vertices[current + 3, 1] + v2[1];
-        Vertices[next + 3, 2] = Vertices[current + 3, 2] + v2[2];
+        global.Vertices[next + 3, 0] = global.Vertices[current + 3, 0] + v2[0]; 
+        global.Vertices[next + 3, 1] = global.Vertices[current + 3, 1] + v2[1];
+        global.Vertices[next + 3, 2] = global.Vertices[current + 3, 2] + v2[2];
     }
 }
 </string>
@@ -164,7 +164,7 @@ for(var i = 0; i &lt; Length; i++)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>for(var i = 0; i &lt; (Length + 1); i++)
+            <string>for(var i = 0; i &lt; (global.Length + 1); i++)
 {
     draw_quad(i * 4, make_colour_rgb(255, 255, 255))
 }
