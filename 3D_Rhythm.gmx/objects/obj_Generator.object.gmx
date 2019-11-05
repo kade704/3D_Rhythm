@@ -51,7 +51,7 @@ show_debug_message(Length);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var colour = make_colour_rgb(255, 255, 255);
+            <string>//var vertices = noone;
 
 vertices[0, 0] = 0;
 vertices[0, 1] = -5;
@@ -61,27 +61,52 @@ vertices[1, 0] = 0;
 vertices[1, 1] = 5;
 vertices[1, 2] = 0;
 
-var length = array_height_2d(vertices);
+vertices[2, 0] = 10;
+vertices[2, 1] = -5;
+vertices[2, 2] = 0;
 
-d3d_transform_set_identity();
-d3d_primitive_begin(pr_linelist);
-for(var i = 0; i &lt; lenght; i++)
+vertices[3, 0] = 10;
+vertices[3, 1] = 5;
+vertices[3, 2] = 0;
+
+draw_quad();
+
+
+
+
+for(var i = 0; i &lt; Length; i++)
 {
-    d3d_vertex_colour(vertices[i, 0], vertices[i, 1], vertices[i, 2], colour, 1);
+    var u = normalize(vertices[2, 0] - vertices[3, 0], vertices[2, 1] - vertices[3, 1], vertices[2, 2] - vertices[3, 2]);
+
+    var v1 = rotate_axis(vertices[2, 0] - vertices[0, 0], vertices[2, 1] - vertices[0, 1], vertices[2, 2] - vertices[0, 2], u[0], u[1], u[2], 90 - (Data[i, 1] * 90));
+    var v2 = rotate_axis(vertices[3, 0] - vertices[1, 0], vertices[3, 1] - vertices[1, 1], vertices[3, 2] - vertices[1, 2], u[0], u[1], u[2], 90 - (Data[i, 1] * 90));
+
+    var px1 = vertices[2, 0] + v1[0]; 
+    var py1 = vertices[2, 1] + v1[1];
+    var pz1 = vertices[2, 2] + v1[2];
+        
+    var px2 = vertices[3, 0] + v2[0]; 
+    var py2 = vertices[3, 1] + v2[1];
+    var pz2 = vertices[3, 2] + v2[2];
+        
+    vertices[0, 0] = vertices[2, 0];
+    vertices[0, 1] = vertices[2, 1];
+    vertices[0, 2] = vertices[2, 2];
+        
+    vertices[1, 0] = vertices[3, 0];
+    vertices[1, 1] = vertices[3, 1];
+    vertices[1, 2] = vertices[3, 2];
+        
+    vertices[2, 0] = px1;
+    vertices[2, 1] = py1;
+    vertices[2, 2] = pz1;
+        
+    vertices[3, 0] = px2;
+    vertices[3, 1] = py2;
+    vertices[3, 2] = pz2;
+    
+    draw_quad();
 }
-d3d_primitive_end();
-d3d_transform_set_identity();
-
-
-
-
-
-
-
-
-
-
-
 </string>
           </argument>
         </arguments>

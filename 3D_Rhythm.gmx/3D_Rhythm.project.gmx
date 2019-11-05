@@ -15,10 +15,8 @@
     <script>scripts\draw_quad.gml</script>
     <script>scripts\draw_axis.gml</script>
     <script>scripts\get_song_data.gml</script>
-    <script>scripts\rotate_x.gml</script>
-    <script>scripts\rotate_y.gml</script>
-    <script>scripts\rotate_z.gml</script>
-    <script>scripts\cross.gml</script>
+    <script>scripts\rotate_axis.gml</script>
+    <script>scripts\normalize.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_GeoSans</font>
