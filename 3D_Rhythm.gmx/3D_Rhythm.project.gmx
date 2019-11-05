@@ -26,7 +26,7 @@
     <object>objects\obj_Cube</object>
     <object>objects\obj_Music</object>
     <object>objects\obj_HUD</object>
-    <object>objects\obj_Generator</object>
+    <object>objects\obj_MapGenerator</object>
     <object>objects\obj_Axis</object>
   </objects>
   <rooms name="rooms">
