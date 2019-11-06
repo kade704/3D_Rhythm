@@ -1,12 +1,13 @@
-var x1 = argument0;
-var y1 = argument1; 
-var z1 = argument2; 
-var x2 = argument3; 
-var y2 = argument4; 
-var z2 = argument5; 
+var _x1 = argument0;
+var _y1 = argument1;
+var _z1 = argument2;
+var _x2 = argument3;
+var _y2 = argument4;
+var _z2 = argument5;
 
-result[0] = (y1 * z2) - (z1 * y2);
-result[1] = (z1 * x2) - (x1 * z2);
-result[2] = (x1 * y2) - (y1 * x2);
+var _result = noone;
+_result[0] = _y1 * _z2 - _z1 * _y2;
+_result[1] = _x1 * _z2 - _z1 * _x2;
+_result[2] = _x1 * _y2 - _y1 * _x2;
 
-return result;
+return _result;

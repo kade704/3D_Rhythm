@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>draw_set_font(ft_GeoSans);
 draw_set_colour(c_aqua);
-draw_text(30, 30, "fps : " + string(fps));
+draw_text(30, 30, "FPS : " + string(fps));
 </string>
           </argument>
         </arguments>

@@ -19,7 +19,7 @@ if(file_exists(name))
 }
 else 
 {
-    show_debug_message("[Error] File Open Failed -> " + name);
+    show_error("[Error] File Open Failed -> " + name, true);
     return noone;
 }
 

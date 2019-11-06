@@ -101,11 +101,6 @@ var px = global.Vertices[index + 1, 0] + (vx / 2);
 var py = global.Vertices[index + 1, 1] + (vy / 2);
 var pz = global.Vertices[index + 1, 2] + (vz / 2);
 
-show_debug_message(px);
-show_debug_message(py);
-show_debug_message(pz);
-show_debug_message("");
-
 var u = normalize(global.Vertices[index + 0, 0] - global.Vertices[index + 3, 0], global.Vertices[index + 0, 1] - global.Vertices[index + 3, 1], global.Vertices[index + 0, 2] - global.Vertices[index + 3, 2]);
 var v = rotate_axis(vv[0] * Scale, vv[1] * Scale, vv[2] * Scale, u[0], u[1], u[2], Angle);
 

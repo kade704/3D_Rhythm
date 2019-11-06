@@ -5,7 +5,7 @@
   </Configs>
   <NewExtensions/>
   <sounds name="sound">
-    <sound>sound\snd_LOCA</sound>
+    <sound>sound\snd_GoLike</sound>
   </sounds>
   <sprites name="sprites"/>
   <backgrounds name="background"/>
@@ -17,6 +17,8 @@
     <script>scripts\get_song_data.gml</script>
     <script>scripts\rotate_axis.gml</script>
     <script>scripts\normalize.gml</script>
+    <script>scripts\cross.gml</script>
+    <script>scripts\initialize_song.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_GeoSans</font>
@@ -24,7 +26,7 @@
   <objects name="objects">
     <object>objects\obj_Camera</object>
     <object>objects\obj_Cube</object>
-    <object>objects\obj_Music</object>
+    <object>objects\obj_JukeBox</object>
     <object>objects\obj_HUD</object>
     <object>objects\obj_MapGenerator</object>
     <object>objects\obj_Axis</object>
