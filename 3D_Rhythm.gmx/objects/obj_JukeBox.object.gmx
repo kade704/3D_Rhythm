@@ -4,7 +4,7 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>0</depth>
-  <persistent>0</persistent>
+  <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -25,12 +25,111 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>global.Songs = ds_grid_create(4, 1);
+            <string>///Initialize Song
+
+SongIndex = 0;
+
+Songs = ds_grid_create(4, 1);
 initialize_song(0, snd_GoLike, "Go Like (D&amp;B Mix)", 172);
 
-global.CurrentSong = 0;
+LastTime = 0;
+NextTime = 0;
+ElapsedScale = 0;
+OneBeatRate = 0;
 
-audio_play_sound(ds_grid_get(global.Songs, 1, global.CurrentSong), 10, false);
+IsPlaying = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>OneBeatRate = (1 / (ds_grid_get(Songs, 3, SongIndex) / 60)) * 1000;
+LastTime = current_time;
+NextTime = current_time + OneBeatRate;
+IsPlaying = true;
+
+audio_play_sound(ds_grid_get(Songs, 1, SongIndex), 10, false);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(IsPlaying)
+{
+    
+
+    if(current_time &gt; NextTime)
+    {
+        with(obj_Cube){
+            event_user(0);
+        }
+        
+        LastTime = NextTime;
+        NextTime += OneBeatRate * obj_Map.Data[obj_Cube.Index - 1, 1];
+    }
+    ElapsedScale = (current_time - LastTime) / OneBeatRate;
+    show_debug_message(ElapsedScale);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(room == Main)
+{
+    alarm[0] = 100;
+}
 </string>
           </argument>
         </arguments>

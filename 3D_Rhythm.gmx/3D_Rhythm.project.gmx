@@ -28,10 +28,13 @@
     <object>objects\obj_Cube</object>
     <object>objects\obj_JukeBox</object>
     <object>objects\obj_HUD</object>
-    <object>objects\obj_MapGenerator</object>
+    <object>objects\obj_Map</object>
     <object>objects\obj_Axis</object>
+    <object>objects\obj_GameManager</object>
+    <object>objects\obj_test</object>
   </objects>
   <rooms name="rooms">
+    <room>rooms\Lobby</room>
     <room>rooms\Main</room>
   </rooms>
   <help>

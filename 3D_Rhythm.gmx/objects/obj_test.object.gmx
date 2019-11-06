@@ -8,7 +8,7 @@
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
-    <event eventtype="0" enumb="0">
+    <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -25,17 +25,15 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Variables
-
-Index = 1;
-AngleBase = 0;
-Angle = 0;
+            <string>draw_set_font(ft_GeoSans);
+draw_set_colour(c_aqua);
+draw_text(30, 30, "This Is Lobby");
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="3" enumb="2">
+    <event eventtype="9" enumb="32">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -52,61 +50,7 @@ Angle = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(obj_JukeBox.IsPlaying)
-{
-    Angle = -obj_JukeBox.ElapsedScale * 90;
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="7" enumb="10">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if(Index &lt; obj_Map.Length) 
-{
-    AngleBase = (obj_Map.Data[Index, 1] * 90) - 90;
-    Index++;
-}
-else obj_JukeBox.IsPlaying = false;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>draw_cube(Index * 4, make_colour_rgb(122, 122, 255), AngleBase + Angle);
+            <string>room_goto_next();
 </string>
           </argument>
         </arguments>
