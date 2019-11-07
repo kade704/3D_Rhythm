@@ -25,10 +25,10 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Load Song and Initialization Data
-Data = get_song_data("GoLike.txt");
+            <string>/// Load Map From File
+
+Data = get_song_map(ds_grid_get(obj_JukeBox.Songs, 5, obj_JukeBox.SongIndex));
 Length = array_height_2d(Data);
-Vertices = noone;
 </string>
           </argument>
         </arguments>
@@ -166,7 +166,7 @@ for(var i = 0; i &lt; Length; i++)
             <kind>1</kind>
             <string>for(var i = 0; i &lt; (Length + 1); i++)
 {
-    draw_quad(i * 4, make_colour_rgb(255, 255, 255))
+    draw_quad(i * 4, make_colour_rgb(0, 0, 0))
 }
 </string>
           </argument>

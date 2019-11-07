@@ -14,7 +14,7 @@
     <script>scripts\draw_cube.gml</script>
     <script>scripts\draw_quad.gml</script>
     <script>scripts\draw_axis.gml</script>
-    <script>scripts\get_song_data.gml</script>
+    <script>scripts\get_song_map.gml</script>
     <script>scripts\rotate_axis.gml</script>
     <script>scripts\normalize.gml</script>
     <script>scripts\cross.gml</script>
@@ -32,6 +32,7 @@
     <object>objects\obj_Axis</object>
     <object>objects\obj_GameManager</object>
     <object>objects\obj_test</object>
+    <object>objects\obj_File</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\Lobby</room>
