@@ -19,6 +19,10 @@
     <script>scripts\normalize.gml</script>
     <script>scripts\cross.gml</script>
     <script>scripts\initialize_song.gml</script>
+    <script>scripts\vec3_create.gml</script>
+    <script>scripts\vec3_get_x.gml</script>
+    <script>scripts\vec3_get_y.gml</script>
+    <script>scripts\vec3_get_z.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_GeoSans</font>
