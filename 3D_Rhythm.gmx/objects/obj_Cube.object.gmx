@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Variables
+            <string>///Initialization Variables
 
 Index = 1;
 AngleBase = 0;

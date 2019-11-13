@@ -25,7 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>IsDebugMode = false;
+            <string>///Initialization Variables
+
+IsDebugMode = false;
 </string>
           </argument>
         </arguments>
@@ -76,7 +78,9 @@ if(debug)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_colour(c_aqua);
+            <string>///Draw Map
+
+draw_set_colour(c_aqua);
 d3d_transform_set_identity();
 
 for(var i = 0; i &lt; obj_File.Length; i++)
@@ -108,7 +112,7 @@ d3d_transform_set_identity();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///DebugMode
+            <string>///[Debug Only] Draw Vectors
 
 if(IsDebugMode)
 {
