@@ -3,6 +3,25 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
+  <datafiles number="1" name="datafiles">
+    <datafile>
+      <name>GoLike.txt</name>
+      <exists>-1</exists>
+      <size>24</size>
+      <exportAction>2</exportAction>
+      <exportDir></exportDir>
+      <overwrite>0</overwrite>
+      <freeData>-1</freeData>
+      <removeEnd>0</removeEnd>
+      <store>0</store>
+      <ConfigOptions>
+        <Config name="Default">
+          <CopyToMask>9223372036854775807</CopyToMask>
+        </Config>
+      </ConfigOptions>
+      <filename>GoLike.txt</filename>
+    </datafile>
+  </datafiles>
   <NewExtensions/>
   <sounds name="sound">
     <sound>sound\snd_GoLike</sound>
@@ -11,32 +30,34 @@
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
+    <scripts name="math">
+      <script>scripts\normalize.gml</script>
+      <script>scripts\cross.gml</script>
+      <script>scripts\dot.gml</script>
+      <script>scripts\rotate_axis.gml</script>
+    </scripts>
     <script>scripts\draw_cube.gml</script>
     <script>scripts\draw_quad.gml</script>
     <script>scripts\draw_axis.gml</script>
-    <script>scripts\get_song_map.gml</script>
-    <script>scripts\rotate_axis.gml</script>
-    <script>scripts\normalize.gml</script>
-    <script>scripts\cross.gml</script>
+    <script>scripts\get_song_data.gml</script>
     <script>scripts\initialize_song.gml</script>
-    <script>scripts\vec3_create.gml</script>
-    <script>scripts\vec3_get_x.gml</script>
-    <script>scripts\vec3_get_y.gml</script>
-    <script>scripts\vec3_get_z.gml</script>
   </scripts>
   <fonts name="fonts">
-    <font>fonts\ft_GeoSans</font>
+    <font>fonts\ft_Dealerplate</font>
   </fonts>
   <objects name="objects">
-    <object>objects\obj_Camera</object>
-    <object>objects\obj_Cube</object>
+    <objects name="Lobby">
+      <object>objects\obj_test</object>
+    </objects>
+    <objects name="Main">
+      <object>objects\obj_File</object>
+      <object>objects\obj_Camera</object>
+      <object>objects\obj_Map</object>
+      <object>objects\obj_HUD</object>
+      <object>objects\obj_Axis</object>
+      <object>objects\obj_Cube</object>
+    </objects>
     <object>objects\obj_JukeBox</object>
-    <object>objects\obj_HUD</object>
-    <object>objects\obj_Map</object>
-    <object>objects\obj_Axis</object>
-    <object>objects\obj_GameManager</object>
-    <object>objects\obj_test</object>
-    <object>objects\obj_File</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\Lobby</room>

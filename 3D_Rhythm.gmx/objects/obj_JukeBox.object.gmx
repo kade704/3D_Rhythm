@@ -65,7 +65,7 @@ LastTime = current_time;
 NextTime = current_time + OneBeatRate;
 IsPlaying = true;
 
-audio_play_sound(ds_grid_get(Songs, 1, SongIndex), 10, false);
+//audio_play_sound(ds_grid_get(Songs, 1, SongIndex), 10, false);
 </string>
           </argument>
         </arguments>
@@ -88,7 +88,7 @@ audio_play_sound(ds_grid_get(Songs, 1, SongIndex), 10, false);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(IsPlaying)
+            <string>/*if(IsPlaying)
 {
     if(current_time &gt; NextTime)
     {
@@ -101,7 +101,7 @@ audio_play_sound(ds_grid_get(Songs, 1, SongIndex), 10, false);
     }
     ElapsedScale = (current_time - LastTime) / OneBeatRate;
     show_debug_message(ElapsedScale);
-}
+}*/
 </string>
           </argument>
         </arguments>

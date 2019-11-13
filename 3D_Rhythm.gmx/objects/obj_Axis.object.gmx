@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>global.EnableAxis = false;
+            <string>IsEnabled = false;
 </string>
           </argument>
         </arguments>
@@ -48,7 +48,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.EnableAxis)
+            <string>if(IsEnabled)
 {
     d3d_transform_set_identity();
     draw_axis(0.5);

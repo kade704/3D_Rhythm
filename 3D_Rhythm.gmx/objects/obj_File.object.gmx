@@ -3,11 +3,108 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>10000000</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
-  <events/>
+  <events>
+    <event eventtype="0" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Load Data From File
+Data = get_song_data(ds_grid_get(obj_JukeBox.Songs, 5, obj_JukeBox.SongIndex));
+Length = array_height_2d(Data);
+
+Positions[0, 0] = 0;
+Positions[0, 1] = 0;
+Positions[0, 2] = 0;
+
+Vectors[0, 0] = 1;
+Vectors[0, 1] = 0;
+Vectors[0, 2] = 0;
+
+Normals[0, 0] = 0;
+Normals[0, 1] = 0;
+Normals[0, 2] = 1;
+
+for(var i = 1; i &lt; Length; i++)
+{
+    if(Data[i, 0] == -1) //좌회전 진행
+    {   
+        var pv = rotate_axis(Vectors[i - 1, 0], Vectors[i - 1, 1], Vectors[i - 1, 2], Normals[i - 1, 0], Normals[i - 1, 1], Normals[i - 1, 2], -45);
+        Positions[i, 0] = Positions[i - 1, 0] + (pv[0] * 5 * sqrt(2));
+        Positions[i, 1] = Positions[i - 1, 1] + (pv[1] * 5 * sqrt(2));
+        Positions[i, 2] = Positions[i - 1, 2] + (pv[2] * 5 * sqrt(2));
+        
+        var vv = rotate_axis(Vectors[i - 1, 0], Vectors[i - 1, 1], Vectors[i - 1, 2], Normals[i - 1, 0], Normals[i - 1, 1], Normals[i - 1, 2], -90);
+        vv = rotate_axis(vv[0], vv[1], vv[2], Vectors[i - 1, 0], Vectors[i - 1, 1], Vectors[i - 1, 2], (90 * Data[i, 1]) - 90);
+        Vectors[i, 0] = vv[0];
+        Vectors[i, 1] = vv[1];
+        Vectors[i, 2] = vv[2];
+        
+        var nv = rotate_axis(Normals[i - 1, 0], Normals[i - 1, 1], Normals[i - 1, 2], Vectors[i - 1, 0], Vectors[i - 1, 1], Vectors[i - 1, 2], (90 * Data[i, 1]) - 90);
+        Normals[i, 0] = nv[0];
+        Normals[i, 1] = nv[1];
+        Normals[i, 2] = nv[2];
+    }
+    else if(Data[i, 0] == 1) //우회전 진행
+    {   
+        var pv = rotate_axis(Vectors[i - 1, 0], Vectors[i - 1, 1], Vectors[i - 1, 2], Normals[i - 1, 0], Normals[i - 1, 1], Normals[i - 1, 2], 45);
+        Positions[i, 0] = Positions[i - 1, 0] + (pv[0] * 5 * sqrt(2));
+        Positions[i, 1] = Positions[i - 1, 1] + (pv[1] * 5 * sqrt(2));
+        Positions[i, 2] = Positions[i - 1, 2] + (pv[2] * 5 * sqrt(2));
+        
+        var vv = rotate_axis(Vectors[i - 1, 0], Vectors[i - 1, 1], Vectors[i - 1, 2], Normals[i - 1, 0], Normals[i - 1, 1], Normals[i - 1, 2], 90);
+        vv = rotate_axis(vv[0], vv[1], vv[2], Vectors[i - 1, 0], Vectors[i - 1, 1], Vectors[i - 1, 2], 90 - (90 * Data[i, 1]));
+        Vectors[i, 0] = vv[0];
+        Vectors[i, 1] = vv[1];
+        Vectors[i, 2] = vv[2];
+        
+        var nv = rotate_axis(Normals[i - 1, 0], Normals[i - 1, 1], Normals[i - 1, 2], Vectors[i - 1, 0], Vectors[i - 1, 1], Vectors[i - 1, 2], 90 - (90 * Data[i, 1]));
+        Normals[i, 0] = nv[0];
+        Normals[i, 1] = nv[1];
+        Normals[i, 2] = nv[2];
+    }
+    else //직진 진행
+    {
+        var u = cross(Normals[i - 1, 0], Normals[i - 1, 1], Normals[i - 1, 2], Vectors[i - 1, 0], Vectors[i - 1, 1], Vectors[i - 1, 2]);
+        u = normalize(u[0], u[1], u[2]);
+        
+        Positions[i, 0] = Positions[i - 1, 0] + (Vectors[i - 1, 0] * 10);
+        Positions[i, 1] = Positions[i - 1, 1] + (Vectors[i - 1, 1] * 10);
+        Positions[i, 2] = Positions[i - 1, 2] + (Vectors[i - 1, 2] * 10);
+        
+        var vv = rotate_axis(Vectors[i - 1, 0], Vectors[i - 1, 1], Vectors[i - 1, 2], u[0], u[1], u[2], 90 - (90 * Data[i, 1]));
+        Vectors[i, 0] = vv[0];
+        Vectors[i, 1] = vv[1];
+        Vectors[i, 2] = vv[2];
+        
+        var nv = rotate_axis(Normals[i - 1, 0], Normals[i - 1, 1], Normals[i - 1, 2], u[0], u[1], u[2], 90 - (90 * Data[i, 1]));
+        Normals[i, 0] = nv[0];
+        Normals[i, 1] = nv[1];
+        Normals[i, 2] = nv[2];
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+  </events>
   <PhysicsObject>0</PhysicsObject>
   <PhysicsObjectSensor>0</PhysicsObjectSensor>
   <PhysicsObjectShape>0</PhysicsObjectShape>

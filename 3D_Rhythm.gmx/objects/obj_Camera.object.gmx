@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>10000000</depth>
+  <depth>10000001</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -27,17 +27,19 @@
             <kind>1</kind>
             <string>/// Variables
 
-PositionX = 0;
-PositionY = 0;
-PositionZ = 0;
+PositionX = 100;
+PositionY = 100;
+PositionZ = 100;
 
 TargetX = 0;
 TargetY = 0;
 TargetZ = 0;
 
 Scale = 120;
-Angle = -40;
+Angle = 0;
 SmoothSpeed = 0.1;
+
+
 </string>
           </argument>
         </arguments>
@@ -90,26 +92,20 @@ draw_set_colour(c_white);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var index = obj_Cube.Index * 4;
+            <string>/*var index = obj_Cube.Index * 4;
 
-var vx = obj_Map.Vertices[index + 1, 0] - obj_Map.Vertices[index + 2, 0];
-var vy = obj_Map.Vertices[index + 1, 1] - obj_Map.Vertices[index + 2, 1];
-var vz = obj_Map.Vertices[index + 1, 2] - obj_Map.Vertices[index + 2, 2];
-var vv = normalize(vx, vy, vz);
-
-var px = obj_Map.Vertices[index + 1, 0] + (vx / 2);
-var py = obj_Map.Vertices[index + 1, 1] + (vy / 2);
-var pz = obj_Map.Vertices[index + 1, 2] + (vz / 2);
-
-var u = normalize(obj_Map.Vertices[index + 0, 0] - obj_Map.Vertices[index + 3, 0], obj_Map.Vertices[index + 0, 1] - obj_Map.Vertices[index + 3, 1], obj_Map.Vertices[index + 0, 2] - obj_Map.Vertices[index + 3, 2]);
-var v = rotate_axis(vv[0] * Scale, vv[1] * Scale, vv[2] * Scale, u[0], u[1], u[2], Angle);
 
 TargetX = lerp(TargetX, px, SmoothSpeed);
 TargetY = lerp(TargetY, py, SmoothSpeed);
 TargetZ = lerp(TargetZ, pz, SmoothSpeed);
 PositionX = lerp(PositionX, px + v[0], SmoothSpeed);
 PositionY = lerp(PositionY, py + v[1], SmoothSpeed);
-PositionZ = lerp(PositionZ, pz + v[2], SmoothSpeed);
+PositionZ = lerp(PositionZ, pz + v[2], SmoothSpeed);*/
+
+Angle += (-keyboard_check(ord('A')) + keyboard_check(ord('D'))) * 0.01;
+
+PositionX = cos(Angle) * 100;
+PositionY = sin(Angle) * 100;
 </string>
           </argument>
         </arguments>

@@ -25,14 +25,13 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Load Map From File
-
-Data = get_song_map(ds_grid_get(obj_JukeBox.Songs, 5, obj_JukeBox.SongIndex));
-Length = array_height_2d(Data);
+            <string>IsDebugMode = false;
 </string>
           </argument>
         </arguments>
       </action>
+    </event>
+    <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -49,98 +48,11 @@ Length = array_height_2d(Data);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Initialization Vertices
+            <string>var debug = keyboard_check_pressed(vk_f1);
 
-Vertices[0, 0] = 0;
-Vertices[0, 1] = -5;
-Vertices[0, 2] = 0;
-
-Vertices[1, 0] = 0;
-Vertices[1, 1] = 5;
-Vertices[1, 2] = 0;
-
-Vertices[2, 0] = 10;
-Vertices[2, 1] = -5;
-Vertices[2, 2] = 0;
-
-Vertices[3, 0] = 10;
-Vertices[3, 1] = 5;
-Vertices[3, 2] = 0;
-
-for(var i = 0; i &lt; Length; i++)
+if(debug)
 {
-    var current = i * 4;
-    var next = (i + 1) * 4;
-
-    if(Data[i, 0] == -1)
-    {  
-        var u = normalize(Vertices[current + 2, 0] - Vertices[current, 0], Vertices[current + 2, 1] - Vertices[current, 1], Vertices[current + 2, 2] - Vertices[current, 2]);
-    
-        var v1 = rotate_axis(Vertices[current, 0] - Vertices[current + 1, 0], Vertices[current, 1] - Vertices[current + 1, 1], Vertices[current, 2] - Vertices[current + 1, 2], u[0], u[1], u[2], 90 - (Data[i, 1] * 90));
-        var v2 = rotate_axis(Vertices[current + 2, 0] - Vertices[current + 3, 0], Vertices[current + 2, 1] - Vertices[current + 3, 1], Vertices[current + 2, 2] - Vertices[current + 3, 2], u[0], u[1], u[2], 90 - (Data[i, 1] * 90));
-    
-        Vertices[next, 0] = Vertices[current, 0];
-        Vertices[next, 1] = Vertices[current, 1];
-        Vertices[next, 2] = Vertices[current, 2];
-        
-        Vertices[next + 1, 0] = Vertices[current + 2, 0];
-        Vertices[next + 1, 1] = Vertices[current + 2, 1];
-        Vertices[next + 1, 2] = Vertices[current + 2, 2];
-        
-        Vertices[next + 2, 0] = Vertices[current + 0, 0] + v1[0]; 
-        Vertices[next + 2, 1] = Vertices[current + 0, 1] + v1[1];
-        Vertices[next + 2, 2] = Vertices[current + 0, 2] + v1[2];
-            
-        Vertices[next + 3, 0] = Vertices[current + 2, 0] + v2[0]; 
-        Vertices[next + 3, 1] = Vertices[current + 2, 1] + v2[1];
-        Vertices[next + 3, 2] = Vertices[current + 2, 2] + v2[2];
-    }
-    else if(Data[i, 0] == 1)
-    {
-        var u = normalize(Vertices[current + 3, 0] - Vertices[current + 1, 0], Vertices[current + 3, 1] - Vertices[current + 1, 1], Vertices[current + 3, 2] - Vertices[current + 1, 2]);
-    
-        var v1 = rotate_axis(Vertices[current + 3, 0] - Vertices[current + 2, 0], Vertices[current + 3, 1] - Vertices[current + 2, 1], Vertices[current + 3, 2] - Vertices[current + 2, 2], u[0], u[1], u[2], 90 - (Data[i, 1] * 90));
-        var v2 = rotate_axis(Vertices[current + 1, 0] - Vertices[current, 0], Vertices[current + 1, 1] - Vertices[current, 1], Vertices[current + 1, 2] - Vertices[current, 2], u[0], u[1], u[2], 90 - (Data[i, 1] * 90));
-    
-        Vertices[next, 0] = Vertices[current + 3, 0];
-        Vertices[next, 1] = Vertices[current + 3, 1];
-        Vertices[next, 2] = Vertices[current + 3, 2];
-        
-        Vertices[next + 1, 0] = Vertices[current + 1, 0];
-        Vertices[next + 1, 1] = Vertices[current + 1, 1];
-        Vertices[next + 1, 2] = Vertices[current + 1, 2];
-        
-        Vertices[next + 2, 0] = Vertices[current + 3, 0] + v1[0]; 
-        Vertices[next + 2, 1] = Vertices[current + 3, 1] + v1[1];
-        Vertices[next + 2, 2] = Vertices[current + 3, 2] + v1[2];
-            
-        Vertices[next + 3, 0] = Vertices[current + 1, 0] + v2[0]; 
-        Vertices[next + 3, 1] = Vertices[current + 1, 1] + v2[1];
-        Vertices[next + 3, 2] = Vertices[current + 1, 2] + v2[2];
-    }
-    else
-    {
-        var u = normalize(Vertices[current + 2, 0] - Vertices[current + 3, 0], Vertices[current + 2, 1] - Vertices[current + 3, 1], Vertices[current + 2, 2] - Vertices[current + 3, 2]);
-    
-        var v1 = rotate_axis(Vertices[current + 2, 0] - Vertices[current, 0], Vertices[current + 2, 1] - Vertices[current, 1], Vertices[current + 2, 2] - Vertices[current, 2], u[0], u[1], u[2], 90 - (Data[i, 1] * 90));
-        var v2 = rotate_axis(Vertices[current + 3, 0] - Vertices[current + 1, 0], Vertices[current + 3, 1] - Vertices[current + 1, 1], Vertices[current + 3, 2] - Vertices[current + 1, 2], u[0], u[1], u[2], 90 - (Data[i, 1] * 90));
-    
-        Vertices[next, 0] = Vertices[current + 2, 0];
-        Vertices[next, 1] = Vertices[current + 2, 1];
-        Vertices[next, 2] = Vertices[current + 2, 2];
-        
-        Vertices[next + 1, 0] = Vertices[current + 3, 0];
-        Vertices[next + 1, 1] = Vertices[current + 3, 1];
-        Vertices[next + 1, 2] = Vertices[current + 3, 2];
-        
-        Vertices[next + 2, 0] = Vertices[current + 2, 0] + v1[0]; 
-        Vertices[next + 2, 1] = Vertices[current + 2, 1] + v1[1];
-        Vertices[next + 2, 2] = Vertices[current + 2, 2] + v1[2];
-            
-        Vertices[next + 3, 0] = Vertices[current + 3, 0] + v2[0]; 
-        Vertices[next + 3, 1] = Vertices[current + 3, 1] + v2[1];
-        Vertices[next + 3, 2] = Vertices[current + 3, 2] + v2[2];
-    }
+    IsDebugMode = !IsDebugMode;
 }
 </string>
           </argument>
@@ -164,9 +76,61 @@ for(var i = 0; i &lt; Length; i++)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>for(var i = 0; i &lt; (Length + 1); i++)
+            <string>draw_set_colour(c_aqua);
+d3d_transform_set_identity();
+
+for(var i = 0; i &lt; obj_File.Length; i++)
 {
-    draw_quad(i * 4, make_colour_rgb(0, 0, 0))
+    draw_quad(obj_File.Positions[i, 0], obj_File.Positions[i, 1], obj_File.Positions[i, 2],
+              obj_File.Vectors[i, 0], obj_File.Vectors[i, 1], obj_File.Vectors[i, 2],
+              obj_File.Normals[i, 0], obj_File.Normals[i, 1], obj_File.Normals[i, 2],
+              0.5, make_colour_rgb(255, 0, 255));
+}
+
+d3d_transform_set_identity();
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///DebugMode
+
+if(IsDebugMode)
+{
+    d3d_transform_set_identity();
+    
+    d3d_primitive_begin(pr_linelist);
+    for(var i = 0; i &lt; obj_File.Length; i++)
+    {
+        var u = cross(obj_File.Vectors[i, 0], obj_File.Vectors[i, 1], obj_File.Vectors[i, 2], obj_File.Normals[i, 0], obj_File.Normals[i, 1], obj_File.Normals[i, 2]);
+        u = normalize(u[0], u[1], u[2]);
+        
+        d3d_vertex_colour(obj_File.Positions[i, 0], obj_File.Positions[i, 1], obj_File.Positions[i, 2], make_colour_rgb(255, 0, 0), 1);
+        d3d_vertex_colour(obj_File.Positions[i, 0] + (obj_File.Vectors[i, 0] * 5), obj_File.Positions[i, 1] + (obj_File.Vectors[i, 1] * 5), obj_File.Positions[i, 2] + (obj_File.Vectors[i, 2] * 5), make_colour_rgb(255, 0, 0), 1);
+        
+        d3d_vertex_colour(obj_File.Positions[i, 0], obj_File.Positions[i, 1], obj_File.Positions[i, 2], make_colour_rgb(0, 255, 0), 1);
+        d3d_vertex_colour(obj_File.Positions[i, 0] + (obj_File.Normals[i, 0] * 5), obj_File.Positions[i, 1] + (obj_File.Normals[i, 1] * 5), obj_File.Positions[i, 2] + (obj_File.Normals[i, 2] * 5), make_colour_rgb(0, 255, 0), 1);
+        
+        d3d_vertex_colour(obj_File.Positions[i, 0], obj_File.Positions[i, 1], obj_File.Positions[i, 2], make_colour_rgb(0, 0, 255), 1);
+        d3d_vertex_colour(obj_File.Positions[i, 0] + (u[0] * 5), obj_File.Positions[i, 1] + (u[1] * 5), obj_File.Positions[i, 2] + (u[2] * 5), make_colour_rgb(0, 0, 255), 1);
+    }
+    d3d_primitive_end();
+    d3d_transform_set_identity();
 }
 </string>
           </argument>

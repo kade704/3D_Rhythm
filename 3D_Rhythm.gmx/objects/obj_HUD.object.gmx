@@ -25,8 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_font(ft_GeoSans);
-draw_set_colour(c_aqua);
+            <string>draw_set_font(ft_Dealerplate);
+draw_set_colour(c_black);
 draw_text(30, 30, "FPS : " + string(fps));
 </string>
           </argument>

@@ -1,4 +1,4 @@
-var _index = argument0;
+/*var _index = argument0;
 var _colour = argument1;
 var _angle = argument2;
 
@@ -43,4 +43,4 @@ d3d_vertex_colour(obj_Map.Vertices[_index + 1, 0] + _v4[0], obj_Map.Vertices[_in
 d3d_vertex_colour(obj_Map.Vertices[_index, 0] + _v1[0], obj_Map.Vertices[_index, 1] + _v1[1], obj_Map.Vertices[_index, 2] + _v1[2], _colour, 1);
 d3d_vertex_colour(obj_Map.Vertices[_index, 0] + _v3[0], obj_Map.Vertices[_index, 1] + _v3[1], obj_Map.Vertices[_index, 2] + _v3[2], _colour, 1);
 
-d3d_primitive_end();
+d3d_primitive_end();*/

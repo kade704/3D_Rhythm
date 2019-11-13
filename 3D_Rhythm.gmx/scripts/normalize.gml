@@ -1,3 +1,5 @@
+///normalize(vx, vy, vz)
+
 var _vx = argument0;
 var _vy = argument1;
 var _vz = argument2;

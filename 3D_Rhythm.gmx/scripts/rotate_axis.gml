@@ -1,3 +1,5 @@
+///rotate_axis(vx, vy, vz, ux, uy, uz, angle)
+
 var _vx = argument0;
 var _vy = argument1;
 var _vz = argument2;

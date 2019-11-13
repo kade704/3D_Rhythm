@@ -52,9 +52,9 @@
   </views>
   <instances>
     <instance objName="obj_Camera" x="0" y="0" name="inst_3E543036" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_File" x="96" y="0" name="inst_B43617E9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_Map" x="32" y="0" name="inst_8DAE314E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_Axis" x="64" y="0" name="inst_A48D974B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_Cube" x="96" y="0" name="inst_C7035453" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_HUD" x="0" y="32" name="inst_6A222220" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
