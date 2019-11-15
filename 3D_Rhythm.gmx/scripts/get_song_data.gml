@@ -1,16 +1,17 @@
 var name = argument0;
 
-var data;
+var data = noone;
+data[0, 0] = 0;
+data[0, 1] = 1;
 
 if(file_exists(name))
 {
     var file = file_text_open_read(name);    
 
-    var count;
-    for(count = 0; !file_text_eof(file); count++)
+    for(var i = 1; !file_text_eof(file); i++)
     {
-        data[count, 0] = file_text_read_real(file);
-        data[count, 1] = file_text_read_real(file);
+        data[i, 0] = file_text_read_real(file);
+        data[i, 1] = file_text_read_real(file);
         file_text_readln(file);
     }
     file_text_close(file);
@@ -22,4 +23,3 @@ else
     show_error("[Error] File Open Failed -> " + name, true);
     return noone;
 }
-

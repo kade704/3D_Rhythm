@@ -62,6 +62,8 @@ SmoothSpeed = 0.1;
             <kind>1</kind>
             <string>/// Initialize d3d
 
+display_reset(8, true);
+
 d3d_start();
 d3d_set_perspective(true);
 d3d_set_hidden(true);

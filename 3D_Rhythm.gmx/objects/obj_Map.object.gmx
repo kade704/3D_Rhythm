@@ -88,7 +88,7 @@ for(var i = 0; i &lt; obj_File.Length; i++)
     draw_quad(obj_File.Positions[i, 0], obj_File.Positions[i, 1], obj_File.Positions[i, 2],
               obj_File.Vectors[i, 0], obj_File.Vectors[i, 1], obj_File.Vectors[i, 2],
               obj_File.Normals[i, 0], obj_File.Normals[i, 1], obj_File.Normals[i, 2],
-              0.5, make_colour_rgb(255, 0, 255));
+              10, 0.2, make_colour_rgb(0, 0, 0), 1);
 }
 
 d3d_transform_set_identity();
