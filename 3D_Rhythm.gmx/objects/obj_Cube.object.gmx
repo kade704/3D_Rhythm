@@ -25,16 +25,18 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Initialization Variables
+            <string>///변수 초기화
 
-Index = 0;
+Index = 1;
 Angle = 0;
+
+TimeStart = 0;
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="3" enumb="2">
+    <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -51,10 +53,15 @@ Angle = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/*if(obj_JukeBox.IsPlaying)
+            <string>if(obj_JukeBox.IsPlaying)
 {
-    Angle = -obj_JukeBox.ElapsedScale * 90;
-}*/
+    if(obj_Data.Timeline[Index] &lt; current_time - TimeStart &amp;&amp; Index &lt; obj_Data.Length - 1)
+    {
+        Index++;
+        Angle = (obj_Data.Data[Index, 1] * 90) - 90;
+    }
+    Angle -= 90 / (obj_Data.OneBeatRate / (delta_time * 0.001));
+}
 </string>
           </argument>
         </arguments>
@@ -77,12 +84,7 @@ Angle = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/*if(Index &lt; obj_Map.Length) 
-{
-    AngleBase = (obj_Map.Data[Index, 1] * 90) - 90;
-    Index++;
-}
-else obj_JukeBox.IsPlaying = false;*/
+            <string>TimeStart = current_time;
 </string>
           </argument>
         </arguments>
@@ -105,22 +107,22 @@ else obj_JukeBox.IsPlaying = false;*/
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var u = cross(obj_File.Vectors[Index, 0], obj_File.Vectors[Index, 1], obj_File.Vectors[Index, 2], obj_File.Normals[Index, 0], obj_File.Normals[Index, 1], obj_File.Normals[Index, 2]);
+            <string>var u = cross(obj_Data.Vectors[Index, 0], obj_Data.Vectors[Index, 1], obj_Data.Vectors[Index, 2], obj_Data.Normals[Index, 0], obj_Data.Normals[Index, 1], obj_Data.Normals[Index, 2]);
 u = normalize(u[0], u[1], u[2]);
 
-var pv = rotate_axis(obj_File.Vectors[Index, 0], obj_File.Vectors[Index, 1], obj_File.Vectors[Index, 2], u[0], u[1], u[2], Angle + 135);
+var pv = rotate_axis(obj_Data.Vectors[Index, 0], obj_Data.Vectors[Index, 1], obj_Data.Vectors[Index, 2], u[0], u[1], u[2], Angle + 135);
 
-var px = obj_File.Positions[Index, 0] + (obj_File.Vectors[Index, 0] * -5) + (pv[0] * 5 * sqrt(2));
-var py = obj_File.Positions[Index, 1] + (obj_File.Vectors[Index, 1] * -5) + (pv[1] * 5 * sqrt(2));
-var pz = obj_File.Positions[Index, 2] + (obj_File.Vectors[Index, 2] * -5) + (pv[2] * 5 * sqrt(2));
+var px = obj_Data.Positions[Index, 0] + (obj_Data.Vectors[Index, 0] * -5) + (pv[0] * 5 * sqrt(2));
+var py = obj_Data.Positions[Index, 1] + (obj_Data.Vectors[Index, 1] * -5) + (pv[1] * 5 * sqrt(2));
+var pz = obj_Data.Positions[Index, 2] + (obj_Data.Vectors[Index, 2] * -5) + (pv[2] * 5 * sqrt(2));
 
-var vv = rotate_axis(obj_File.Vectors[Index, 0], obj_File.Vectors[Index, 1], obj_File.Vectors[Index, 2], u[0], u[1], u[2], Angle);
+var vv = rotate_axis(obj_Data.Vectors[Index, 0], obj_Data.Vectors[Index, 1], obj_Data.Vectors[Index, 2], u[0], u[1], u[2], Angle);
 
 var vx = vv[0];
 var vy = vv[1];
 var vz = vv[2];
 
-var nv = rotate_axis(obj_File.Normals[Index, 0], obj_File.Normals[Index, 1], obj_File.Normals[Index, 2], u[0], u[1], u[2], Angle);
+var nv = rotate_axis(obj_Data.Normals[Index, 0], obj_Data.Normals[Index, 1], obj_Data.Normals[Index, 2], u[0], u[1], u[2], Angle);
 
 var nx = nv[0];
 var ny = nv[1];

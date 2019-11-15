@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Variables
+            <string>/// 변수 초기화
 
 PositionX = 0;
 PositionY = 0;
@@ -63,7 +63,7 @@ SmoothSpeed = 0.1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Initialize d3d
+            <string>/// d3d 초기화
 
 display_reset(8, true);
 
@@ -97,21 +97,23 @@ draw_set_colour(c_white);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var index = obj_Cube.Index;
+            <string>///위치 변형하기
 
-var px = obj_File.Positions[index, 0];
-var py = obj_File.Positions[index, 1];
-var pz = obj_File.Positions[index, 2];
+var index = obj_Cube.Index;
 
-var u = cross(obj_File.Vectors[index, 0], obj_File.Vectors[index, 1], obj_File.Vectors[index, 2], obj_File.Normals[index, 0], obj_File.Normals[index, 1], obj_File.Normals[index, 2]);
+var px = obj_Data.Positions[index, 0];
+var py = obj_Data.Positions[index, 1];
+var pz = obj_Data.Positions[index, 2];
+
+var u = cross(obj_Data.Vectors[index, 0], obj_Data.Vectors[index, 1], obj_Data.Vectors[index, 2], obj_Data.Normals[index, 0], obj_Data.Normals[index, 1], obj_Data.Normals[index, 2]);
 u = normalize(u[0], u[1], u[2]);
 
-var v = rotate_axis(obj_File.Vectors[index, 0], obj_File.Vectors[index, 1], obj_File.Vectors[index, 2], u[0], u[1], u[2], 45);
-v = rotate_axis(v[0], v[1], v[2], obj_File.Normals[index, 0], obj_File.Normals[index, 1], obj_File.Normals[index, 2], 135);
+var v = rotate_axis(obj_Data.Vectors[index, 0], obj_Data.Vectors[index, 1], obj_Data.Vectors[index, 2], u[0], u[1], u[2], 45);
+v = rotate_axis(v[0], v[1], v[2], obj_Data.Normals[index, 0], obj_Data.Normals[index, 1], obj_Data.Normals[index, 2], 135);
 
-var nx = obj_File.Normals[index, 0];
-var ny = obj_File.Normals[index, 1];
-var nz = obj_File.Normals[index, 2];
+var nx = obj_Data.Normals[index, 0];
+var ny = obj_Data.Normals[index, 1];
+var nz = obj_Data.Normals[index, 2];
 
 TargetX = lerp(TargetX, px, SmoothSpeed);
 TargetY = lerp(TargetY, py, SmoothSpeed);

@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Initialization Variables
+            <string>///변수 초기화
 
 IsDebugMode = false;
 </string>
@@ -83,11 +83,11 @@ if(debug)
 draw_set_colour(c_aqua);
 d3d_transform_set_identity();
 
-for(var i = 0; i &lt; obj_File.Length; i++)
+for(var i = 0; i &lt; obj_Data.Length; i++)
 {
-    draw_quad(obj_File.Positions[i, 0], obj_File.Positions[i, 1], obj_File.Positions[i, 2],
-              obj_File.Vectors[i, 0], obj_File.Vectors[i, 1], obj_File.Vectors[i, 2],
-              obj_File.Normals[i, 0], obj_File.Normals[i, 1], obj_File.Normals[i, 2],
+    draw_quad(obj_Data.Positions[i, 0], obj_Data.Positions[i, 1], obj_Data.Positions[i, 2],
+              obj_Data.Vectors[i, 0], obj_Data.Vectors[i, 1], obj_Data.Vectors[i, 2],
+              obj_Data.Normals[i, 0], obj_Data.Normals[i, 1], obj_Data.Normals[i, 2],
               10, 0.2, make_colour_rgb(0, 0, 0), 1);
 }
 
@@ -119,19 +119,19 @@ if(IsDebugMode)
     d3d_transform_set_identity();
     
     d3d_primitive_begin(pr_linelist);
-    for(var i = 0; i &lt; obj_File.Length; i++)
+    for(var i = 0; i &lt; obj_Data.Length; i++)
     {
-        var u = cross(obj_File.Vectors[i, 0], obj_File.Vectors[i, 1], obj_File.Vectors[i, 2], obj_File.Normals[i, 0], obj_File.Normals[i, 1], obj_File.Normals[i, 2]);
+        var u = cross(obj_Data.Vectors[i, 0], obj_Data.Vectors[i, 1], obj_Data.Vectors[i, 2], obj_Data.Normals[i, 0], obj_Data.Normals[i, 1], obj_Data.Normals[i, 2]);
         u = normalize(u[0], u[1], u[2]);
         
-        d3d_vertex_colour(obj_File.Positions[i, 0], obj_File.Positions[i, 1], obj_File.Positions[i, 2], make_colour_rgb(255, 0, 0), 1);
-        d3d_vertex_colour(obj_File.Positions[i, 0] + (obj_File.Vectors[i, 0] * 5), obj_File.Positions[i, 1] + (obj_File.Vectors[i, 1] * 5), obj_File.Positions[i, 2] + (obj_File.Vectors[i, 2] * 5), make_colour_rgb(255, 0, 0), 1);
+        d3d_vertex_colour(obj_Data.Positions[i, 0], obj_Data.Positions[i, 1], obj_Data.Positions[i, 2], make_colour_rgb(255, 0, 0), 1);
+        d3d_vertex_colour(obj_Data.Positions[i, 0] + (obj_Data.Vectors[i, 0] * 5), obj_Data.Positions[i, 1] + (obj_Data.Vectors[i, 1] * 5), obj_Data.Positions[i, 2] + (obj_Data.Vectors[i, 2] * 5), make_colour_rgb(255, 0, 0), 1);
         
-        d3d_vertex_colour(obj_File.Positions[i, 0], obj_File.Positions[i, 1], obj_File.Positions[i, 2], make_colour_rgb(0, 255, 0), 1);
-        d3d_vertex_colour(obj_File.Positions[i, 0] + (obj_File.Normals[i, 0] * 5), obj_File.Positions[i, 1] + (obj_File.Normals[i, 1] * 5), obj_File.Positions[i, 2] + (obj_File.Normals[i, 2] * 5), make_colour_rgb(0, 255, 0), 1);
+        d3d_vertex_colour(obj_Data.Positions[i, 0], obj_Data.Positions[i, 1], obj_Data.Positions[i, 2], make_colour_rgb(0, 255, 0), 1);
+        d3d_vertex_colour(obj_Data.Positions[i, 0] + (obj_Data.Normals[i, 0] * 5), obj_Data.Positions[i, 1] + (obj_Data.Normals[i, 1] * 5), obj_Data.Positions[i, 2] + (obj_Data.Normals[i, 2] * 5), make_colour_rgb(0, 255, 0), 1);
         
-        d3d_vertex_colour(obj_File.Positions[i, 0], obj_File.Positions[i, 1], obj_File.Positions[i, 2], make_colour_rgb(0, 0, 255), 1);
-        d3d_vertex_colour(obj_File.Positions[i, 0] + (u[0] * 5), obj_File.Positions[i, 1] + (u[1] * 5), obj_File.Positions[i, 2] + (u[2] * 5), make_colour_rgb(0, 0, 255), 1);
+        d3d_vertex_colour(obj_Data.Positions[i, 0], obj_Data.Positions[i, 1], obj_Data.Positions[i, 2], make_colour_rgb(0, 0, 255), 1);
+        d3d_vertex_colour(obj_Data.Positions[i, 0] + (u[0] * 5), obj_Data.Positions[i, 1] + (u[1] * 5), obj_Data.Positions[i, 2] + (u[2] * 5), make_colour_rgb(0, 0, 255), 1);
     }
     d3d_primitive_end();
     d3d_transform_set_identity();

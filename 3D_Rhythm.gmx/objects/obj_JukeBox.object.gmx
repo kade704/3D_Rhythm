@@ -35,10 +35,6 @@ add_song(1, snd_YaWholeStyle, "K+Lab", "Ya Whole Style", 172, "YaWholeStyle.txt"
 
 Length = ds_grid_height(Songs);
 
-LastTime = 0;
-NextTime = 0;
-ElapsedScale = 0;
-OneBeatRate = 0;
 
 IsPlaying = false;
 </string>
@@ -63,12 +59,10 @@ IsPlaying = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/*OneBeatRate = (1 / (ds_grid_get(Songs, 4, SongIndex) / 60)) * 1000;
-LastTime = current_time;
-NextTime = current_time + OneBeatRate;
-IsPlaying = true;
+            <string>audio_play_sound(ds_grid_get(Songs, 1, Selected), 1, false);
 
-audio_play_sound(ds_grid_get(Songs, 1, SongIndex), 10, false);*/
+with(obj_Cube) event_user(0);
+IsPlaying = true;
 </string>
           </argument>
         </arguments>
@@ -91,21 +85,7 @@ audio_play_sound(ds_grid_get(Songs, 1, SongIndex), 10, false);*/
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/*if(IsPlaying)
-{
-    if(current_time &gt; NextTime)
-    {
-        with(obj_Cube){
-            event_user(0);
-        }
-        
-        LastTime = NextTime;
-        NextTime += OneBeatRate * obj_Map.Data[obj_Cube.Index - 1, 1];
-    }
-    ElapsedScale = (current_time - LastTime) / OneBeatRate;
-    show_debug_message(ElapsedScale);
-}*/
-</string>
+            <string></string>
           </argument>
         </arguments>
       </action>

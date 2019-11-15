@@ -16,10 +16,11 @@ if(file_exists(name))
     }
     file_text_close(file);
     
+    log("File Successfully Loaded : " + name);
     return data;
 }
 else 
 {
-    show_error("[Error] File Open Failed -> " + name, true);
+    error("File could not open. : " + name);
     return noone;
 }

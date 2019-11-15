@@ -25,9 +25,32 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Load Data From File
+            <string>/// 파일에서 데이터 불러오기
 Data = get_song_data(ds_grid_get(obj_JukeBox.Songs, 5, obj_JukeBox.Selected));
 Length = array_height_2d(Data);
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// 데이터를 기반으로 위치, 벡터, 노멀 생성하기
 
 Positions[0, 0] = 0;
 Positions[0, 1] = 0;
@@ -40,7 +63,6 @@ Vectors[0, 2] = 0;
 Normals[0, 0] = 0;
 Normals[0, 1] = 0;
 Normals[0, 2] = 1;
-show_debug_message(Length);
 
 for(var i = 1; i &lt; Length; i++)
 {
@@ -107,6 +129,38 @@ for(var i = 1; i &lt; Length; i++)
         Normals[i, 1] = nv[1];
         Normals[i, 2] = nv[2];
     }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// 데이터를 기반으로 송 타임라인 생성하기
+
+OneBeatRate = (1 / (ds_grid_get(obj_JukeBox.Songs, 4, obj_JukeBox.Selected) / 60)) * 1000;
+
+var currentTime = 0;
+
+Timeline[0] = 0;
+for(var i = 1; i &lt; Length; i++)
+{
+    currentTime += (OneBeatRate * Data[i, 1]);
+    Timeline[i] = currentTime;
 }
 </string>
           </argument>

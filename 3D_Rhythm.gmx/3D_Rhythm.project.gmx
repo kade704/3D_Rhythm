@@ -59,6 +59,8 @@
     <script>scripts\draw_axis.gml</script>
     <script>scripts\get_song_data.gml</script>
     <script>scripts\add_song.gml</script>
+    <script>scripts\log.gml</script>
+    <script>scripts\error.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_Dealerplate</font>
@@ -68,7 +70,7 @@
       <object>objects\obj_test</object>
     </objects>
     <objects name="Main">
-      <object>objects\obj_File</object>
+      <object>objects\obj_Data</object>
       <object>objects\obj_Camera</object>
       <object>objects\obj_Map</object>
       <object>objects\obj_HUD</object>
