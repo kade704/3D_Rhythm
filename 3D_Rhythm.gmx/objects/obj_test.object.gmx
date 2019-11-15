@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string></string>
+            <string>Selected = 0;
+</string>
           </argument>
         </arguments>
       </action>
@@ -48,14 +49,67 @@
           <argument>
             <kind>1</kind>
             <string>draw_set_font(ft_Dealerplate);
-draw_set_colour(c_aqua);
-draw_text(30, 30, "Game Lobby");
+draw_set_colour(c_white);
+draw_set_alpha(1);
+
+for(var i = 0; i &lt; obj_JukeBox.Length; i++)
+{
+    draw_text(30, 30 + (i * 60), ds_grid_get(obj_JukeBox.Songs, 2, i) + " - " + ds_grid_get(obj_JukeBox.Songs, 3, i));
+}
+
+draw_triangle(10, 30 + (obj_JukeBox.Selected * 60) + 7, 20, 30 + (obj_JukeBox.Selected * 60) + 15, 10, 30 + (obj_JukeBox.Selected * 60) + 23, false); 
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="9" enumb="32">
+    <event eventtype="9" enumb="40">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(obj_JukeBox.Selected &lt; obj_JukeBox.Length - 1) obj_JukeBox.Selected++;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="38">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(obj_JukeBox.Selected &gt; 0) obj_JukeBox.Selected--;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="13">
       <action>
         <libid>1</libid>
         <id>603</id>

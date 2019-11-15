@@ -27,16 +27,19 @@
             <kind>1</kind>
             <string>/// Variables
 
-PositionX = 100;
-PositionY = 100;
-PositionZ = 100;
+PositionX = 0;
+PositionY = 0;
+PositionZ = 0;
 
 TargetX = 0;
 TargetY = 0;
 TargetZ = 0;
 
+NormalX = 0;
+NormalY = 0;
+NormalZ = 0;
+
 Scale = 120;
-Angle = 0;
 SmoothSpeed = 0.1;
 
 
@@ -94,20 +97,33 @@ draw_set_colour(c_white);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/*var index = obj_Cube.Index * 4;
+            <string>var index = obj_Cube.Index;
 
+var px = obj_File.Positions[index, 0];
+var py = obj_File.Positions[index, 1];
+var pz = obj_File.Positions[index, 2];
+
+var u = cross(obj_File.Vectors[index, 0], obj_File.Vectors[index, 1], obj_File.Vectors[index, 2], obj_File.Normals[index, 0], obj_File.Normals[index, 1], obj_File.Normals[index, 2]);
+u = normalize(u[0], u[1], u[2]);
+
+var v = rotate_axis(obj_File.Vectors[index, 0], obj_File.Vectors[index, 1], obj_File.Vectors[index, 2], u[0], u[1], u[2], 45);
+v = rotate_axis(v[0], v[1], v[2], obj_File.Normals[index, 0], obj_File.Normals[index, 1], obj_File.Normals[index, 2], 135);
+
+var nx = obj_File.Normals[index, 0];
+var ny = obj_File.Normals[index, 1];
+var nz = obj_File.Normals[index, 2];
 
 TargetX = lerp(TargetX, px, SmoothSpeed);
 TargetY = lerp(TargetY, py, SmoothSpeed);
 TargetZ = lerp(TargetZ, pz, SmoothSpeed);
-PositionX = lerp(PositionX, px + v[0], SmoothSpeed);
-PositionY = lerp(PositionY, py + v[1], SmoothSpeed);
-PositionZ = lerp(PositionZ, pz + v[2], SmoothSpeed);*/
 
-Angle += (-keyboard_check(ord('A')) + keyboard_check(ord('D'))) * 0.01;
+PositionX = lerp(PositionX, px + (v[0] * Scale), SmoothSpeed);
+PositionY = lerp(PositionY, py + (v[1] * Scale), SmoothSpeed);
+PositionZ = lerp(PositionZ, pz + (v[2] * Scale), SmoothSpeed);
 
-PositionX = cos(Angle) * 100;
-PositionY = sin(Angle) * 100;
+NormalX = lerp(NormalX, nx, SmoothSpeed);
+NormalY = lerp(NormalY, ny, SmoothSpeed);
+NormalZ = lerp(NormalZ, nz, SmoothSpeed);
 </string>
           </argument>
         </arguments>
@@ -132,7 +148,7 @@ PositionY = sin(Angle) * 100;
             <kind>1</kind>
             <string>var aspect = window_get_width() / window_get_height();
 
-d3d_set_projection_ext(PositionX, PositionY, PositionZ, TargetX, TargetY, TargetZ, 0, 0, 1, 45, aspect, 0.1, 1000);
+d3d_set_projection_ext(PositionX, PositionY, PositionZ, TargetX, TargetY, TargetZ, NormalX, NormalY, NormalZ, 45, aspect, 0.1, 1000);
 </string>
           </argument>
         </arguments>

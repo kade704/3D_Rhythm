@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>/// Load Data From File
-Data = get_song_data(ds_grid_get(obj_JukeBox.Songs, 5, obj_JukeBox.SongIndex));
+Data = get_song_data(ds_grid_get(obj_JukeBox.Songs, 5, obj_JukeBox.Selected));
 Length = array_height_2d(Data);
 
 Positions[0, 0] = 0;

@@ -27,8 +27,7 @@
             <kind>1</kind>
             <string>///Initialization Variables
 
-Index = 1;
-AngleBase = 0;
+Index = 0;
 Angle = 0;
 </string>
           </argument>
@@ -52,10 +51,10 @@ Angle = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(obj_JukeBox.IsPlaying)
+            <string>/*if(obj_JukeBox.IsPlaying)
 {
     Angle = -obj_JukeBox.ElapsedScale * 90;
-}
+}*/
 </string>
           </argument>
         </arguments>
@@ -78,12 +77,12 @@ Angle = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(Index &lt; obj_Map.Length) 
+            <string>/*if(Index &lt; obj_Map.Length) 
 {
     AngleBase = (obj_Map.Data[Index, 1] * 90) - 90;
     Index++;
 }
-else obj_JukeBox.IsPlaying = false;
+else obj_JukeBox.IsPlaying = false;*/
 </string>
           </argument>
         </arguments>
@@ -106,7 +105,28 @@ else obj_JukeBox.IsPlaying = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_cube(Index * 4, make_colour_rgb(122, 122, 255), AngleBase + Angle);
+            <string>var u = cross(obj_File.Vectors[Index, 0], obj_File.Vectors[Index, 1], obj_File.Vectors[Index, 2], obj_File.Normals[Index, 0], obj_File.Normals[Index, 1], obj_File.Normals[Index, 2]);
+u = normalize(u[0], u[1], u[2]);
+
+var pv = rotate_axis(obj_File.Vectors[Index, 0], obj_File.Vectors[Index, 1], obj_File.Vectors[Index, 2], u[0], u[1], u[2], Angle + 135);
+
+var px = obj_File.Positions[Index, 0] + (obj_File.Vectors[Index, 0] * -5) + (pv[0] * 5 * sqrt(2));
+var py = obj_File.Positions[Index, 1] + (obj_File.Vectors[Index, 1] * -5) + (pv[1] * 5 * sqrt(2));
+var pz = obj_File.Positions[Index, 2] + (obj_File.Vectors[Index, 2] * -5) + (pv[2] * 5 * sqrt(2));
+
+var vv = rotate_axis(obj_File.Vectors[Index, 0], obj_File.Vectors[Index, 1], obj_File.Vectors[Index, 2], u[0], u[1], u[2], Angle);
+
+var vx = vv[0];
+var vy = vv[1];
+var vz = vv[2];
+
+var nv = rotate_axis(obj_File.Normals[Index, 0], obj_File.Normals[Index, 1], obj_File.Normals[Index, 2], u[0], u[1], u[2], Angle);
+
+var nx = nv[0];
+var ny = nv[1];
+var nz = nv[2];
+
+draw_cube(px, py, pz, vx, vy, vz, nx, ny, nz, 10, 0.2, make_colour_rgb(125, 80, 255), 1); 
 </string>
           </argument>
         </arguments>

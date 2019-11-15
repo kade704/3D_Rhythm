@@ -27,10 +27,13 @@
             <kind>1</kind>
             <string>///Initialize Songs Info
 
-SongIndex = 0;
+Selected = 0;
 
-Songs = ds_grid_create(6, 1);
-initialize_song(0, snd_GoLike, "Fox Stevenson", "Go Like (D&amp;B Mix)", 172, "GoLike.txt");
+Songs = ds_grid_create(6, 2);
+add_song(0, snd_GoLike, "Fox Stevenson", "Go Like (D&amp;B Mix)", 172, "GoLike.txt");
+add_song(1, snd_YaWholeStyle, "K+Lab", "Ya Whole Style", 172, "YaWholeStyle.txt");
+
+Length = ds_grid_height(Songs);
 
 LastTime = 0;
 NextTime = 0;
@@ -60,12 +63,12 @@ IsPlaying = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>OneBeatRate = (1 / (ds_grid_get(Songs, 4, SongIndex) / 60)) * 1000;
+            <string>/*OneBeatRate = (1 / (ds_grid_get(Songs, 4, SongIndex) / 60)) * 1000;
 LastTime = current_time;
 NextTime = current_time + OneBeatRate;
 IsPlaying = true;
 
-//audio_play_sound(ds_grid_get(Songs, 1, SongIndex), 10, false);
+audio_play_sound(ds_grid_get(Songs, 1, SongIndex), 10, false);*/
 </string>
           </argument>
         </arguments>
