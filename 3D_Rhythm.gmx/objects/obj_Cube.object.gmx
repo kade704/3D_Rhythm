@@ -31,6 +31,9 @@ Index = 1;
 Angle = 0;
 
 TimeStart = 0;
+
+IsHitted = false;
+JudgementRate = 150;
 </string>
           </argument>
         </arguments>
@@ -53,7 +56,9 @@ TimeStart = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(obj_JukeBox.IsPlaying)
+            <string>/// 형태 변환
+
+if(obj_JukeBox.IsPlaying)
 {
     if(obj_Data.Timeline[Index] &lt; current_time - TimeStart &amp;&amp; Index &lt; obj_Data.Length - 1)
     {
@@ -61,6 +66,73 @@ TimeStart = 0;
         Angle = (obj_Data.Data[Index, 1] * 90) - 90;
     }
     Angle -= 90 / (obj_Data.OneBeatRate / (delta_time * 0.001));
+}
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///노트 판정
+
+if(obj_JukeBox.IsPlaying)
+{
+    var key = keyboard_check_pressed(vk_anykey);
+    
+    if((obj_Data.Timeline[Index] - current_time + TimeStart) &lt; JudgementRate)
+    {
+        if(obj_Data.NoteHits[Index] == noone &amp;&amp; key)
+        {
+            obj_Data.NoteHits[Index] = 1;
+            log("Perfect!");
+        }
+    }
+    
+    if((obj_Data.Timeline[Index] - current_time + TimeStart) &gt; JudgementRate 
+    &amp;&amp; (current_time - TimeStart - obj_Data.Timeline[Index - 1]) &gt; JudgementRate)
+    {
+        if(obj_Data.NoteHits[Index] == noone &amp;&amp; key)
+        {
+            obj_Data.NoteHits[Index] = 0;
+            log("miss...");
+        } 
+    }
+    
+    if(Index &gt; 1)
+    {
+        if((current_time - TimeStart - obj_Data.Timeline[Index - 1]) &lt; JudgementRate) 
+        {
+            if(obj_Data.NoteHits[Index - 1] == noone &amp;&amp; key)
+            {
+                obj_Data.NoteHits[Index - 1] = 1;
+                log("Perfect!");
+            }
+        }
+        else 
+        {
+            if(obj_Data.NoteHits[Index - 1] == noone)
+            {
+                obj_Data.NoteHits[Index - 1] = 0;
+                log("miss...");
+            } 
+        }
+    }
 }
 </string>
           </argument>
@@ -128,7 +200,7 @@ var nx = nv[0];
 var ny = nv[1];
 var nz = nv[2];
 
-draw_cube(px, py, pz, vx, vy, vz, nx, ny, nz, 10, 0.2, make_colour_rgb(125, 80, 255), 1); 
+draw_cube(px, py, pz, vx, vy, vz, nx, ny, nz, 10, 1, make_colour_rgb(125, 80, 255), 1); 
 </string>
           </argument>
         </arguments>

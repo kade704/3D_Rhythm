@@ -150,7 +150,7 @@ for(var i = 1; i &lt; Length; i++)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// 데이터를 기반으로 송 타임라인 생성하기
+            <string>/// 데이터를 기반으로 노래 타임라인 생성하기
 
 OneBeatRate = (1 / (ds_grid_get(obj_JukeBox.Songs, 4, obj_JukeBox.Selected) / 60)) * 1000;
 
@@ -161,6 +161,32 @@ for(var i = 1; i &lt; Length; i++)
 {
     currentTime += (OneBeatRate * Data[i, 1]);
     Timeline[i] = currentTime;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///노트 판정 결과 초기화
+
+for(var i = 0; i &lt; Length; i++)
+{
+    NoteHits[i] = noone;
 }
 </string>
           </argument>

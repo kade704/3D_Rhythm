@@ -76,6 +76,7 @@
       <object>objects\obj_HUD</object>
       <object>objects\obj_Axis</object>
       <object>objects\obj_Cube</object>
+      <object>objects\obj_System</object>
     </objects>
     <object>objects\obj_JukeBox</object>
   </objects>
