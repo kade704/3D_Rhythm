@@ -3,8 +3,8 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
-  <datafiles number="5" name="datafiles">
-    <datafiles number="5" name="Song">
+  <datafiles number="6" name="datafiles">
+    <datafiles number="6" name="Song">
       <datafile>
         <name>GoLike.txt</name>
         <exists>-1</exists>
@@ -40,7 +40,7 @@
         <filename>YaWholeStyle.txt</filename>
       </datafile>
     </datafiles>
-    <datafiles number="5" name="Model">
+    <datafiles number="6" name="Model">
       <datafile>
         <name>cube.obj</name>
         <exists>-1</exists>
@@ -61,7 +61,7 @@
       <datafile>
         <name>untitled.obj</name>
         <exists>-1</exists>
-        <size>409</size>
+        <size>664</size>
         <exportAction>2</exportAction>
         <exportDir></exportDir>
         <overwrite>0</overwrite>
@@ -100,6 +100,7 @@
     <script>scripts\error.gml</script>
     <script>scripts\load_model.gml</script>
     <script>scripts\draw_model.gml</script>
+    <script>scripts\string_split.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_Dealerplate</font>
