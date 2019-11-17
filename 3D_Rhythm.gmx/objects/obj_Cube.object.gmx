@@ -38,6 +38,30 @@ JudgementRate = 150;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// 모델 불러오기
+
+Model = load_model("Model/untitled.obj");
+
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="3" enumb="0">
       <action>
@@ -100,7 +124,6 @@ if(obj_JukeBox.IsPlaying)
         if(obj_Data.NoteHits[Index] == noone &amp;&amp; key)
         {
             obj_Data.NoteHits[Index] = 1;
-            log("Perfect!");
         }
     }
     
@@ -110,7 +133,6 @@ if(obj_JukeBox.IsPlaying)
         if(obj_Data.NoteHits[Index] == noone &amp;&amp; key)
         {
             obj_Data.NoteHits[Index] = 0;
-            log("miss...");
         } 
     }
     
@@ -121,7 +143,6 @@ if(obj_JukeBox.IsPlaying)
             if(obj_Data.NoteHits[Index - 1] == noone &amp;&amp; key)
             {
                 obj_Data.NoteHits[Index - 1] = 1;
-                log("Perfect!");
             }
         }
         else 
@@ -129,7 +150,6 @@ if(obj_JukeBox.IsPlaying)
             if(obj_Data.NoteHits[Index - 1] == noone)
             {
                 obj_Data.NoteHits[Index - 1] = 0;
-                log("miss...");
             } 
         }
     }
@@ -200,7 +220,12 @@ var nx = nv[0];
 var ny = nv[1];
 var nz = nv[2];
 
-draw_cube(px, py, pz, vx, vy, vz, nx, ny, nz, 10, 1, make_colour_rgb(125, 80, 255), 1); 
+//draw_cube(px, py, pz, vx, vy, vz, nx, ny, nz, 10, 0.2, make_colour_rgb(125, 80, 255), 1); 
+
+//draw_model(0, 0, 0, 0, 0, 0, 0, 0, 0, Model, 5, 1);
+
+draw_set_colour(c_white);
+d3d_draw_block(-5, -5, -5, 5, 5, 5 ,-1, 1, 1);
 </string>
           </argument>
         </arguments>

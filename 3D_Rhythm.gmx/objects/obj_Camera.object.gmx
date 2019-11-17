@@ -65,13 +65,27 @@ SmoothSpeed = 0.1;
             <kind>1</kind>
             <string>/// d3d 초기화
 
+//anti-aliasing, v-sync 설정
 display_reset(8, true);
 
+//d3d 시작
 d3d_start();
+
 d3d_set_perspective(true);
 d3d_set_hidden(true);
-d3d_set_lighting(false);
-d3d_set_culling(false);
+
+// 안개 설정
+//d3d_set_fog(true, c_white, 100, 200);
+
+
+// 라이팅 설정
+d3d_set_lighting(true);
+d3d_light_define_direction(0, 1, 1, -1, c_white);
+d3d_light_define_point(1, 100, 100, 100, 200, c_white);
+d3d_light_enable(0, true);
+d3d_light_enable(1, true);
+
+d3d_set_culling(true);
 d3d_set_shading(false);
 draw_set_colour(c_white);
 

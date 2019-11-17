@@ -30,8 +30,8 @@
 Selected = 0;
 
 Songs = ds_grid_create(6, 2);
-add_song(0, snd_GoLike, "Fox Stevenson", "Go Like (D&amp;B Mix)", 172, "GoLike.txt");
-add_song(1, snd_YaWholeStyle, "K+Lab", "Ya Whole Style", 93, "YaWholeStyle.txt");
+add_song(0, snd_GoLike, "Fox Stevenson", "Go Like (D&amp;B Mix)", 172, "Song/GoLike.txt");
+add_song(1, snd_YaWholeStyle, "K+Lab", "Ya Whole Style", 93, "Song/YaWholeStyle.txt");
 
 Length = ds_grid_height(Songs);
 

@@ -86,7 +86,7 @@ d3d_transform_set_identity();
 for(var i = 0; i &lt; obj_Data.Length; i++)
 {
     var index = obj_Cube.Index;
-    var colour = make_colour_rgb(0, 0, 0);
+    var colour = c_white;
     var alpha = 1 - clamp((index - i) / 10, 0, 1);
     
     if(alpha &gt; 0)

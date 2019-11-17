@@ -26,10 +26,32 @@
           <argument>
             <kind>1</kind>
             <string>/// 파일에서 데이터 불러오기
-Data = get_song_data(ds_grid_get(obj_JukeBox.Songs, 5, obj_JukeBox.Selected));
+
+var name = ds_grid_get(obj_JukeBox.Songs, 5, obj_JukeBox.Selected);
+
+Data[0, 0] = 0;
+Data[0, 1] = 1;
+
+if(file_exists(name))
+{
+    var file = file_text_open_read(name);    
+
+    for(var i = 1; !file_text_eof(file); i++)
+    {
+        Data[i, 0] = file_text_read_real(file);
+        Data[i, 1] = file_text_read_real(file);
+        file_text_readln(file);
+    }
+    file_text_close(file);
+    
+    log("File Successfully Loaded : " + name);
+}
+else 
+{
+    error("File does not exist. : " + name);
+}
+
 Length = array_height_2d(Data);
-
-
 </string>
           </argument>
         </arguments>

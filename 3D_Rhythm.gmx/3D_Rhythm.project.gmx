@@ -3,41 +3,79 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
-  <datafiles number="2" name="datafiles">
-    <datafile>
-      <name>GoLike.txt</name>
-      <exists>-1</exists>
-      <size>24</size>
-      <exportAction>2</exportAction>
-      <exportDir></exportDir>
-      <overwrite>0</overwrite>
-      <freeData>-1</freeData>
-      <removeEnd>0</removeEnd>
-      <store>0</store>
-      <ConfigOptions>
-        <Config name="Default">
-          <CopyToMask>9223372036854775807</CopyToMask>
-        </Config>
-      </ConfigOptions>
-      <filename>GoLike.txt</filename>
-    </datafile>
-    <datafile>
-      <name>YaWholeStyle.txt</name>
-      <exists>-1</exists>
-      <size>0</size>
-      <exportAction>2</exportAction>
-      <exportDir></exportDir>
-      <overwrite>0</overwrite>
-      <freeData>-1</freeData>
-      <removeEnd>0</removeEnd>
-      <store>0</store>
-      <ConfigOptions>
-        <Config name="Default">
-          <CopyToMask>9223372036854775807</CopyToMask>
-        </Config>
-      </ConfigOptions>
-      <filename>YaWholeStyle.txt</filename>
-    </datafile>
+  <datafiles number="5" name="datafiles">
+    <datafiles number="5" name="Song">
+      <datafile>
+        <name>GoLike.txt</name>
+        <exists>-1</exists>
+        <size>24</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>GoLike.txt</filename>
+      </datafile>
+      <datafile>
+        <name>YaWholeStyle.txt</name>
+        <exists>-1</exists>
+        <size>0</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>YaWholeStyle.txt</filename>
+      </datafile>
+    </datafiles>
+    <datafiles number="5" name="Model">
+      <datafile>
+        <name>cube.obj</name>
+        <exists>-1</exists>
+        <size>10396</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>cube.obj</filename>
+      </datafile>
+      <datafile>
+        <name>untitled.obj</name>
+        <exists>-1</exists>
+        <size>409</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>untitled.obj</filename>
+      </datafile>
+    </datafiles>
   </datafiles>
   <NewExtensions/>
   <sounds name="sound">
@@ -48,7 +86,7 @@
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
-    <scripts name="math">
+    <scripts name="Math">
       <script>scripts\normalize.gml</script>
       <script>scripts\cross.gml</script>
       <script>scripts\dot.gml</script>
@@ -57,10 +95,11 @@
     <script>scripts\draw_cube.gml</script>
     <script>scripts\draw_quad.gml</script>
     <script>scripts\draw_axis.gml</script>
-    <script>scripts\get_song_data.gml</script>
     <script>scripts\add_song.gml</script>
     <script>scripts\log.gml</script>
     <script>scripts\error.gml</script>
+    <script>scripts\load_model.gml</script>
+    <script>scripts\draw_model.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_Dealerplate</font>
@@ -75,8 +114,8 @@
       <object>objects\obj_Map</object>
       <object>objects\obj_HUD</object>
       <object>objects\obj_Axis</object>
-      <object>objects\obj_Cube</object>
       <object>objects\obj_System</object>
+      <object>objects\obj_Cube</object>
     </objects>
     <object>objects\obj_JukeBox</object>
   </objects>
