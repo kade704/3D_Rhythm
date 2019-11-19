@@ -20,27 +20,38 @@ if(file_exists(_name))
         
         if(_header == "v ")
         {   
-            var _s = string_split(string_delete(_string, 1, 2));
-            _vertices[_vertexCount, 0] = _s[0];
-            _vertices[_vertexCount, 1] = _s[1];
-            _vertices[_vertexCount, 2] = _s[2];
+            var _s = string_split(string_delete(_string, 1, 2), " ");
+            _vertices[_vertexCount, 0] = real(_s[0]);
+            _vertices[_vertexCount, 1] = real(_s[1]);
+            _vertices[_vertexCount, 2] = real(_s[2]);
             _vertexCount++;
         }
         else if(_header == "vn")
         {
-           
+            var _s = string_split(string_delete(_string, 1, 3), " ");
+            _normals[_normalCount, 0] = real(_s[0]);
+            _normals[_normalCount, 1] = real(_s[1]);
+            _normals[_normalCount, 2] = real(_s[2]);
+            _normalCount++;
         }
         else if(_header == "f ")
         {
-            var _s = string_split(string_delete(_string, 1, 2));
+            var _s = string_split(string_delete(_string, 1, 2), " ");
             
+            var _v1 = string_split(_s[0], "/");
+            _indices[_indexCount, 0] = real(_v1[0]);
+            _indices[_indexCount, 1] = real(_v1[2]);
+            _indexCount++;
             
-            var _v = string_copy(_s[0], 1, string_pos("/")
+            var _v2 = string_split(_s[1], "/");
+            _indices[_indexCount, 0] = real(_v2[0]);
+            _indices[_indexCount, 1] = real(_v2[2]);
+            _indexCount++;
             
-            _indices[_indexCount, 0] = string( _s[0];
-            _vertices[_vertexCount, 1] = _s[1];
-            _vertices[_vertexCount, 2] = _s[2];
-            _vertexCount++;
+            var _v3 = string_split(_s[2], "/");
+            _indices[_indexCount, 0] = real(_v3[0]);
+            _indices[_indexCount, 1] = real(_v3[2]);
+            _indexCount++;
         }
         else {}
 
@@ -52,23 +63,13 @@ if(file_exists(_name))
     var _result = noone;
     for(var i = 0; i < _indexCount; i++)
     {
-        _result[(i * 3) + 0, 0] = _vertices[_indices[i, 0] - 1, 0];
-        _result[(i * 3) + 0, 1] = _vertices[_indices[i, 0] - 1, 1];
-        _result[(i * 3) + 0, 2] = _vertices[_indices[i, 0] - 1, 2];
-        //_result[(i * 3) + 0, 3] = _normals[_indices[i, 0] - 1, 2];
+        _result[i, 0] = _vertices[_indices[i, 0] - 1, 0];
+        _result[i, 1] = _vertices[_indices[i, 0] - 1, 1];
+        _result[i, 2] = _vertices[_indices[i, 0] - 1, 2];
         
-        _result[(i * 3) + 1, 0] = _vertices[_indices[i, 1] - 1, 0];
-        _result[(i * 3) + 1, 1] = _vertices[_indices[i, 1] - 1, 1];
-        _result[(i * 3) + 1, 2] = _vertices[_indices[i, 1] - 1, 2];
-        
-        _result[(i * 3) + 2, 0] = _vertices[_indices[i, 2] - 1, 0];
-        _result[(i * 3) + 2, 1] = _vertices[_indices[i, 2] - 1, 1];
-        _result[(i * 3) + 2, 2] = _vertices[_indices[i, 2] - 1, 2];
-    }
-    
-    for(var i = 0; i < array_height_2d(_result); i++)
-    {
-        log(string(_result[i, 0]) + " " + string(_result[i, 1]) + " " + string(_result[i, 2]));
+        _result[i, 3] = _normals[_indices[i, 1] - 1, 0];
+        _result[i, 4] = _normals[_indices[i, 1] - 1, 1];
+        _result[i, 5] = _normals[_indices[i, 1] - 1, 2];
     }
     
     log("File Successfully Loaded : " + _name);

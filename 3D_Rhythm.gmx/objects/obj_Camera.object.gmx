@@ -80,13 +80,12 @@ d3d_set_hidden(true);
 
 // 라이팅 설정
 d3d_set_lighting(true);
-d3d_light_define_direction(0, 1, 1, -1, c_white);
-d3d_light_define_point(1, 100, 100, 100, 200, c_white);
+d3d_light_define_ambient(make_colour_rgb(100, 100, 100));
+d3d_light_define_direction(0, 0.2264, 0.7926, -0.5661, c_white);
 d3d_light_enable(0, true);
-d3d_light_enable(1, true);
 
-d3d_set_culling(true);
-d3d_set_shading(false);
+d3d_set_culling(false);
+d3d_set_shading(true);
 draw_set_colour(c_white);
 
 </string>

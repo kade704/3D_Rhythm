@@ -56,7 +56,7 @@ JudgementRate = 150;
             <kind>1</kind>
             <string>/// 모델 불러오기
 
-Model = load_model("Model/untitled.obj");
+Model = load_model("Model/cube1.obj");
 
 </string>
           </argument>
@@ -220,12 +220,7 @@ var nx = nv[0];
 var ny = nv[1];
 var nz = nv[2];
 
-//draw_cube(px, py, pz, vx, vy, vz, nx, ny, nz, 10, 0.2, make_colour_rgb(125, 80, 255), 1); 
-
-//draw_model(0, 0, 0, 0, 0, 0, 0, 0, 0, Model, 5, 1);
-
-draw_set_colour(c_white);
-d3d_draw_block(-5, -5, -5, 5, 5, 5 ,-1, 1, 1);
+draw_model(px, py, pz, vx, vy, vz, nx, ny, nz, Model, 5, 1);
 </string>
           </argument>
         </arguments>

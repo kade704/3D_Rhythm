@@ -91,3 +91,5 @@ d3d_vertex_colour(ex4, ey4, ez4, _colour, _alpha);
 d3d_vertex_colour(x4, y4, z4, _colour, _alpha);
 
 d3d_primitive_end();
+
+d3d_transform_set_identity();

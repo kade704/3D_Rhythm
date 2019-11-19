@@ -80,9 +80,6 @@ if(debug)
             <kind>1</kind>
             <string>///맵 그리기
 
-draw_set_colour(c_aqua);
-d3d_transform_set_identity();
-
 for(var i = 0; i &lt; obj_Data.Length; i++)
 {
     var index = obj_Cube.Index;
@@ -101,8 +98,6 @@ for(var i = 0; i &lt; obj_Data.Length; i++)
     }
         
 }
-
-d3d_transform_set_identity();
 </string>
           </argument>
         </arguments>
