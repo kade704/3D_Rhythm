@@ -66,17 +66,13 @@ SmoothSpeed = 0.1;
             <string>/// d3d 초기화
 
 //anti-aliasing, v-sync 설정
-display_reset(8, true);
+display_reset(4, true);
 
 //d3d 시작
 d3d_start();
 
 d3d_set_perspective(true);
-d3d_set_hidden(true);
-
-// 안개 설정
-//d3d_set_fog(true, c_white, 100, 200);
-
+d3d_set_hidden(false);
 
 // 라이팅 설정
 d3d_set_lighting(true);
@@ -118,27 +114,27 @@ var px = obj_Data.Positions[index, 0];
 var py = obj_Data.Positions[index, 1];
 var pz = obj_Data.Positions[index, 2];
 
-var u = cross(obj_Data.Vectors[index, 0], obj_Data.Vectors[index, 1], obj_Data.Vectors[index, 2], obj_Data.Normals[index, 0], obj_Data.Normals[index, 1], obj_Data.Normals[index, 2]);
-u = normalize(u[0], u[1], u[2]);
+var s = cross(obj_Data.Directions[index, 0], obj_Data.Directions[index, 1], obj_Data.Directions[index, 2], obj_Data.Ups[index, 0], obj_Data.Ups[index, 1], obj_Data.Ups[index, 2]);
+s = normalize(s[0], s[1], s[2]);
 
-var v = rotate_axis(obj_Data.Vectors[index, 0], obj_Data.Vectors[index, 1], obj_Data.Vectors[index, 2], u[0], u[1], u[2], 45);
-v = rotate_axis(v[0], v[1], v[2], obj_Data.Normals[index, 0], obj_Data.Normals[index, 1], obj_Data.Normals[index, 2], 135);
+var d = rotate_axis(obj_Data.Directions[index, 0], obj_Data.Directions[index, 1], obj_Data.Directions[index, 2], s[0], s[1], s[2], 45);
+d = rotate_axis(d[0], d[1], d[2], obj_Data.Ups[index, 0], obj_Data.Ups[index, 1], obj_Data.Ups[index, 2], 135);
 
-var nx = obj_Data.Normals[index, 0];
-var ny = obj_Data.Normals[index, 1];
-var nz = obj_Data.Normals[index, 2];
+var ux = obj_Data.Ups[index, 0];
+var uy = obj_Data.Ups[index, 1];
+var uz = obj_Data.Ups[index, 2];
 
 TargetX = lerp(TargetX, px, SmoothSpeed);
 TargetY = lerp(TargetY, py, SmoothSpeed);
 TargetZ = lerp(TargetZ, pz, SmoothSpeed);
 
-PositionX = lerp(PositionX, px + (v[0] * Scale), SmoothSpeed);
-PositionY = lerp(PositionY, py + (v[1] * Scale), SmoothSpeed);
-PositionZ = lerp(PositionZ, pz + (v[2] * Scale), SmoothSpeed);
+PositionX = lerp(PositionX, px + (d[0] * Scale), SmoothSpeed);
+PositionY = lerp(PositionY, py + (d[1] * Scale), SmoothSpeed);
+PositionZ = lerp(PositionZ, pz + (d[2] * Scale), SmoothSpeed);
 
-NormalX = lerp(NormalX, nx, SmoothSpeed);
-NormalY = lerp(NormalY, ny, SmoothSpeed);
-NormalZ = lerp(NormalZ, nz, SmoothSpeed);
+NormalX = lerp(NormalX, ux, SmoothSpeed);
+NormalY = lerp(NormalY, uy, SmoothSpeed);
+NormalZ = lerp(NormalZ, uz, SmoothSpeed);
 </string>
           </argument>
         </arguments>

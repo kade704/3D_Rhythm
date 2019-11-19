@@ -56,7 +56,7 @@ JudgementRate = 150;
             <kind>1</kind>
             <string>/// 모델 불러오기
 
-Model = load_model("Model/cube1.obj");
+Model = load_model("Model/cube0.obj");
 
 </string>
           </argument>
@@ -199,28 +199,30 @@ if(obj_JukeBox.IsPlaying)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var u = cross(obj_Data.Vectors[Index, 0], obj_Data.Vectors[Index, 1], obj_Data.Vectors[Index, 2], obj_Data.Normals[Index, 0], obj_Data.Normals[Index, 1], obj_Data.Normals[Index, 2]);
-u = normalize(u[0], u[1], u[2]);
+            <string>///큐브 그리기
 
-var pv = rotate_axis(obj_Data.Vectors[Index, 0], obj_Data.Vectors[Index, 1], obj_Data.Vectors[Index, 2], u[0], u[1], u[2], Angle + 135);
+var s = cross(obj_Data.Directions[Index, 0], obj_Data.Directions[Index, 1], obj_Data.Directions[Index, 2], obj_Data.Ups[Index, 0], obj_Data.Ups[Index, 1], obj_Data.Ups[Index, 2]);
+s = normalize(s[0], s[1], s[2]);
 
-var px = obj_Data.Positions[Index, 0] + (obj_Data.Vectors[Index, 0] * -5) + (pv[0] * 5 * sqrt(2));
-var py = obj_Data.Positions[Index, 1] + (obj_Data.Vectors[Index, 1] * -5) + (pv[1] * 5 * sqrt(2));
-var pz = obj_Data.Positions[Index, 2] + (obj_Data.Vectors[Index, 2] * -5) + (pv[2] * 5 * sqrt(2));
+var pv = rotate_axis(obj_Data.Directions[Index, 0], obj_Data.Directions[Index, 1], obj_Data.Directions[Index, 2], s[0], s[1], s[2], Angle + 135);
 
-var vv = rotate_axis(obj_Data.Vectors[Index, 0], obj_Data.Vectors[Index, 1], obj_Data.Vectors[Index, 2], u[0], u[1], u[2], Angle);
+var px = obj_Data.Positions[Index, 0] + (obj_Data.Directions[Index, 0] * -5) + (pv[0] * 5 * sqrt(2));
+var py = obj_Data.Positions[Index, 1] + (obj_Data.Directions[Index, 1] * -5) + (pv[1] * 5 * sqrt(2));
+var pz = obj_Data.Positions[Index, 2] + (obj_Data.Directions[Index, 2] * -5) + (pv[2] * 5 * sqrt(2));
 
-var vx = vv[0];
-var vy = vv[1];
-var vz = vv[2];
+var dv = rotate_axis(obj_Data.Directions[Index, 0], obj_Data.Directions[Index, 1], obj_Data.Directions[Index, 2], s[0], s[1], s[2], Angle);
 
-var nv = rotate_axis(obj_Data.Normals[Index, 0], obj_Data.Normals[Index, 1], obj_Data.Normals[Index, 2], u[0], u[1], u[2], Angle);
+var dx = dv[0];
+var dy = dv[1];
+var dz = dv[2];
 
-var nx = nv[0];
-var ny = nv[1];
-var nz = nv[2];
+var uv = rotate_axis(obj_Data.Ups[Index, 0], obj_Data.Ups[Index, 1], obj_Data.Ups[Index, 2], s[0], s[1], s[2], Angle);
 
-draw_model(px, py, pz, vx, vy, vz, nx, ny, nz, Model, 5, 1);
+var ux = uv[0];
+var uy = uv[1];
+var uz = uv[2];
+
+draw_model(px, py, pz, dx, dy, dz, ux, uy, uz, Model, 5);
 </string>
           </argument>
         </arguments>
