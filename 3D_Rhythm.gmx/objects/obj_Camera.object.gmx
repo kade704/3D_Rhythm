@@ -70,20 +70,12 @@ display_reset(4, true);
 
 //d3d 시작
 d3d_start();
-
 d3d_set_perspective(true);
-d3d_set_hidden(false);
-
-// 라이팅 설정
-d3d_set_lighting(true);
-d3d_light_define_ambient(make_colour_rgb(100, 100, 100));
-d3d_light_define_direction(0, 0.2264, 0.7926, -0.5661, c_white);
-d3d_light_enable(0, true);
+d3d_set_hidden(true);
 
 d3d_set_culling(false);
 d3d_set_shading(true);
 draw_set_colour(c_white);
-
 </string>
           </argument>
         </arguments>
@@ -114,15 +106,20 @@ var px = obj_Data.Positions[index, 0];
 var py = obj_Data.Positions[index, 1];
 var pz = obj_Data.Positions[index, 2];
 
-var s = cross(obj_Data.Directions[index, 0], obj_Data.Directions[index, 1], obj_Data.Directions[index, 2], obj_Data.Ups[index, 0], obj_Data.Ups[index, 1], obj_Data.Ups[index, 2]);
-s = normalize(s[0], s[1], s[2]);
+var dx = obj_Data.Directions[index, 0];
+var dy = obj_Data.Directions[index, 1];
+var dz = obj_Data.Directions[index, 2];
 
-var d = rotate_axis(obj_Data.Directions[index, 0], obj_Data.Directions[index, 1], obj_Data.Directions[index, 2], s[0], s[1], s[2], 45);
-d = rotate_axis(d[0], d[1], d[2], obj_Data.Ups[index, 0], obj_Data.Ups[index, 1], obj_Data.Ups[index, 2], 135);
+var sx = obj_Data.Sides[index, 0];
+var sy = obj_Data.Sides[index, 1];
+var sz = obj_Data.Sides[index, 2];
 
 var ux = obj_Data.Ups[index, 0];
 var uy = obj_Data.Ups[index, 1];
 var uz = obj_Data.Ups[index, 2];
+
+var d = rotate_axis(dx, dy, dz, sx, sy, sz, -45);
+d = rotate_axis(d[0], d[1], d[2], ux, uy, uz, 135);
 
 TargetX = lerp(TargetX, px, SmoothSpeed);
 TargetY = lerp(TargetY, py, SmoothSpeed);
@@ -157,7 +154,9 @@ NormalZ = lerp(NormalZ, uz, SmoothSpeed);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var aspect = window_get_width() / window_get_height();
+            <string>///카메라 그리기 
+
+var aspect = window_get_width() / window_get_height();
 
 d3d_set_projection_ext(PositionX, PositionY, PositionZ, TargetX, TargetY, TargetZ, NormalX, NormalY, NormalZ, 45, aspect, 0.1, 1000);
 </string>

@@ -25,10 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// 모델 불러오기
+            <string>///변수 초기화
 
-Model = load_model("Model/tile0.obj");
-
+IsDebugMode = false;
 </string>
           </argument>
         </arguments>
@@ -49,9 +48,10 @@ Model = load_model("Model/tile0.obj");
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///변수 초기화
+            <string>/// 모델 불러오기
 
-IsDebugMode = false;
+Model = load_model("Model/tile1.obj");
+
 </string>
           </argument>
         </arguments>
@@ -106,10 +106,11 @@ if(debug)
 
 for(var i = 0; i &lt; obj_Data.Length; i++)
 {
-    draw_model(obj_Data.Positions[i, 0], obj_Data.Positions[i, 1], obj_Data.Positions[i, 2],
-          obj_Data.Directions[i, 0], obj_Data.Directions[i, 1], obj_Data.Directions[i, 2],
-          obj_Data.Ups[i, 0], obj_Data.Ups[i, 1], obj_Data.Ups[i, 2],
-          Model, 5);
+    draw_model(obj_Data.Positions[i, 0] - (obj_Data.Ups[i, 0] * 1), obj_Data.Positions[i, 1] - (obj_Data.Ups[i, 1] * 1), obj_Data.Positions[i, 2] - (obj_Data.Ups[i, 2] * 1),
+               obj_Data.Directions[i, 0], obj_Data.Directions[i, 1], obj_Data.Directions[i, 2],
+               obj_Data.Sides[i, 0], obj_Data.Sides[i, 1], obj_Data.Sides[i, 2],
+               obj_Data.Ups[i, 0], obj_Data.Ups[i, 1], obj_Data.Ups[i, 2],
+               Model, 5.1);
 }
 </string>
           </argument>
@@ -131,7 +132,7 @@ for(var i = 0; i &lt; obj_Data.Length; i++)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///[디버그 모드] 벡터, 노멀 그리기
+            <string>///[디버그 모드] 벡터, 사이드, 업 벡터 그리기
 
 if(IsDebugMode)
 {
@@ -140,17 +141,16 @@ if(IsDebugMode)
     d3d_primitive_begin(pr_linelist);
     for(var i = 0; i &lt; obj_Data.Length; i++)
     {
-        var u = cross(obj_Data.Directions[i, 0], obj_Data.Directions[i, 1], obj_Data.Directions[i, 2], obj_Data.Ups[i, 0], obj_Data.Ups[i, 1], obj_Data.Ups[i, 2]);
-        u = normalize(u[0], u[1], u[2]);
-        
         d3d_vertex_colour(obj_Data.Positions[i, 0], obj_Data.Positions[i, 1], obj_Data.Positions[i, 2], make_colour_rgb(255, 0, 0), 1);
         d3d_vertex_colour(obj_Data.Positions[i, 0] + (obj_Data.Directions[i, 0] * 5), obj_Data.Positions[i, 1] + (obj_Data.Directions[i, 1] * 5), obj_Data.Positions[i, 2] + (obj_Data.Directions[i, 2] * 5), make_colour_rgb(255, 0, 0), 1);
         
         d3d_vertex_colour(obj_Data.Positions[i, 0], obj_Data.Positions[i, 1], obj_Data.Positions[i, 2], make_colour_rgb(0, 255, 0), 1);
-        d3d_vertex_colour(obj_Data.Positions[i, 0] + (obj_Data.Ups[i, 0] * 5), obj_Data.Positions[i, 1] + (obj_Data.Ups[i, 1] * 5), obj_Data.Positions[i, 2] + (obj_Data.Ups[i, 2] * 5), make_colour_rgb(0, 255, 0), 1);
+        d3d_vertex_colour(obj_Data.Positions[i, 0] + (obj_Data.Sides[i, 0] * 5), obj_Data.Positions[i, 1] + (obj_Data.Sides[i, 1] * 5), obj_Data.Positions[i, 2] + (obj_Data.Sides[i, 2] * 5), make_colour_rgb(0, 255, 0), 1);
         
         d3d_vertex_colour(obj_Data.Positions[i, 0], obj_Data.Positions[i, 1], obj_Data.Positions[i, 2], make_colour_rgb(0, 0, 255), 1);
-        d3d_vertex_colour(obj_Data.Positions[i, 0] + (u[0] * 5), obj_Data.Positions[i, 1] + (u[1] * 5), obj_Data.Positions[i, 2] + (u[2] * 5), make_colour_rgb(0, 0, 255), 1);
+        d3d_vertex_colour(obj_Data.Positions[i, 0] + (obj_Data.Ups[i, 0] * 5), obj_Data.Positions[i, 1] + (obj_Data.Ups[i, 1] * 5), obj_Data.Positions[i, 2] + (obj_Data.Ups[i, 2] * 5), make_colour_rgb(0, 0, 255), 1);
+        
+        
     }
     d3d_primitive_end();
     d3d_transform_set_identity();

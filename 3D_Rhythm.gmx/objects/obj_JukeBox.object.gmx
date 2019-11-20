@@ -59,7 +59,9 @@ IsPlaying = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>audio_play_sound(ds_grid_get(Songs, 1, Selected), 0, false);
+            <string>///노래 시작
+
+audio_play_sound(ds_grid_get(Songs, 1, Selected), 0, false);
 audio_master_gain(0.1);
 
 with(obj_Cube) event_user(0);
@@ -86,7 +88,9 @@ IsPlaying = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(room == Main)
+            <string>///100틱 뒤에 노래 시작
+
+if(room == Main)
 {
     alarm[0] = 100;
 }

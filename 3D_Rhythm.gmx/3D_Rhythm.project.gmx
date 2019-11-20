@@ -3,8 +3,8 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
-  <datafiles number="16" name="datafiles">
-    <datafiles number="16" name="Song">
+  <datafiles number="22" name="datafiles">
+    <datafiles number="22" name="Song">
       <datafile>
         <name>GoLike.txt</name>
         <exists>-1</exists>
@@ -40,7 +40,7 @@
         <filename>YaWholeStyle.txt</filename>
       </datafile>
     </datafiles>
-    <datafiles number="16" name="Model">
+    <datafiles number="22" name="Model">
       <datafile>
         <name>cube0.obj</name>
         <exists>-1</exists>
@@ -78,7 +78,7 @@
       <datafile>
         <name>tile0.obj</name>
         <exists>-1</exists>
-        <size>944</size>
+        <size>664</size>
         <exportAction>2</exportAction>
         <exportDir></exportDir>
         <overwrite>0</overwrite>
@@ -95,7 +95,7 @@
       <datafile>
         <name>tile1.obj</name>
         <exists>-1</exists>
-        <size>6243</size>
+        <size>5872</size>
         <exportAction>2</exportAction>
         <exportDir></exportDir>
         <overwrite>0</overwrite>
@@ -120,20 +120,25 @@
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
+    <scripts name="Shader">
+      <script>scripts\shader_set_uniform_float.gml</script>
+      <script>scripts\shader_set_uniform_vec3.gml</script>
+    </scripts>
     <scripts name="Math">
-      <script>scripts\normalize.gml</script>
       <script>scripts\cross.gml</script>
       <script>scripts\dot.gml</script>
       <script>scripts\rotate_axis.gml</script>
     </scripts>
+    <script>scripts\load_model.gml</script>
+    <script>scripts\draw_model.gml</script>
     <script>scripts\string_split.gml</script>
-    <script>scripts\draw_axis.gml</script>
     <script>scripts\add_song.gml</script>
     <script>scripts\log.gml</script>
     <script>scripts\error.gml</script>
-    <script>scripts\load_model.gml</script>
-    <script>scripts\draw_model.gml</script>
   </scripts>
+  <shaders name="shaders">
+    <shader type="GLSLES">shaders\shd_simple.shader</shader>
+  </shaders>
   <fonts name="fonts">
     <font>fonts\ft_Dealerplate</font>
   </fonts>
@@ -146,7 +151,6 @@
       <object>objects\obj_Camera</object>
       <object>objects\obj_Map</object>
       <object>objects\obj_HUD</object>
-      <object>objects\obj_Axis</object>
       <object>objects\obj_System</object>
       <object>objects\obj_Cube</object>
     </objects>

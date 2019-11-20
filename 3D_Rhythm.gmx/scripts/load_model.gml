@@ -57,23 +57,24 @@ if(file_exists(_name))
 
         file_text_readln(_file);
     }
-    
     file_text_close(_file);
     
-    var _result = noone;
+    vertex_format_begin();
+    vertex_format_add_position_3d();
+    vertex_format_add_normal();
+    var _format = vertex_format_end();
+    
+    var _buffer = vertex_create_buffer();
+    vertex_begin(_buffer, _format);
     for(var i = 0; i < _indexCount; i++)
     {
-        _result[i, 0] = _vertices[_indices[i, 0] - 1, 0];
-        _result[i, 1] = _vertices[_indices[i, 0] - 1, 1];
-        _result[i, 2] = _vertices[_indices[i, 0] - 1, 2];
-        
-        _result[i, 3] = _normals[_indices[i, 1] - 1, 0];
-        _result[i, 4] = _normals[_indices[i, 1] - 1, 1];
-        _result[i, 5] = _normals[_indices[i, 1] - 1, 2];
+        vertex_position_3d(_buffer, _vertices[_indices[i, 0] - 1, 0], _vertices[_indices[i, 0] - 1, 1], _vertices[_indices[i, 0] - 1, 2]);
+        vertex_normal(_buffer, _normals[_indices[i, 1] - 1, 0], _normals[_indices[i, 1] - 1, 1], _normals[_indices[i, 1] - 1, 2]);
     }
+    vertex_end(_buffer);
     
     log("File Successfully Loaded : " + _name);
-    return _result;
+    return _buffer;
 }
 else 
 {
