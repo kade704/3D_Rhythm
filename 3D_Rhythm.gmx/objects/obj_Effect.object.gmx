@@ -25,7 +25,23 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>IsEnabled = false;
+            <string>Px = 0;
+Py = 0;
+Pz = 0;
+
+Fx = 0;
+Fy = 0;
+Fz = 0;
+
+Rx = 0;
+Ry = 0;
+Rz = 0;
+
+Ux = 0;
+Uy = 0;
+Uz = 0;
+
+TimeStart = current_time;
 </string>
           </argument>
         </arguments>
@@ -48,12 +64,14 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(IsEnabled)
-{
-    d3d_transform_set_identity();
-    draw_axis(0.5);
-    d3d_transform_set_identity();
-}
+            <string>var alpha = 1 - clamp(((current_time - TimeStart) / obj_Data.OneBeatRate), 0, 1);
+if(alpha == 0) instance_destroy();
+
+draw_quad(obj_Data.Positions[obj_Cube.Index, 0], obj_Data.Positions[obj_Cube.Index, 1], obj_Data.Positions[obj_Cube.Index, 2],
+          obj_Data.Forwards[obj_Cube.Index, 0], obj_Data.Forwards[obj_Cube.Index, 1], obj_Data.Forwards[obj_Cube.Index, 2],
+          obj_Data.Rights[obj_Cube.Index, 0], obj_Data.Rights[obj_Cube.Index, 1], obj_Data.Rights[obj_Cube.Index, 2],
+          obj_Data.Ups[obj_Cube.Index, 0], obj_Data.Ups[obj_Cube.Index, 1], obj_Data.Ups[obj_Cube.Index, 2],
+          10, 1, c_white, 0.5);
 </string>
           </argument>
         </arguments>

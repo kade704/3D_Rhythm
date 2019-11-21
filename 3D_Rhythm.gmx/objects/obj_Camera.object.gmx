@@ -73,9 +73,9 @@ d3d_start();
 d3d_set_perspective(true);
 d3d_set_hidden(true);
 
-d3d_set_culling(false);
-d3d_set_shading(true);
-draw_set_colour(c_white);
+d3d_set_culling(true);
+d3d_set_shading(false);
+//draw_set_colour(c_white);
 </string>
           </argument>
         </arguments>
@@ -106,19 +106,19 @@ var px = obj_Data.Positions[index, 0];
 var py = obj_Data.Positions[index, 1];
 var pz = obj_Data.Positions[index, 2];
 
-var dx = obj_Data.Directions[index, 0];
-var dy = obj_Data.Directions[index, 1];
-var dz = obj_Data.Directions[index, 2];
+var fx = obj_Data.Forwards[index, 0];
+var fy = obj_Data.Forwards[index, 1];
+var fz = obj_Data.Forwards[index, 2];
 
-var sx = obj_Data.Sides[index, 0];
-var sy = obj_Data.Sides[index, 1];
-var sz = obj_Data.Sides[index, 2];
+var rx = obj_Data.Rights[index, 0];
+var ry = obj_Data.Rights[index, 1];
+var rz = obj_Data.Rights[index, 2];
 
 var ux = obj_Data.Ups[index, 0];
 var uy = obj_Data.Ups[index, 1];
 var uz = obj_Data.Ups[index, 2];
 
-var d = rotate_axis(dx, dy, dz, sx, sy, sz, -45);
+var d = rotate_axis(fx, fy, fz, rx, ry, rz, -45);
 d = rotate_axis(d[0], d[1], d[2], ux, uy, uz, 135);
 
 TargetX = lerp(TargetX, px, SmoothSpeed);
@@ -154,7 +154,7 @@ NormalZ = lerp(NormalZ, uz, SmoothSpeed);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///카메라 그리기 
+            <string>///카메라 배치
 
 var aspect = window_get_width() / window_get_height();
 

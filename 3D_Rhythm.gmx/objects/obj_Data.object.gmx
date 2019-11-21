@@ -72,19 +72,19 @@ Length = array_height_2d(Data);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// 데이터를 기반으로 위치, 방향, 사이드, 업 벡터 생성하기
+            <string>/// 데이터를 기반으로 위치, 포워드, 라이트, 업 벡터 생성하기
 
 Positions[0, 0] = 0;
 Positions[0, 1] = 0;
 Positions[0, 2] = 0;
 
-Directions[0, 0] = 1;
-Directions[0, 1] = 0;
-Directions[0, 2] = 0;
+Forwards[0, 0] = 1;
+Forwards[0, 1] = 0;
+Forwards[0, 2] = 0;
 
-Sides[0, 0] = 0;
-Sides[0, 1] = 1;
-Sides[0, 2] = 0;
+Rights[0, 0] = 0;
+Rights[0, 1] = 1;
+Rights[0, 2] = 0;
 
 Ups[0, 0] = 0;
 Ups[0, 1] = 0;
@@ -96,20 +96,20 @@ for(var i = 1; i &lt; Length; i++)
     {   
         var angle = (90 * Data[i, 1]) - 90;
         
-        var d = rotate_axis(-Sides[i - 1, 0], -Sides[i - 1, 1], -Sides[i - 1, 2], Directions[i - 1, 0], Directions[i - 1, 1], Directions[i - 1, 2], angle);
-        Positions[i, 0] = Positions[i - 1, 0] + (-Sides[i - 1, 0] * 5) + (d[0] * 5);
-        Positions[i, 1] = Positions[i - 1, 1] + (-Sides[i - 1, 1] * 5) + (d[1] * 5);
-        Positions[i, 2] = Positions[i - 1, 2] + (-Sides[i - 1, 2] * 5) + (d[2] * 5);
+        var d = rotate_axis(-Rights[i - 1, 0], -Rights[i - 1, 1], -Rights[i - 1, 2], Forwards[i - 1, 0], Forwards[i - 1, 1], Forwards[i - 1, 2], angle);
+        Positions[i, 0] = Positions[i - 1, 0] + (-Rights[i - 1, 0] * 5) + (d[0] * 5);
+        Positions[i, 1] = Positions[i - 1, 1] + (-Rights[i - 1, 1] * 5) + (d[1] * 5);
+        Positions[i, 2] = Positions[i - 1, 2] + (-Rights[i - 1, 2] * 5) + (d[2] * 5);
         
-        Directions[i, 0] = d[0];
-        Directions[i, 1] = d[1];
-        Directions[i, 2] = d[2];
+        Forwards[i, 0] = d[0];
+        Forwards[i, 1] = d[1];
+        Forwards[i, 2] = d[2];
         
-        Sides[i, 0] = Directions[i - 1, 0];
-        Sides[i, 1] = Directions[i - 1, 1];
-        Sides[i, 2] = Directions[i - 1, 2];
+        Rights[i, 0] = Forwards[i - 1, 0];
+        Rights[i, 1] = Forwards[i - 1, 1];
+        Rights[i, 2] = Forwards[i - 1, 2];
         
-        var u = rotate_axis(Ups[i - 1, 0], Ups[i - 1, 1], Ups[i - 1, 2], Directions[i - 1, 0], Directions[i - 1, 1], Directions[i - 1, 2], angle);
+        var u = rotate_axis(Ups[i - 1, 0], Ups[i - 1, 1], Ups[i - 1, 2], Forwards[i - 1, 0], Forwards[i - 1, 1], Forwards[i - 1, 2], angle);
         Ups[i, 0] = u[0];
         Ups[i, 1] = u[1];
         Ups[i, 2] = u[2];
@@ -118,20 +118,20 @@ for(var i = 1; i &lt; Length; i++)
     {   
         var angle = 90 - (90 * Data[i, 1]);
         
-        var d = rotate_axis(Sides[i - 1, 0], Sides[i - 1, 1], Sides[i - 1, 2], Directions[i - 1, 0], Directions[i - 1, 1], Directions[i - 1, 2], angle);
-        Positions[i, 0] = Positions[i - 1, 0] + (Sides[i - 1, 0] * 5) + (d[0] * 5);
-        Positions[i, 1] = Positions[i - 1, 1] + (Sides[i - 1, 1] * 5) + (d[1] * 5);
-        Positions[i, 2] = Positions[i - 1, 2] + (Sides[i - 1, 2] * 5) + (d[2] * 5);
+        var d = rotate_axis(Rights[i - 1, 0], Rights[i - 1, 1], Rights[i - 1, 2], Forwards[i - 1, 0], Forwards[i - 1, 1], Forwards[i - 1, 2], angle);
+        Positions[i, 0] = Positions[i - 1, 0] + (Rights[i - 1, 0] * 5) + (d[0] * 5);
+        Positions[i, 1] = Positions[i - 1, 1] + (Rights[i - 1, 1] * 5) + (d[1] * 5);
+        Positions[i, 2] = Positions[i - 1, 2] + (Rights[i - 1, 2] * 5) + (d[2] * 5);
         
-        Directions[i, 0] = d[0];
-        Directions[i, 1] = d[1];
-        Directions[i, 2] = d[2];
+        Forwards[i, 0] = d[0];
+        Forwards[i, 1] = d[1];
+        Forwards[i, 2] = d[2];
         
-        Sides[i, 0] = -Directions[i - 1, 0];
-        Sides[i, 1] = -Directions[i - 1, 1];
-        Sides[i, 2] = -Directions[i - 1, 2];
+        Rights[i, 0] = -Forwards[i - 1, 0];
+        Rights[i, 1] = -Forwards[i - 1, 1];
+        Rights[i, 2] = -Forwards[i - 1, 2];
         
-        var u = rotate_axis(Ups[i - 1, 0], Ups[i - 1, 1], Ups[i - 1, 2], Directions[i - 1, 0], Directions[i - 1, 1], Directions[i - 1, 2], angle);
+        var u = rotate_axis(Ups[i - 1, 0], Ups[i - 1, 1], Ups[i - 1, 2], Forwards[i - 1, 0], Forwards[i - 1, 1], Forwards[i - 1, 2], angle);
         Ups[i, 0] = u[0];
         Ups[i, 1] = u[1];
         Ups[i, 2] = u[2];
@@ -140,20 +140,20 @@ for(var i = 1; i &lt; Length; i++)
     {
         var angle = (90 * Data[i, 1] - 90);
         
-        var d = rotate_axis(Directions[i - 1, 0], Directions[i - 1, 1], Directions[i - 1, 2], Sides[i - 1, 0], Sides[i - 1, 1], Sides[i - 1, 2], angle);
-        Positions[i, 0] = Positions[i - 1, 0] + (Directions[i - 1, 0] * 5) + (d[0] * 5);
-        Positions[i, 1] = Positions[i - 1, 1] + (Directions[i - 1, 1] * 5) + (d[1] * 5);
-        Positions[i, 2] = Positions[i - 1, 2] + (Directions[i - 1, 2] * 5) + (d[2] * 5);
+        var d = rotate_axis(Forwards[i - 1, 0], Forwards[i - 1, 1], Forwards[i - 1, 2], Rights[i - 1, 0], Rights[i - 1, 1], Rights[i - 1, 2], angle);
+        Positions[i, 0] = Positions[i - 1, 0] + (Forwards[i - 1, 0] * 5) + (d[0] * 5);
+        Positions[i, 1] = Positions[i - 1, 1] + (Forwards[i - 1, 1] * 5) + (d[1] * 5);
+        Positions[i, 2] = Positions[i - 1, 2] + (Forwards[i - 1, 2] * 5) + (d[2] * 5);
         
-        Directions[i, 0] = d[0];
-        Directions[i, 1] = d[1];
-        Directions[i, 2] = d[2];
+        Forwards[i, 0] = d[0];
+        Forwards[i, 1] = d[1];
+        Forwards[i, 2] = d[2];
         
-        Sides[i, 0] = Sides[i - 1, 0];
-        Sides[i, 1] = Sides[i - 1, 1];
-        Sides[i, 2] = Sides[i - 1, 2];
+        Rights[i, 0] = Rights[i - 1, 0];
+        Rights[i, 1] = Rights[i - 1, 1];
+        Rights[i, 2] = Rights[i - 1, 2];
         
-        var u = rotate_axis(Ups[i - 1, 0], Ups[i - 1, 1], Ups[i - 1, 2], Sides[i - 1, 0], Sides[i - 1, 1], Sides[i - 1, 2], angle);
+        var u = rotate_axis(Ups[i - 1, 0], Ups[i - 1, 1], Ups[i - 1, 2], Rights[i - 1, 0], Rights[i - 1, 1], Rights[i - 1, 2], angle);
         Ups[i, 0] = u[0];
         Ups[i, 1] = u[1];
         Ups[i, 2] = u[2];

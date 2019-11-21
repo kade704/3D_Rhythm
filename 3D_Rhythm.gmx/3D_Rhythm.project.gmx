@@ -3,12 +3,12 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
-  <datafiles number="22" name="datafiles">
-    <datafiles number="22" name="Song">
+  <datafiles number="23" name="datafiles">
+    <datafiles number="23" name="Song">
       <datafile>
-        <name>GoLike.txt</name>
+        <name>pn35a.txt</name>
         <exists>-1</exists>
-        <size>24</size>
+        <size>211</size>
         <exportAction>2</exportAction>
         <exportDir></exportDir>
         <overwrite>0</overwrite>
@@ -20,7 +20,7 @@
             <CopyToMask>9223372036854775807</CopyToMask>
           </Config>
         </ConfigOptions>
-        <filename>GoLike.txt</filename>
+        <filename>pn35a.txt</filename>
       </datafile>
       <datafile>
         <name>YaWholeStyle.txt</name>
@@ -40,7 +40,7 @@
         <filename>YaWholeStyle.txt</filename>
       </datafile>
     </datafiles>
-    <datafiles number="22" name="Model">
+    <datafiles number="23" name="Model">
       <datafile>
         <name>cube0.obj</name>
         <exists>-1</exists>
@@ -113,8 +113,8 @@
   </datafiles>
   <NewExtensions/>
   <sounds name="sound">
-    <sound>sound\snd_GoLike</sound>
     <sound>sound\snd_YaWholeStyle</sound>
+    <sound>sound\snd_pn35a</sound>
   </sounds>
   <sprites name="sprites"/>
   <backgrounds name="background"/>
@@ -123,18 +123,22 @@
     <scripts name="Shader">
       <script>scripts\shader_set_uniform_float.gml</script>
       <script>scripts\shader_set_uniform_vec3.gml</script>
+      <script>scripts\shader_set_uniform_vec4.gml</script>
     </scripts>
     <scripts name="Math">
+      <script>scripts\normalize.gml</script>
       <script>scripts\cross.gml</script>
       <script>scripts\dot.gml</script>
       <script>scripts\rotate_axis.gml</script>
     </scripts>
     <script>scripts\load_model.gml</script>
     <script>scripts\draw_model.gml</script>
+    <script>scripts\draw_quad.gml</script>
     <script>scripts\string_split.gml</script>
     <script>scripts\add_song.gml</script>
     <script>scripts\log.gml</script>
     <script>scripts\error.gml</script>
+    <script>scripts\create_effect.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shd_simple.shader</shader>

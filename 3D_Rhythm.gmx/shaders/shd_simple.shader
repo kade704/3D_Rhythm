@@ -30,15 +30,19 @@ void main()
 }
 //######################_==_YOYO_SHADER_MARKER_==_######################@~varying vec3 v_vPosition;
 varying vec3 v_vNormal;
+varying vec4 v_vColour;
+
+uniform vec4 _colour;
 
 void main()
 {
-    vec3 lightDir = vec3(-10, -30, -20);
+    vec3 _lightDir = vec3(-10, -30, -20);
 
-    float ambient1 = 0.3;
-  
-    float diffuse1 = max(dot(normalize(v_vNormal), normalize(-lightDir)), 0.0);
+    float _min = 0.7;
+    float _max = 1.0;
+    
+    float _intensity = abs(dot(normalize(v_vNormal), normalize(_lightDir)));
         
-    float result = ambient1 + diffuse1;
-    gl_FragColor = vec4(vec3(result), 1.0);
+    float _result = _min + ((_max - _min) * _intensity);
+    gl_FragColor = vec4(_colour.rgb * _result, _colour.a);
 }

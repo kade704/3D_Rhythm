@@ -106,11 +106,66 @@ if(debug)
 
 for(var i = 0; i &lt; obj_Data.Length; i++)
 {
-    draw_model(obj_Data.Positions[i, 0] - (obj_Data.Ups[i, 0] * 1), obj_Data.Positions[i, 1] - (obj_Data.Ups[i, 1] * 1), obj_Data.Positions[i, 2] - (obj_Data.Ups[i, 2] * 1),
-               obj_Data.Directions[i, 0], obj_Data.Directions[i, 1], obj_Data.Directions[i, 2],
-               obj_Data.Sides[i, 0], obj_Data.Sides[i, 1], obj_Data.Sides[i, 2],
-               obj_Data.Ups[i, 0], obj_Data.Ups[i, 1], obj_Data.Ups[i, 2],
-               Model, 5.1);
+    
+    var colour = c_white;
+    if(obj_Data.NoteHits[i] == 1) colour = c_green;
+    if(obj_Data.NoteHits[i] == 0) colour = c_red;
+
+    var alpha = 1;
+    if(obj_JukeBox.IsPlaying) 
+        alpha = 1 - clamp(((current_time - obj_Cube.TimeStart) - obj_Data.Timeline[i]) / (obj_Data.OneBeatRate * 5), 0, 1);
+    
+    if(alpha &gt; 0)
+    {
+        draw_model(obj_Data.Positions[i, 0] - (obj_Data.Ups[i, 0] * 1), obj_Data.Positions[i, 1] - (obj_Data.Ups[i, 1] * 1), obj_Data.Positions[i, 2] - (obj_Data.Ups[i, 2] * 1),
+                   obj_Data.Forwards[i, 0], obj_Data.Forwards[i, 1], obj_Data.Forwards[i, 2],
+                   obj_Data.Rights[i, 0], obj_Data.Rights[i, 1], obj_Data.Rights[i, 2],
+                   obj_Data.Ups[i, 0], obj_Data.Ups[i, 1], obj_Data.Ups[i, 2],
+                   Model, 5.2, colour, alpha);
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///효과 그리기
+
+for(var i = 0; i &lt; obj_Data.Length; i++)
+{
+    var colour = c_white;
+    if(obj_Data.NoteHits[i] == 1) colour = c_green;
+    if(obj_Data.NoteHits[i] == 0) colour = c_red;
+
+    var alpha = 0;
+    if(obj_JukeBox.IsPlaying &amp;&amp; obj_Cube.Index &lt;= i) 
+        alpha = 1 - clamp(-((current_time - obj_Cube.TimeStart) - obj_Data.Timeline[i]) / obj_Data.OneBeatRate, 0, 1);
+    
+    var size = 12 + (15 * (1 - alpha));
+        
+    if(alpha &gt; 0)
+    {
+        draw_quad(obj_Data.Positions[i, 0], obj_Data.Positions[i, 1], obj_Data.Positions[i, 2],
+                  obj_Data.Forwards[i, 0], obj_Data.Forwards[i, 1], obj_Data.Forwards[i, 2],
+                  obj_Data.Rights[i, 0], obj_Data.Rights[i, 1], obj_Data.Rights[i, 2],
+                  obj_Data.Ups[i, 0], obj_Data.Ups[i, 1], obj_Data.Ups[i, 2],
+                  size, 1, c_white, alpha);
+    }
 }
 </string>
           </argument>
@@ -142,10 +197,10 @@ if(IsDebugMode)
     for(var i = 0; i &lt; obj_Data.Length; i++)
     {
         d3d_vertex_colour(obj_Data.Positions[i, 0], obj_Data.Positions[i, 1], obj_Data.Positions[i, 2], make_colour_rgb(255, 0, 0), 1);
-        d3d_vertex_colour(obj_Data.Positions[i, 0] + (obj_Data.Directions[i, 0] * 5), obj_Data.Positions[i, 1] + (obj_Data.Directions[i, 1] * 5), obj_Data.Positions[i, 2] + (obj_Data.Directions[i, 2] * 5), make_colour_rgb(255, 0, 0), 1);
+        d3d_vertex_colour(obj_Data.Positions[i, 0] + (obj_Data.Forwards[i, 0] * 5), obj_Data.Positions[i, 1] + (obj_Data.Forwards[i, 1] * 5), obj_Data.Positions[i, 2] + (obj_Data.Forwards[i, 2] * 5), make_colour_rgb(255, 0, 0), 1);
         
         d3d_vertex_colour(obj_Data.Positions[i, 0], obj_Data.Positions[i, 1], obj_Data.Positions[i, 2], make_colour_rgb(0, 255, 0), 1);
-        d3d_vertex_colour(obj_Data.Positions[i, 0] + (obj_Data.Sides[i, 0] * 5), obj_Data.Positions[i, 1] + (obj_Data.Sides[i, 1] * 5), obj_Data.Positions[i, 2] + (obj_Data.Sides[i, 2] * 5), make_colour_rgb(0, 255, 0), 1);
+        d3d_vertex_colour(obj_Data.Positions[i, 0] + (obj_Data.Rights[i, 0] * 5), obj_Data.Positions[i, 1] + (obj_Data.Rights[i, 1] * 5), obj_Data.Positions[i, 2] + (obj_Data.Rights[i, 2] * 5), make_colour_rgb(0, 255, 0), 1);
         
         d3d_vertex_colour(obj_Data.Positions[i, 0], obj_Data.Positions[i, 1], obj_Data.Positions[i, 2], make_colour_rgb(0, 0, 255), 1);
         d3d_vertex_colour(obj_Data.Positions[i, 0] + (obj_Data.Ups[i, 0] * 5), obj_Data.Positions[i, 1] + (obj_Data.Ups[i, 1] * 5), obj_Data.Positions[i, 2] + (obj_Data.Ups[i, 2] * 5), make_colour_rgb(0, 0, 255), 1);

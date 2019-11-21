@@ -124,6 +124,7 @@ if(obj_JukeBox.IsPlaying)
         if(obj_Data.NoteHits[Index] == noone &amp;&amp; key)
         {
             obj_Data.NoteHits[Index] = 1;
+            //create_effect(Index);
         }
     }
     
@@ -143,6 +144,7 @@ if(obj_JukeBox.IsPlaying)
             if(obj_Data.NoteHits[Index - 1] == noone &amp;&amp; key)
             {
                 obj_Data.NoteHits[Index - 1] = 1;
+                //create_effect(Index - 1);
             }
         }
         else 
@@ -203,26 +205,26 @@ TimeStart = current_time;
             <kind>1</kind>
             <string>///큐브 그리기
 
-var pv = rotate_axis(obj_Data.Directions[Index, 0], obj_Data.Directions[Index, 1], obj_Data.Directions[Index, 2], obj_Data.Sides[Index, 0], obj_Data.Sides[Index, 1], obj_Data.Sides[Index, 2], -(Angle + 135));
-var px = obj_Data.Positions[Index, 0] + (obj_Data.Directions[Index, 0] * -5) + (pv[0] * 5 * sqrt(2));
-var py = obj_Data.Positions[Index, 1] + (obj_Data.Directions[Index, 1] * -5) + (pv[1] * 5 * sqrt(2));
-var pz = obj_Data.Positions[Index, 2] + (obj_Data.Directions[Index, 2] * -5) + (pv[2] * 5 * sqrt(2));
+var pv = rotate_axis(obj_Data.Forwards[Index, 0], obj_Data.Forwards[Index, 1], obj_Data.Forwards[Index, 2], obj_Data.Rights[Index, 0], obj_Data.Rights[Index, 1], obj_Data.Rights[Index, 2], -(Angle + 135));
+var px = obj_Data.Positions[Index, 0] + (obj_Data.Forwards[Index, 0] * -5) + (pv[0] * 5 * sqrt(2));
+var py = obj_Data.Positions[Index, 1] + (obj_Data.Forwards[Index, 1] * -5) + (pv[1] * 5 * sqrt(2));
+var pz = obj_Data.Positions[Index, 2] + (obj_Data.Forwards[Index, 2] * -5) + (pv[2] * 5 * sqrt(2));
 
-var dv = rotate_axis(obj_Data.Directions[Index, 0], obj_Data.Directions[Index, 1], obj_Data.Directions[Index, 2], obj_Data.Sides[Index, 0], obj_Data.Sides[Index, 1], obj_Data.Sides[Index, 2], -Angle);
-var dx = dv[0];
-var dy = dv[1];
-var dz = dv[2];
+var fv = rotate_axis(obj_Data.Forwards[Index, 0], obj_Data.Forwards[Index, 1], obj_Data.Forwards[Index, 2], obj_Data.Rights[Index, 0], obj_Data.Rights[Index, 1], obj_Data.Rights[Index, 2], -Angle);
+var fx = fv[0];
+var fy = fv[1];
+var fz = fv[2];
 
-var sx = obj_Data.Sides[Index, 0];
-var sy = obj_Data.Sides[Index, 1];
-var sz = obj_Data.Sides[Index, 2];
+var rx = obj_Data.Rights[Index, 0];
+var ry = obj_Data.Rights[Index, 1];
+var rz = obj_Data.Rights[Index, 2];
 
-var uv = rotate_axis(obj_Data.Ups[Index, 0], obj_Data.Ups[Index, 1], obj_Data.Ups[Index, 2], obj_Data.Sides[Index, 0], obj_Data.Sides[Index, 1], obj_Data.Sides[Index, 2], -Angle);
+var uv = rotate_axis(obj_Data.Ups[Index, 0], obj_Data.Ups[Index, 1], obj_Data.Ups[Index, 2], obj_Data.Rights[Index, 0], obj_Data.Rights[Index, 1], obj_Data.Rights[Index, 2], -Angle);
 var ux = uv[0];
 var uy = uv[1];
 var uz = uv[2];
 
-draw_model(px, py, pz, dx, dy, dz, sx, sy, sz, ux, uy, uz, Model, 5);
+draw_model(px, py, pz, fx, fy, fz, rx, ry, rz, ux, uy, uz, Model, 5, c_white, 1);
 </string>
           </argument>
         </arguments>
