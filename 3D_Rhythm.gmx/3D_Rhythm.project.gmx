@@ -22,23 +22,6 @@
         </ConfigOptions>
         <filename>pn35a.txt</filename>
       </datafile>
-      <datafile>
-        <name>YaWholeStyle.txt</name>
-        <exists>-1</exists>
-        <size>0</size>
-        <exportAction>2</exportAction>
-        <exportDir></exportDir>
-        <overwrite>0</overwrite>
-        <freeData>-1</freeData>
-        <removeEnd>0</removeEnd>
-        <store>0</store>
-        <ConfigOptions>
-          <Config name="Default">
-            <CopyToMask>9223372036854775807</CopyToMask>
-          </Config>
-        </ConfigOptions>
-        <filename>YaWholeStyle.txt</filename>
-      </datafile>
     </datafiles>
     <datafiles number="23" name="Model">
       <datafile>
@@ -113,7 +96,6 @@
   </datafiles>
   <NewExtensions/>
   <sounds name="sound">
-    <sound>sound\snd_YaWholeStyle</sound>
     <sound>sound\snd_pn35a</sound>
   </sounds>
   <sprites name="sprites"/>
@@ -138,10 +120,10 @@
     <script>scripts\add_song.gml</script>
     <script>scripts\log.gml</script>
     <script>scripts\error.gml</script>
-    <script>scripts\create_effect.gml</script>
   </scripts>
   <shaders name="shaders">
-    <shader type="GLSLES">shaders\shd_simple.shader</shader>
+    <shader type="GLSLES">shaders\shd_lighting.shader</shader>
+    <shader type="GLSLES">shaders\shd_postprocessing.shader</shader>
   </shaders>
   <fonts name="fonts">
     <font>fonts\ft_Dealerplate</font>
@@ -154,9 +136,9 @@
       <object>objects\obj_Data</object>
       <object>objects\obj_Camera</object>
       <object>objects\obj_Map</object>
-      <object>objects\obj_HUD</object>
       <object>objects\obj_System</object>
       <object>objects\obj_Cube</object>
+      <object>objects\obj_PostProcessing</object>
     </objects>
     <object>objects\obj_JukeBox</object>
   </objects>
