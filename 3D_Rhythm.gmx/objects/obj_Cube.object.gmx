@@ -32,7 +32,7 @@ Angle = 0;
 
 TimeStart = 0;
 
-IsHitted = false;
+IsHitted = noone;
 JudgementRate = 150;
 </string>
           </argument>
@@ -56,7 +56,7 @@ JudgementRate = 150;
             <kind>1</kind>
             <string>/// 모델 불러오기
 
-Model = load_model("Model/cube1.obj");
+Model = load_model("Model/Cube0.obj");
 
 </string>
           </argument>
@@ -119,40 +119,41 @@ if(obj_JukeBox.IsPlaying)
 {
     var key = keyboard_check_pressed(vk_anykey);
     
-    if((obj_Data.Timeline[Index] - current_time + TimeStart) &lt; JudgementRate)
+    var lastNoteTime = obj_Data.Timeline[Index - 1];
+    var currentNoteTime = obj_Data.Timeline[Index];
+    
+    if((lastNoteTime &lt; current_time - TimeStart) &amp;&amp; (current_time - TimeStart &lt; lastNoteTime + JudgementRate) &amp;&amp; Index &gt; 1)
     {
-        if(obj_Data.NoteHits[Index] == noone &amp;&amp; key)
+        if(key &amp;&amp; IsHitted == false)
         {
-            obj_Data.NoteHits[Index] = 1;
+            IsHitted = true;
+            //create_effect(Index - 1);
+        }
+    }
+    
+    if((lastNoteTime + JudgementRate &lt; current_time - TimeStart) &amp;&amp; (current_time - TimeStart &lt; currentNoteTime - JudgementRate))
+    {
+        if(IsHitted == false)
+        {
+            game_restart();
+        }
+        if(key)
+        {
+            game_restart();
+        }
+        IsHitted = noone;
+    }
+    
+    if((currentNoteTime - JudgementRate &lt; current_time - TimeStart) &amp;&amp; (current_time - TimeStart &lt; currentNoteTime))
+    {
+        if(IsHitted == noone)
+        {
+            IsHitted = false;
+        }
+        if(key &amp;&amp; IsHitted == false)
+        {
+            IsHitted = true;
             //create_effect(Index);
-        }
-    }
-    
-    if((obj_Data.Timeline[Index] - current_time + TimeStart) &gt; JudgementRate 
-    &amp;&amp; (current_time - TimeStart - obj_Data.Timeline[Index - 1]) &gt; JudgementRate)
-    {
-        if(obj_Data.NoteHits[Index] == noone &amp;&amp; key)
-        {
-            obj_Data.NoteHits[Index] = 0;
-        } 
-    }
-    
-    if(Index &gt; 1)
-    {
-        if((current_time - TimeStart - obj_Data.Timeline[Index - 1]) &lt; JudgementRate) 
-        {
-            if(obj_Data.NoteHits[Index - 1] == noone &amp;&amp; key)
-            {
-                obj_Data.NoteHits[Index - 1] = 1;
-                //create_effect(Index - 1);
-            }
-        }
-        else 
-        {
-            if(obj_Data.NoteHits[Index - 1] == noone)
-            {
-                obj_Data.NoteHits[Index - 1] = 0;
-            } 
         }
     }
 }
@@ -224,7 +225,7 @@ var ux = uv[0];
 var uy = uv[1];
 var uz = uv[2];
 
-draw_model(px, py, pz, fx, fy, fz, rx, ry, rz, ux, uy, uz, Model, 5, c_white, 1);
+draw_model(px, py, pz, fx, fy, fz, rx, ry, rz, ux, uy, uz, Model, sprite_get_texture(spr_Cube0, 0), 5);
 </string>
           </argument>
         </arguments>

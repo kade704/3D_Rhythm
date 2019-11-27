@@ -3,8 +3,8 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
-  <datafiles number="23" name="datafiles">
-    <datafiles number="23" name="Song">
+  <datafiles number="29" name="datafiles">
+    <datafiles number="29" name="Song">
       <datafile>
         <name>pn35a.txt</name>
         <exists>-1</exists>
@@ -23,11 +23,11 @@
         <filename>pn35a.txt</filename>
       </datafile>
     </datafiles>
-    <datafiles number="23" name="Model">
+    <datafiles number="29" name="Model">
       <datafile>
-        <name>cube0.obj</name>
+        <name>Cube0.obj</name>
         <exists>-1</exists>
-        <size>664</size>
+        <size>21126</size>
         <exportAction>2</exportAction>
         <exportDir></exportDir>
         <overwrite>0</overwrite>
@@ -39,12 +39,12 @@
             <CopyToMask>9223372036854775807</CopyToMask>
           </Config>
         </ConfigOptions>
-        <filename>cube0.obj</filename>
+        <filename>Cube0.obj</filename>
       </datafile>
       <datafile>
-        <name>cube1.obj</name>
+        <name>Tile0.obj</name>
         <exists>-1</exists>
-        <size>26974</size>
+        <size>9438</size>
         <exportAction>2</exportAction>
         <exportDir></exportDir>
         <overwrite>0</overwrite>
@@ -56,41 +56,7 @@
             <CopyToMask>9223372036854775807</CopyToMask>
           </Config>
         </ConfigOptions>
-        <filename>cube1.obj</filename>
-      </datafile>
-      <datafile>
-        <name>tile0.obj</name>
-        <exists>-1</exists>
-        <size>664</size>
-        <exportAction>2</exportAction>
-        <exportDir></exportDir>
-        <overwrite>0</overwrite>
-        <freeData>-1</freeData>
-        <removeEnd>0</removeEnd>
-        <store>0</store>
-        <ConfigOptions>
-          <Config name="Default">
-            <CopyToMask>9223372036854775807</CopyToMask>
-          </Config>
-        </ConfigOptions>
-        <filename>tile0.obj</filename>
-      </datafile>
-      <datafile>
-        <name>tile1.obj</name>
-        <exists>-1</exists>
-        <size>5872</size>
-        <exportAction>2</exportAction>
-        <exportDir></exportDir>
-        <overwrite>0</overwrite>
-        <freeData>-1</freeData>
-        <removeEnd>0</removeEnd>
-        <store>0</store>
-        <ConfigOptions>
-          <Config name="Default">
-            <CopyToMask>9223372036854775807</CopyToMask>
-          </Config>
-        </ConfigOptions>
-        <filename>tile1.obj</filename>
+        <filename>Tile0.obj</filename>
       </datafile>
     </datafiles>
   </datafiles>
@@ -98,7 +64,10 @@
   <sounds name="sound">
     <sound>sound\snd_pn35a</sound>
   </sounds>
-  <sprites name="sprites"/>
+  <sprites name="sprites">
+    <sprite>sprites\spr_Cube0</sprite>
+    <sprite>sprites\spr_Tile0</sprite>
+  </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -115,15 +84,16 @@
     </scripts>
     <script>scripts\load_model.gml</script>
     <script>scripts\draw_model.gml</script>
-    <script>scripts\draw_quad.gml</script>
+    <script>scripts\draw_text_3d.gml</script>
     <script>scripts\string_split.gml</script>
     <script>scripts\add_song.gml</script>
     <script>scripts\log.gml</script>
     <script>scripts\error.gml</script>
   </scripts>
   <shaders name="shaders">
-    <shader type="GLSLES">shaders\shd_lighting.shader</shader>
-    <shader type="GLSLES">shaders\shd_postprocessing.shader</shader>
+    <shader type="GLSLES">shaders\shd_Lighting.shader</shader>
+    <shader type="GLSLES">shaders\shd_NonLighting.shader</shader>
+    <shader type="GLSLES">shaders\shd_PostProcessing.shader</shader>
   </shaders>
   <fonts name="fonts">
     <font>fonts\ft_Dealerplate</font>
@@ -134,13 +104,14 @@
     </objects>
     <objects name="Main">
       <object>objects\obj_Data</object>
-      <object>objects\obj_Camera</object>
       <object>objects\obj_Map</object>
       <object>objects\obj_System</object>
       <object>objects\obj_Cube</object>
       <object>objects\obj_PostProcessing</object>
+      <object>objects\obj_Text</object>
     </objects>
     <object>objects\obj_JukeBox</object>
+    <object>objects\obj_Camera</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\Lobby</room>

@@ -25,13 +25,37 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>application_surface_draw_enable(false);
+            <string>///변수 초기화
+
+Px = 0;
+Py = 0;
+Pz = 0;
+
+Fx = 1;
+Fy = 0;
+Fz = 0;
+
+Rx = 0;
+Ry = 1;
+Rz = 0;
+
+Ux = 0;
+Uy = 0;
+Uz = 1;
+
+Size = 10;
+Edge = 0.1;
+Colour = make_colour_rgb(0, 255, 0);
+Alpha = 1;
+
+MaxSize = 20;
+Speed = 0.2;
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="8" enumb="74">
+    <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -48,9 +72,33 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>shader_set(shd_PostProcessing);
-draw_surface(application_surface, 0, 0);
-shader_reset();
+            <string>//Alpha = lerp(Alpha, 0, Speed);
+//Size = lerp(Size, MaxSize, Speed);
+
+if(Alpha &lt; 0.01) instance_destroy();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_effect(Px, Py, Pz, Fx, Fy, Fz, Rx, Ry, Rz, Ux, Uy, Uz, Size, Edge, Colour);
 </string>
           </argument>
         </arguments>

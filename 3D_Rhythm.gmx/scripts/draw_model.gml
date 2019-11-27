@@ -1,4 +1,4 @@
-///draw_model(px, py, pz, fx, fy, fz, rx, ry, rz, ux, uy, uz, buffer, size, colour, alpha)
+///draw_model(px, py, pz, fx, fy, fz, rx, ry, rz, ux, uy, uz, buffer, texture, size)
 
 var _px = argument0;
 var _py = argument1;
@@ -13,16 +13,14 @@ var _ux = argument9;
 var _uy = argument10;
 var _uz = argument11;
 var _buffer = argument12;
-var _size = argument13;
-var _colour = argument14;
-var _alpha = argument15;
+var _texture = argument13;
+var _size = argument14;
 
-shader_set(shd_lighting);
-shader_set_uniform_vec3(shd_lighting, "_position", _px, _py, _pz);
-shader_set_uniform_vec3(shd_lighting, "_direction", _fx, _fy, _fz);
-shader_set_uniform_vec3(shd_lighting, "_side", _rx, _ry, _rz);
-shader_set_uniform_vec3(shd_lighting, "_up", _ux, _uy, _uz);
-shader_set_uniform_float(shd_lighting, "_size", _size);
-shader_set_uniform_vec4(shd_lighting, "_colour", colour_get_red(_colour) / 255, colour_get_green(_colour) / 255, colour_get_blue(_colour) / 255, _alpha);
-vertex_submit(_buffer, pr_trianglelist, -1);
+shader_set(shd_Lighting);
+shader_set_uniform_vec3(shd_Lighting, "_position", _px, _py, _pz);
+shader_set_uniform_vec3(shd_Lighting, "_direction", _fx, _fy, _fz);
+shader_set_uniform_vec3(shd_Lighting, "_side", _rx, _ry, _rz);
+shader_set_uniform_vec3(shd_Lighting, "_up", _ux, _uy, _uz);
+shader_set_uniform_float(shd_Lighting, "_size", _size);
+vertex_submit(_buffer, pr_trianglelist, _texture);
 shader_reset();
