@@ -89,6 +89,8 @@
     <script>scripts\add_song.gml</script>
     <script>scripts\log.gml</script>
     <script>scripts\error.gml</script>
+    <script>scripts\instance_create_3d.gml</script>
+    <script>scripts\instance_position_3d.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shd_Lighting.shader</shader>
@@ -100,18 +102,22 @@
   </fonts>
   <objects name="objects">
     <objects name="Lobby">
-      <object>objects\obj_test</object>
+      <object>objects\obj_LobbyMapGenerator</object>
+      <object>objects\obj_LobbyCube</object>
+      <object>objects\obj_LobbyCamera</object>
+      <object>objects\obj_LobbyData</object>
     </objects>
     <objects name="Main">
-      <object>objects\obj_Data</object>
-      <object>objects\obj_Map</object>
-      <object>objects\obj_System</object>
-      <object>objects\obj_Cube</object>
+      <object>objects\obj_MainMap</object>
+      <object>objects\obj_MainCube</object>
+      <object>objects\obj_MainCamera</object>
+      <object>objects\obj_MainData</object>
       <object>objects\obj_PostProcessing</object>
-      <object>objects\obj_Text</object>
     </objects>
-    <object>objects\obj_JukeBox</object>
-    <object>objects\obj_Camera</object>
+    <object>objects\obj_Text</object>
+    <object>objects\obj_Tile</object>
+    <object>objects\obj_System</object>
+    <object>objects\obj_test</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\Lobby</room>

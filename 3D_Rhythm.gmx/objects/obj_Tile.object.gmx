@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>10000001</depth>
+  <depth>0</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -25,24 +25,23 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// 변수 초기화
+            <string>///변수 초기화
 
 PositionX = 0;
 PositionY = 0;
 PositionZ = 0;
 
-TargetX = 0;
-TargetY = 0;
-TargetZ = 0;
+ForwardX = 1;
+ForwardY = 0;
+ForwardZ = 0;
 
-NormalX = 0;
-NormalY = 0;
-NormalZ = 0;
+RightX = 0;
+RightY = 1;
+RightZ = 0;
 
-Scale = 120;
-SmoothSpeed = 0.1;
-
-
+UpX = 0;
+UpY = 0;
+UpZ = 1;
 </string>
           </argument>
         </arguments>
@@ -63,75 +62,10 @@ SmoothSpeed = 0.1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// d3d 초기화
+            <string>/// 모델 불러오기
 
-//anti-aliasing, v-sync 설정
-display_reset(4, true);
+Model = load_model("Model/Tile0.obj");
 
-//d3d 시작
-d3d_start();
-d3d_set_perspective(true);
-d3d_set_hidden(true);
-
-d3d_set_culling(true);
-d3d_set_shading(false);
-//draw_set_colour(c_white);
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="3" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///위치 변형하기
-
-var index = obj_Cube.Index;
-
-var px = obj_Data.Positions[index, 0];
-var py = obj_Data.Positions[index, 1];
-var pz = obj_Data.Positions[index, 2];
-
-var fx = obj_Data.Forwards[index, 0];
-var fy = obj_Data.Forwards[index, 1];
-var fz = obj_Data.Forwards[index, 2];
-
-var rx = obj_Data.Rights[index, 0];
-var ry = obj_Data.Rights[index, 1];
-var rz = obj_Data.Rights[index, 2];
-
-var ux = obj_Data.Ups[index, 0];
-var uy = obj_Data.Ups[index, 1];
-var uz = obj_Data.Ups[index, 2];
-
-var d = rotate_axis(fx, fy, fz, rx, ry, rz, -45);
-d = rotate_axis(d[0], d[1], d[2], ux, uy, uz, 135);
-
-TargetX = lerp(TargetX, px, SmoothSpeed);
-TargetY = lerp(TargetY, py, SmoothSpeed);
-TargetZ = lerp(TargetZ, pz, SmoothSpeed);
-
-PositionX = lerp(PositionX, px + (d[0] * Scale), SmoothSpeed);
-PositionY = lerp(PositionY, py + (d[1] * Scale), SmoothSpeed);
-PositionZ = lerp(PositionZ, pz + (d[2] * Scale), SmoothSpeed);
-
-NormalX = lerp(NormalX, ux, SmoothSpeed);
-NormalY = lerp(NormalY, uy, SmoothSpeed);
-NormalZ = lerp(NormalZ, uz, SmoothSpeed);
 </string>
           </argument>
         </arguments>
@@ -154,11 +88,7 @@ NormalZ = lerp(NormalZ, uz, SmoothSpeed);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///카메라 배치
-
-var aspect = window_get_width() / window_get_height();
-
-d3d_set_projection_ext(PositionX, PositionY, PositionZ, TargetX, TargetY, TargetZ, NormalX, NormalY, NormalZ, 45, aspect, 0.1, 1000);
+            <string>draw_model(PositionX, PositionY, PositionZ, ForwardX, ForwardY, ForwardZ, RightX, RightY, RightZ, UpX, UpY, UpZ, Model, sprite_get_texture(spr_Tile0, 0), 5);
 </string>
           </argument>
         </arguments>
