@@ -25,65 +25,13 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///변수 초기화
-
-PositionX = 0;
-PositionY = 0;
-PositionZ = 0;
-
-ForwardX = 1;
-ForwardY = 0;
-ForwardZ = 0;
-
-RightX = 0;
-RightY = 1;
-RightZ = 0;
-
-UpX = 0;
-UpY = 0;
-UpZ = 1;
-
-Text = "text";
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>//Surface = surface_create(string_width(Text), string_height(Text));
-/*
-vertex_format_begin();
-vertex_format_add_position_3d();
-vertex_format_add_normal();
-var _format = vertex_format_end();
-
-var _buffer = vertex_create_buffer();
-vertex_begin(_buffer, _format);
-vertex_position_3d(_buffer, 0, -5, 5);
-
-vertex_end(_buffer);
-
-Model = _buffer;*/
+            <string>pos = noone;
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="8" enumb="72">
+    <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -100,9 +48,10 @@ Model = _buffer;*/
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//surface_set_target(Surface);
-//draw_text(0, 0, Text);
-//surface_reset_target();
+            <string>
+draw_set_colour(c_aqua);
+draw_set_font(ft_Dealerplate);
+draw_text(pos[0], pos[1], "text");
 </string>
           </argument>
         </arguments>
@@ -125,16 +74,8 @@ Model = _buffer;*/
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//var tex = surface_get_texture(Surface);
-d3d_transform_set_identity();
-d3d_primitive_begin(pr_trianglelist);
-d3d_vertex_colour(-5, -5, 5, c_aqua, 1);
-d3d_vertex_colour(-5, 5, 5, c_aqua, 1);
-d3d_vertex_colour(5, -5, 5, c_aqua, 1);
-d3d_vertex_colour(5, 5, 5, c_aqua, 1);
-d3d_vertex_colour(-5, -5, 5, c_aqua, 1);
-d3d_vertex_colour(-5, 5, 5, c_aqua, 1);
-d3d_primitive_end();
+            <string>pos = convert_to_screen_point(0, 0, 10);
+log(string(pos[0]) + " " + string(pos[1]));
 </string>
           </argument>
         </arguments>

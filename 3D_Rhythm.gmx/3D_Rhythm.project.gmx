@@ -3,8 +3,8 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
-  <datafiles number="29" name="datafiles">
-    <datafiles number="29" name="Song">
+  <datafiles number="30" name="datafiles">
+    <datafiles number="30" name="Song">
       <datafile>
         <name>pn35a.txt</name>
         <exists>-1</exists>
@@ -23,7 +23,7 @@
         <filename>pn35a.txt</filename>
       </datafile>
     </datafiles>
-    <datafiles number="29" name="Model">
+    <datafiles number="30" name="Model">
       <datafile>
         <name>Cube0.obj</name>
         <exists>-1</exists>
@@ -84,7 +84,6 @@
     </scripts>
     <script>scripts\load_model.gml</script>
     <script>scripts\draw_model.gml</script>
-    <script>scripts\draw_text_3d.gml</script>
     <script>scripts\string_split.gml</script>
     <script>scripts\add_song.gml</script>
     <script>scripts\log.gml</script>
@@ -106,6 +105,7 @@
       <object>objects\obj_LobbyCube</object>
       <object>objects\obj_LobbyCamera</object>
       <object>objects\obj_LobbyData</object>
+      <object>objects\obj_LobbyHUD</object>
     </objects>
     <objects name="Main">
       <object>objects\obj_MainMap</object>
@@ -114,7 +114,6 @@
       <object>objects\obj_MainData</object>
       <object>objects\obj_PostProcessing</object>
     </objects>
-    <object>objects\obj_Text</object>
     <object>objects\obj_Tile</object>
     <object>objects\obj_System</object>
     <object>objects\obj_test</object>

@@ -111,7 +111,7 @@ for(var i = 0; i &lt; obj_Data.Length; i++)
                obj_Data.Forwards[i, 0], obj_Data.Forwards[i, 1], obj_Data.Forwards[i, 2],
                obj_Data.Rights[i, 0], obj_Data.Rights[i, 1], obj_Data.Rights[i, 2],
                obj_Data.Ups[i, 0], obj_Data.Ups[i, 1], obj_Data.Ups[i, 2],
-               Model, sprite_get_texture(spr_Tile0, 0), 5.2);
+               shd_Lighting, Model, sprite_get_texture(spr_Tile0, 0), 5.2);
 }
 </string>
           </argument>

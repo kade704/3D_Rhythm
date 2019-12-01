@@ -21,14 +21,10 @@ void main()
     vec4 object_space_pos = vec4(_p.x, _p.y, _p.z, 1.0);
     gl_Position = gm_Matrices[MATRIX_WORLD_VIEW_PROJECTION] * object_space_pos;
 }
-//######################_==_YOYO_SHADER_MARKER_==_######################@~varying vec3 v_vPosition;
-varying vec3 v_vNormal;
-
-uniform vec3 _colour;
+//######################_==_YOYO_SHADER_MARKER_==_######################@~varying vec2 v_vTexcoord;
 
 void main()
 {
-    
-
-    gl_FragColor = vec4(_colour, 1.0);
+    vec3 _baseCol = texture2D(gm_BaseTexture, v_vTexcoord).rgb;
+    gl_FragColor = vec4(_baseCol, 1.0);
 }

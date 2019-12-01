@@ -88,7 +88,7 @@ Model = load_model("Model/Tile0.obj");
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_model(PositionX, PositionY, PositionZ, ForwardX, ForwardY, ForwardZ, RightX, RightY, RightZ, UpX, UpY, UpZ, Model, sprite_get_texture(spr_Tile0, 0), 5);
+            <string>draw_model(PositionX, PositionY, PositionZ, ForwardX, ForwardY, ForwardZ, RightX, RightY, RightZ, UpX, UpY, UpZ, shd_Lighting, Model, sprite_get_texture(spr_Tile0, 0), 5);
 </string>
           </argument>
         </arguments>

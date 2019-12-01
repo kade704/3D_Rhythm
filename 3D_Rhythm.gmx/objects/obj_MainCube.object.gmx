@@ -225,7 +225,7 @@ var ux = uv[0];
 var uy = uv[1];
 var uz = uv[2];
 
-draw_model(px, py, pz, fx, fy, fz, rx, ry, rz, ux, uy, uz, Model, sprite_get_texture(spr_Cube0, 0), 5);
+draw_model(px, py, pz, fx, fy, fz, rx, ry, rz, ux, uy, uz, shd_Lighting, Model, sprite_get_texture(spr_Cube0, 0), 5);
 </string>
           </argument>
         </arguments>

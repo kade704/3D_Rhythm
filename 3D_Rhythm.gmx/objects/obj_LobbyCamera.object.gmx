@@ -27,6 +27,9 @@
             <kind>1</kind>
             <string>/// 변수 초기화
 
+Projection = noone;
+View = noone;
+
 Scale = 80;
 SmoothSpeed = 0.1;
 
@@ -38,10 +41,11 @@ TargetX = 0;
 TargetY = 0;
 TargetZ = 0;
 
-
 UpX = 0;
 UpY = 0;
 UpZ = 0;
+
+
 </string>
           </argument>
         </arguments>
@@ -139,6 +143,9 @@ PositionZ = lerp(PositionZ, obj_LobbyCube.PositionZ + Scale, SmoothSpeed);
 var aspect = window_get_width() / window_get_height();
 
 d3d_set_projection_ext(PositionX, PositionY, PositionZ, TargetX, TargetY, TargetZ, 0, 0, 1, 45, aspect, 0.1, 1000);
+
+View = matrix_get(matrix_view);
+Projection = matrix_get(matrix_projection);
 </string>
           </argument>
         </arguments>
