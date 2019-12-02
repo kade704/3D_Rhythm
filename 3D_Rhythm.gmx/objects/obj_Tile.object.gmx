@@ -32,6 +32,11 @@ ModelIndex = 0;
 Model = noone;
 Texture = noone;
 
+Alpha = 1;
+Angle = 0;
+
+RotateSpeed = 8;
+
 PositionX = 0;
 PositionY = 0;
 PositionZ = 0;
@@ -93,13 +98,30 @@ Texture = sprite_get_texture(asset_get_index("spr_Tile" + string(ModelIndex)), 0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(Model != noone)
+            <string>
+
+if(Model != noone)
 {
-    draw_model(PositionX, PositionY, PositionZ, 
-               ForwardX, ForwardY, ForwardZ, 
-               RightX, RightY, RightZ, 
-               UpX, UpY, UpZ, 
-               shd_Lighting, Model, Texture, 5);
+    var pv = rotate_axis(ForwardX, ForwardY, ForwardZ, RightX, RightY, RightZ, Angle + 180);
+    var px = PositionX + (ForwardX * -5) + (pv[0] * 5);
+    var py = PositionY + (ForwardY * -5) + (pv[1] * 5);
+    var pz = PositionZ + (ForwardZ * -5) + (pv[2] * 5);
+    
+    var fv = rotate_axis(ForwardX, ForwardY, ForwardZ, RightX, RightY, RightZ, Angle + 180);
+    var fx = fv[0];
+    var fy = fv[1];
+    var fz = fv[2];
+    
+    var rx = RightX;
+    var ry = RightY;
+    var rz = RightZ;
+    
+    var uv = rotate_axis(UpX, UpY, UpZ, RightX, RightY, RightZ, Angle + 180);
+    var ux = uv[0];
+    var uy = uv[1];
+    var uz = uv[2];    
+
+    draw_model(px, py, pz, fx, fy, fz, rx, ry, rz, ux, uy, uz, Model, Texture, 5, Alpha);
 }
 </string>
           </argument>

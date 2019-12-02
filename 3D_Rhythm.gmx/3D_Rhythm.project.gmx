@@ -99,6 +99,7 @@
       <script>scripts\cross.gml</script>
       <script>scripts\dot.gml</script>
       <script>scripts\rotate_axis.gml</script>
+      <script>scripts\pingpong.gml</script>
     </scripts>
     <script>scripts\load_model.gml</script>
     <script>scripts\draw_model.gml</script>
@@ -111,7 +112,6 @@
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shd_Lighting.shader</shader>
-    <shader type="GLSLES">shaders\shd_NonLighting.shader</shader>
     <shader type="GLSLES">shaders\shd_PostProcessing.shader</shader>
   </shaders>
   <fonts name="fonts">
@@ -119,7 +119,7 @@
   </fonts>
   <objects name="objects">
     <objects name="Lobby">
-      <object>objects\obj_LobbyMapGenerator</object>
+      <object>objects\obj_LobbyMap</object>
       <object>objects\obj_LobbyCube</object>
       <object>objects\obj_LobbyCamera</object>
       <object>objects\obj_LobbyData</object>

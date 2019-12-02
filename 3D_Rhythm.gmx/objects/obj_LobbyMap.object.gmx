@@ -4,7 +4,7 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>0</depth>
-  <persistent>-1</persistent>
+  <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -27,8 +27,11 @@
             <kind>1</kind>
             <string>///변수 초기화
 
-IsLobby = true;
-IsPlaying = false;
+
+TimeCount = 0;
+SpawnRate = 8;
+
+TileRotateSpeed = 8;
 </string>
           </argument>
         </arguments>
@@ -49,15 +52,24 @@ IsPlaying = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///노래 정보 초기화
+            <string>///타일 생성
 
-Songs = ds_grid_create(6, 3);
-add_song(0, snd_pn35a, "Virtual Riot", "PN35A", 100, "Song/pn35a.txt");
+var length = ceil(obj_System.Length / 2) * 4;
 
-Length = ds_grid_height(Songs);
+Tiles = noone;
+TileCount = 0;
 
+for(var i = 0; i &lt;= 4; i++)
+{
+    var tile = instance_create_3d(i * 10, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, obj_Tile);
+    with(tile) 
+    {
+        Angle = 180;
+        event_user(0);
+    }
+}
 
-
+alarm[0] = SpawnRate;
 </string>
           </argument>
         </arguments>
@@ -80,19 +92,34 @@ Length = ds_grid_height(Songs);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///노래 시작
+            <string>if(TimeCount &lt; ceil(obj_System.Length / 2) * 4 - 4)
+{
+    Tiles[TileCount] = instance_create_3d((TimeCount) * 10 + 50, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, obj_Tile);
+    with(Tiles[TileCount]) event_user(0);
+    TileCount++;
+}
 
-audio_play_sound(ds_grid_get(Songs, 1, Selected), 0, false);
-audio_master_gain(0.5);
+Tiles[TileCount] = instance_create_3d(floor(TimeCount / 4) * 40 + 40, (TimeCount % 4) * -10 + -10, 0, 0, -1, 0, 1, 0, 0, 0, 0, 1, obj_Tile);
+if(TimeCount % 4 == 3) Tiles[TileCount].ModelIndex = 1;
+with(Tiles[TileCount]) event_user(0);
+TileCount++;
 
-with(obj_Cube) event_user(0);
-IsPlaying = true;
+Tiles[TileCount] = instance_create_3d(floor(TimeCount / 4) * 40 + 40, (TimeCount % 4) * 10 + 10, 0, 0, 1, 0, -1, 0, 0, 0, 0, 1, obj_Tile);
+if(TimeCount % 4 == 3) Tiles[TileCount].ModelIndex = 1;
+with(Tiles[TileCount]) event_user(0);
+TileCount++;
+
+
+TimeCount++;
+
+if(TimeCount &lt; ceil(obj_System.Length / 2) * 4)
+    alarm[0] = SpawnRate;
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="7" enumb="4">
+    <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -109,31 +136,17 @@ IsPlaying = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///100틱 뒤에 노래 시작
-
-if(room == Main)
+            <string>for(var i = 0; i &lt; TileCount; i++)
 {
-    alarm[0] = 100;
+    with(Tiles[i])
+    {
+        if(Angle &lt; 180) Angle += obj_LobbyMap.TileRotateSpeed;
+        else Angle = 180;
+    }
 }
 </string>
           </argument>
         </arguments>
-      </action>
-    </event>
-    <event eventtype="9" enumb="27">
-      <action>
-        <libid>1</libid>
-        <id>331</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_restart_game</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
       </action>
     </event>
   </events>

@@ -43,7 +43,7 @@ UpX = 0;
 UpY = 0;
 UpZ = 1;
 
-Angle = -90;
+Angle = 90;
 RotateSpeed = 4;
 
 IsRotating = false;
@@ -208,9 +208,9 @@ if(!IsRotating)
             <kind>1</kind>
             <string>/// 각도 변환
 
-if(Angle &gt; -90) 
+if(Angle &lt; 90) 
 {
-    Angle -= RotateSpeed;
+    Angle += RotateSpeed;
     IsRotating = true;
 }
 else
@@ -241,12 +241,12 @@ else
             <kind>1</kind>
             <string>///큐브 그리기
 
-var pv = rotate_axis(ForwardX, ForwardY, ForwardZ, RightX, RightY, RightZ, -(Angle + 135));
+var pv = rotate_axis(ForwardX, ForwardY, ForwardZ, RightX, RightY, RightZ, Angle + 225);
 var px = PositionX + (ForwardX * -5) + (pv[0] * 5 * sqrt(2));
 var py = PositionY + (ForwardY * -5) + (pv[1] * 5 * sqrt(2));
 var pz = PositionZ + (ForwardZ * -5) + (pv[2] * 5 * sqrt(2));
 
-var fv = rotate_axis(ForwardX, ForwardY, ForwardZ, RightX, RightY, RightZ, -Angle);
+var fv = rotate_axis(ForwardX, ForwardY, ForwardZ, RightX, RightY, RightZ, Angle);
 var fx = fv[0];
 var fy = fv[1];
 var fz = fv[2];
@@ -255,12 +255,12 @@ var rx = RightX;
 var ry = RightY;
 var rz = RightZ;
 
-var uv = rotate_axis(UpX, UpY, UpZ, RightX, RightY, RightZ, -Angle);
+var uv = rotate_axis(UpX, UpY, UpZ, RightX, RightY, RightZ, Angle);
 var ux = uv[0];
 var uy = uv[1];
 var uz = uv[2];
 
-draw_model(px, py, pz, fx, fy, fz, rx, ry, rz, ux, uy, uz, shd_Lighting, Model, sprite_get_texture(spr_Cube0, 0), 5);
+draw_model(px, py, pz, fx, fy, fz, rx, ry, rz, ux, uy, uz, Model, sprite_get_texture(spr_Cube0, 0), 5, 1);
 </string>
           </argument>
         </arguments>
