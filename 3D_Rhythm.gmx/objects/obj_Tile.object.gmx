@@ -27,6 +27,11 @@
             <kind>1</kind>
             <string>///변수 초기화
 
+ModelIndex = 0;
+
+Model = noone;
+Texture = noone;
+
 PositionX = 0;
 PositionY = 0;
 PositionZ = 0;
@@ -46,6 +51,8 @@ UpZ = 1;
           </argument>
         </arguments>
       </action>
+    </event>
+    <event eventtype="7" enumb="10">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -62,10 +69,8 @@ UpZ = 1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// 모델 불러오기
-
-Model = load_model("Model/Tile0.obj");
-
+            <string>Model = load_model("Model/Tile" + string(ModelIndex) + ".obj");
+Texture = sprite_get_texture(asset_get_index("spr_Tile" + string(ModelIndex)), 0);
 </string>
           </argument>
         </arguments>
@@ -88,7 +93,14 @@ Model = load_model("Model/Tile0.obj");
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_model(PositionX, PositionY, PositionZ, ForwardX, ForwardY, ForwardZ, RightX, RightY, RightZ, UpX, UpY, UpZ, shd_Lighting, Model, sprite_get_texture(spr_Tile0, 0), 5);
+            <string>if(Model != noone)
+{
+    draw_model(PositionX, PositionY, PositionZ, 
+               ForwardX, ForwardY, ForwardZ, 
+               RightX, RightY, RightZ, 
+               UpX, UpY, UpZ, 
+               shd_Lighting, Model, Texture, 5);
+}
 </string>
           </argument>
         </arguments>

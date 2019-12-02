@@ -7,21 +7,21 @@ varying vec2 v_vTexcoord;
 varying vec3 v_vNormal;
 
 uniform vec3 _position;
-uniform vec3 _direction;
-uniform vec3 _side;
+uniform vec3 _forward;
+uniform vec3 _right;
 uniform vec3 _up;
 uniform float _size;
 
 void main()
 {
-    float _px = _position.x + (_direction.x * in_Position.x * _size) + (_side.x * in_Position.y * _size) + (_up.x * in_Position.z * _size);
-    float _py = _position.y + (_direction.y * in_Position.x * _size) + (_side.y * in_Position.y * _size) + (_up.y * in_Position.z * _size);
-    float _pz = _position.z + (_direction.z * in_Position.x * _size) + (_side.z * in_Position.y * _size) + (_up.z * in_Position.z * _size);
+    float _px = _position.x + (_forward.x * in_Position.x * _size) + (_right.x * in_Position.y * _size) + (_up.x * in_Position.z * _size);
+    float _py = _position.y + (_forward.y * in_Position.x * _size) + (_right.y * in_Position.y * _size) + (_up.y * in_Position.z * _size);
+    float _pz = _position.z + (_forward.z * in_Position.x * _size) + (_right.z * in_Position.y * _size) + (_up.z * in_Position.z * _size);
     vec3 _p = vec3(_px, _py, _pz);
     
-    float _nx = (_direction.x * in_Normal.x) + (_side.x * in_Normal.y) + (_up.x * in_Normal.z);
-    float _ny = (_direction.y * in_Normal.x) + (_side.y * in_Normal.y) + (_up.y * in_Normal.z);
-    float _nz = (_direction.z * in_Normal.x) + (_side.z * in_Normal.y) + (_up.z * in_Normal.z);
+    float _nx = (_forward.x * in_Normal.x) + (_right.x * in_Normal.y) + (_up.x * in_Normal.z);
+    float _ny = (_forward.y * in_Normal.x) + (_right.y * in_Normal.y) + (_up.y * in_Normal.z);
+    float _nz = (_forward.z * in_Normal.x) + (_right.z * in_Normal.y) + (_up.z * in_Normal.z);
     vec3 _n = normalize(vec3(_nx, _ny, _nz));
     
     v_vPosition = _p;
@@ -35,6 +35,8 @@ void main()
 varying vec2 v_vTexcoord;
 varying vec3 v_vNormal;
 
+uniform float _alpha;
+
 void main()
 {
     vec3 _lightDir = vec3(-10, -30, -20);
@@ -47,5 +49,5 @@ void main()
     float _intensity = abs(dot(normalize(v_vNormal), normalize(_lightDir)));
     
     vec3 _colour = _baseCol * mix(_minIntensity, _maxIntensity, _intensity);
-    gl_FragColor = vec4(_colour, 1.0);
+    gl_FragColor = vec4(_colour, _alpha);
 }

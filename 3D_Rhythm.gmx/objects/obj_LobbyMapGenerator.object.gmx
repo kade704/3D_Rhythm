@@ -53,20 +53,30 @@ Tiles = noone;
 var length = ceil(obj_System.Length / 2) * 4;
 
 TileCount = 0;
-for(var j = 0; j &lt; length; j++)
+for(var i = 0; i &lt; length; i++)
 {
-    if(j % 4 == 3)
+    if(i % 4 == 3)
     {
-        for(var i = -1; i &gt;= -2; i--)
+        for(var j = -3; j &lt;= -1; j++)
         {
-            Tiles[TileCount++] = instance_create_3d(j * 10, i * 10, 0, 0, -1, 0, 1, 0, 0, 0, 0, 1, obj_Tile);
+            Tiles[TileCount] = instance_create_3d(i * 10, j * 10, 0, 0, -1, 0, 1, 0, 0, 0, 0, 1, obj_Tile);
+            
+            if(j == -3) Tiles[TileCount].ModelIndex = 1;
+            with(Tiles[TileCount]) event_user(0);
+            TileCount++;
         }
-        for(var i = 1; i &lt;= 2; i++)
+        
+        for(var j = 1; j &lt;= 3; j++)
         {
-            Tiles[TileCount++] = instance_create_3d(j * 10, i * 10, 0, 0, 1, 0, -1, 0, 0, 0, 0, 1, obj_Tile);
+            Tiles[TileCount] = instance_create_3d(i * 10, j * 10, 0, 0, 1, 0, -1, 0, 0, 0, 0, 1, obj_Tile);
+            if(j == 3) Tiles[TileCount].ModelIndex = 1;
+            with(Tiles[TileCount]) event_user(0);
+            TileCount++;
         }
     }
-    Tiles[TileCount++] = instance_create_3d(j * 10, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, obj_Tile);
+    Tiles[TileCount] = instance_create_3d(i * 10, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, obj_Tile);
+    with(Tiles[TileCount]) event_user(0);
+    TileCount++;
 }
 </string>
           </argument>

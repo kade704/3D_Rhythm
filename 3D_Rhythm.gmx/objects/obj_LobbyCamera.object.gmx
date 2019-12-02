@@ -30,7 +30,7 @@
 Projection = noone;
 View = noone;
 
-Scale = 80;
+Scale = 65;
 SmoothSpeed = 0.1;
 
 PositionX = -Scale;
@@ -81,7 +81,7 @@ d3d_set_perspective(true);
 d3d_set_hidden(true);
 
 //양면 렌더링 끄기
-d3d_set_culling(false);
+d3d_set_culling(true);
 
 //
 d3d_set_zwriteenable(true);
