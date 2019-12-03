@@ -27,6 +27,8 @@
             <kind>1</kind>
             <string>///변수 초기화
 
+Selected = 0;
+
 IsLobby = true;
 IsPlaying = false;
 </string>
@@ -51,7 +53,7 @@ IsPlaying = false;
             <kind>1</kind>
             <string>///노래 정보 초기화
 
-Songs = ds_grid_create(6, 3);
+Songs = ds_grid_create(6, 10);
 add_song(0, snd_pn35a, "Virtual Riot", "PN35A", 100, "Song/pn35a.txt");
 
 Length = ds_grid_height(Songs);

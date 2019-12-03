@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>10000001</depth>
+  <depth>0</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -25,27 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// 변수 초기화
+            <string>///변수 초기화
 
-Projection = noone;
-View = noone;
-
-Scale = 65;
-SmoothSpeed = 0.02;
-
-PositionX = -Scale;
-PositionY = Scale;
-PositionZ = Scale;
-
-TargetX = 0;
-TargetY = 0;
-TargetZ = 0;
-
-UpX = 0;
-UpY = 0;
-UpZ = 0;
-
-
+Text = "";
 </string>
           </argument>
         </arguments>
@@ -66,31 +48,13 @@ UpZ = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// d3d 초기화
-
-//anti-aliasing, v-sync 설정
-display_reset(4, true);
-
-//d3d 시작
-d3d_start();
-
-//perspective 사용 
-d3d_set_perspective(true);
-
-//depth test 수행
-d3d_set_hidden(true);
-
-//양면 렌더링 끄기
-d3d_set_culling(true);
-
-//
-d3d_set_zwriteenable(true);
+            <string>application_surface_draw_enable(false);
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="3" enumb="0">
+    <event eventtype="8" enumb="74">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -107,21 +71,15 @@ d3d_set_zwriteenable(true);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///위치 변형하기
-
-TargetX = lerp(TargetX, obj_LobbyCube.PositionX, SmoothSpeed);
-TargetY = lerp(TargetY, obj_LobbyCube.PositionY, SmoothSpeed);
-TargetZ = lerp(TargetZ, obj_LobbyCube.PositionZ, SmoothSpeed);
-
-PositionX = lerp(PositionX, obj_LobbyCube.PositionX - Scale, SmoothSpeed);
-PositionY = lerp(PositionY, obj_LobbyCube.PositionY + Scale, SmoothSpeed);
-PositionZ = lerp(PositionZ, obj_LobbyCube.PositionZ + Scale, SmoothSpeed);
+            <string>shader_set(shd_PostProcessing);
+draw_surface(application_surface, 0, 0);
+shader_reset();
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="8" enumb="0">
+    <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -138,14 +96,11 @@ PositionZ = lerp(PositionZ, obj_LobbyCube.PositionZ + Scale, SmoothSpeed);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///카메라 배치
-
-var aspect = window_get_width() / window_get_height();
-
-d3d_set_projection_ext(PositionX, PositionY, PositionZ, TargetX, TargetY, TargetZ, 0, 0, 1, 45, aspect, 0.1, 1000);
-
-View = matrix_get(matrix_view);
-Projection = matrix_get(matrix_projection);
+            <string>draw_set_colour(make_colour_rgb(255, 0, 132));
+draw_set_font(ft_Dealerplate);
+draw_set_halign(fa_center);
+draw_set_valign(fa_center);
+draw_text(window_get_width() / 2, (window_get_height() / 2) - 250, Text);
 </string>
           </argument>
         </arguments>

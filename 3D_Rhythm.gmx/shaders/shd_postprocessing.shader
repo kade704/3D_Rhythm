@@ -22,7 +22,7 @@ void main()
     
     //Vignette
     float _minRadius = 0.2;
-    float _maxRadius = 1.2;
+    float _maxRadius = 0.9;
     float _radius = smoothstep(_minRadius, _maxRadius, distance(vec2(0.5), v_vTexcoord));
     vec3 _vignette = _baseColour * (1.0 - _radius);
     

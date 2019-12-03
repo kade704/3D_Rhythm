@@ -122,7 +122,6 @@
       <object>objects\obj_LobbyMap</object>
       <object>objects\obj_LobbyCube</object>
       <object>objects\obj_LobbyCamera</object>
-      <object>objects\obj_LobbyData</object>
       <object>objects\obj_LobbyHUD</object>
     </objects>
     <objects name="Main">
@@ -130,7 +129,7 @@
       <object>objects\obj_MainCube</object>
       <object>objects\obj_MainCamera</object>
       <object>objects\obj_MainData</object>
-      <object>objects\obj_PostProcessing</object>
+      <object>objects\obj_MainHUD</object>
     </objects>
     <object>objects\obj_Tile</object>
     <object>objects\obj_System</object>

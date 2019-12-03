@@ -93,99 +93,75 @@ Model = load_model("Model/Cube0.obj");
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var left = keyboard_check_pressed(ord('A'));
-var right = keyboard_check_pressed(ord('D'));
-var down = keyboard_check_pressed(ord('S'));
-var up = keyboard_check_pressed(ord('W'));
-
-if(!IsRotating)
+            <string>if(!IsRotating &amp;&amp; mouse_check_button(mb_left))
 {
-    if(left)
+    var dir = point_direction(window_get_width() / 2, window_get_height() / 2, mouse_x, mouse_y);    
+    
+    var velX = 0;
+    var velY = 0;
+    
+    if(0 &lt; dir &amp;&amp; dir &lt;= 90)
     {
-        if(instance_position_3d(PositionX, PositionY - 10, PositionZ, obj_Tile) != noone)
-        {
-            PositionY -= 10;
-        
-            ForwardX = 0;
-            ForwardY = -1;
-            ForwardZ = 0;
-            
-            RightX = 1;
-            RightY = 0;
-            RightZ = 0;
-            
-            UpX = 0;
-            UpZ = 0;
-            UpZ = 1;
-            
-            Angle = 0;
-        }
+        velX = 1;
+        velY = 0;
     }
-    else if(right)
+    else if(90 &lt; dir &amp;&amp; dir &lt;= 180)
     {
-        if(instance_position_3d(PositionX, PositionY + 10, PositionZ, obj_Tile) != noone)
-        {
-            PositionY += 10;
-        
-            ForwardX = 0;
-            ForwardY = 1;
-            ForwardZ = 0;
-            
-            RightX = -1;
-            RightY = 0;
-            RightZ = 0;
-            
-            UpX = 0;
-            UpZ = 0;
-            UpZ = 1;
-            
-            Angle = 0;
-        }
+        velX = 0;
+        velY = -1;
     }
-    else if(down)
+    else if(180 &lt; dir &amp;&amp; dir &lt;= 270)
     {
-        if(instance_position_3d(PositionX - 10, PositionY, PositionZ, obj_Tile) != noone)
-        {
-            PositionX -= 10;
-        
-            ForwardX = -1;
-            ForwardY = 0;
-            ForwardZ = 0;
-            
-            RightX = 0;
-            RightY = -1;
-            RightZ = 0;
-            
-            UpX = 0;
-            UpZ = 0;
-            UpZ = 1;
-            
-            Angle = 0;
-        }
+        velX = -1;
+        velY = 0;
     }
-    else if(up)
+    else if(270 &lt; dir &amp;&amp; dir &lt;= 360)
     {
-        if(instance_position_3d(PositionX + 10, PositionY, PositionZ, obj_Tile) != noone)
-        {
-            PositionX += 10;
+        velX = 0;
+        velY = 1;
+    }
+    
+    if(instance_position_3d(PositionX + (velX * 10), PositionY + (velY * 10), PositionZ, obj_Tile) != noone)
+    {
+        PositionX += (velX * 10);
+        PositionY += (velY * 10);
+    
+        ForwardX = velX;
+        ForwardY = velY;
+        ForwardZ = 0;
         
-            ForwardX = 1;
-            ForwardY = 0;
-            ForwardZ = 0;
+        RightX = -velY;
+        RightY =  velX;
+        RightZ = 0;
+        
+        UpX = 0;
+        UpZ = 0;
+        UpZ = 1;      
+        
+        Angle = 0;
+        
+        var tile = instance_position_3d(PositionX, PositionY, PositionZ, obj_Tile);
+        if(tile.ModelIndex == 1)
+        {
+            var index = (((PositionX - 40) / 40) * 2) + ((PositionY + 40) / 80);
+            var song = ds_grid_get(obj_System.Songs, 2, index) + " - " + ds_grid_get(obj_System.Songs, 3, index);
+            obj_LobbyHUD.Text = song;
             
-            RightX = 0;
-            RightY = 1;
-            RightZ = 0;
+            obj_System.Selected = index;
             
-            UpX = 0;
-            UpZ = 0;
-            UpZ = 1;
+            audio_play_sound(snd_pn35a, 0, false);
             
-            Angle = 0;
+            if(keyboard_check_pressed(vk_enter))
+            {
+                room_goto_next();
+            }
+        } 
+        else 
+        {
+            obj_LobbyHUD.Text = "";
         }
     }
 }
-
 </string>
           </argument>
         </arguments>
