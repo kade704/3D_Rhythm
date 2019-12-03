@@ -25,77 +25,59 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///노래 정보 초기화
+            <string>///변수 초기화
 
 Selected = 0;
 
-Songs = ds_grid_create(6, 1);
-add_song(0, snd_pn35a, "Virtual Riot", "PN35A", 100, "Song/pn35a.txt");
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///노래 정보 초기화
+
+Songs = ds_grid_create(6, 10);
+song_add(0, snd_pn35a, "Virtual Riot", "PN35A", 100, "Song/pn35a.txt");
 
 Length = ds_grid_height(Songs);
 
 
-IsPlaying = false;
+
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="2" enumb="0">
+    <event eventtype="9" enumb="27">
       <action>
         <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
+        <id>331</id>
+        <kind>0</kind>
         <userelative>0</userelative>
         <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
+        <useapplyto>0</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_restart_game</functionname>
         <codestring></codestring>
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///노래 시작
-
-audio_play_sound(ds_grid_get(Songs, 1, Selected), 0, false);
-audio_master_gain(0.5);
-
-with(obj_Cube) event_user(0);
-IsPlaying = true;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="7" enumb="4">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///100틱 뒤에 노래 시작
-
-if(room == Main)
-{
-    alarm[0] = 100;
-}
-</string>
-          </argument>
-        </arguments>
       </action>
     </event>
   </events>

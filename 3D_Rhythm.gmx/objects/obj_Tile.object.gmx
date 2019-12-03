@@ -35,8 +35,6 @@ Texture = noone;
 Alpha = 1;
 Angle = 0;
 
-RotateSpeed = 8;
-
 PositionX = 0;
 PositionY = 0;
 PositionZ = 0;
@@ -52,30 +50,6 @@ RightZ = 0;
 UpX = 0;
 UpY = 0;
 UpZ = 1;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="7" enumb="10">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>Model = load_model("Model/Tile" + string(ModelIndex) + ".obj");
-Texture = sprite_get_texture(asset_get_index("spr_Tile" + string(ModelIndex)), 0);
 </string>
           </argument>
         </arguments>
@@ -98,16 +72,14 @@ Texture = sprite_get_texture(asset_get_index("spr_Tile" + string(ModelIndex)), 0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
-
-if(Model != noone)
+            <string>if(Model != noone)
 {
-    var pv = rotate_axis(ForwardX, ForwardY, ForwardZ, RightX, RightY, RightZ, Angle + 180);
+    var pv = rotate_axis(ForwardX, ForwardY, ForwardZ, -RightX, -RightY, -RightZ, Angle);
     var px = PositionX + (ForwardX * -5) + (pv[0] * 5);
     var py = PositionY + (ForwardY * -5) + (pv[1] * 5);
     var pz = PositionZ + (ForwardZ * -5) + (pv[2] * 5);
     
-    var fv = rotate_axis(ForwardX, ForwardY, ForwardZ, RightX, RightY, RightZ, Angle + 180);
+    var fv = rotate_axis(ForwardX, ForwardY, ForwardZ, -RightX, -RightY, -RightZ, Angle);
     var fx = fv[0];
     var fy = fv[1];
     var fz = fv[2];
@@ -116,12 +88,17 @@ if(Model != noone)
     var ry = RightY;
     var rz = RightZ;
     
-    var uv = rotate_axis(UpX, UpY, UpZ, RightX, RightY, RightZ, Angle + 180);
+    var uv = rotate_axis(UpX, UpY, UpZ, -RightX, -RightY, -RightZ, Angle);
     var ux = uv[0];
     var uy = uv[1];
     var uz = uv[2];    
 
     draw_model(px, py, pz, fx, fy, fz, rx, ry, rz, ux, uy, uz, Model, Texture, 5, Alpha);
+}
+else
+{
+    Model = load_model("Model/Tile" + string(ModelIndex) + ".obj");
+    Texture = sprite_get_texture(asset_get_index("spr_Tile" + string(ModelIndex)), 0);
 }
 </string>
           </argument>

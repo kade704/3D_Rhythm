@@ -27,7 +27,6 @@
             <kind>1</kind>
             <string>///변수 초기화
 
-
 TimeCount = 0;
 SpawnRate = 8;
 
@@ -54,19 +53,13 @@ TileRotateSpeed = 8;
             <kind>1</kind>
             <string>///타일 생성
 
-var length = ceil(obj_System.Length / 2) * 4;
-
 Tiles = noone;
 TileCount = 0;
 
 for(var i = 0; i &lt;= 4; i++)
 {
     var tile = instance_create_3d(i * 10, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, obj_Tile);
-    with(tile) 
-    {
-        Angle = 180;
-        event_user(0);
-    }
+    tile.Angle = 0;
 }
 
 alarm[0] = SpawnRate;
@@ -92,27 +85,27 @@ alarm[0] = SpawnRate;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(TimeCount &lt; ceil(obj_System.Length / 2) * 4 - 4)
+            <string>if(TimeCount &lt; ceil(obj_Jukebox.Length / 2) * 4 - 4)
 {
     Tiles[TileCount] = instance_create_3d((TimeCount) * 10 + 50, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, obj_Tile);
-    with(Tiles[TileCount]) event_user(0);
+    Tiles[TileCount].Angle = 180;
     TileCount++;
 }
 
 Tiles[TileCount] = instance_create_3d(floor(TimeCount / 4) * 40 + 40, (TimeCount % 4) * -10 + -10, 0, 0, -1, 0, 1, 0, 0, 0, 0, 1, obj_Tile);
+Tiles[TileCount].Angle = 180;
 if(TimeCount % 4 == 3) Tiles[TileCount].ModelIndex = 1;
-with(Tiles[TileCount]) event_user(0);
 TileCount++;
 
 Tiles[TileCount] = instance_create_3d(floor(TimeCount / 4) * 40 + 40, (TimeCount % 4) * 10 + 10, 0, 0, 1, 0, -1, 0, 0, 0, 0, 1, obj_Tile);
+Tiles[TileCount].Angle = 180;
 if(TimeCount % 4 == 3) Tiles[TileCount].ModelIndex = 1;
-with(Tiles[TileCount]) event_user(0);
 TileCount++;
 
 
 TimeCount++;
 
-if(TimeCount &lt; ceil(obj_System.Length / 2) * 4)
+if(TimeCount &lt; ceil(obj_Jukebox.Length / 2) * 4)
     alarm[0] = SpawnRate;
 </string>
           </argument>
@@ -140,8 +133,8 @@ if(TimeCount &lt; ceil(obj_System.Length / 2) * 4)
 {
     with(Tiles[i])
     {
-        if(Angle &lt; 180) Angle += obj_LobbyMap.TileRotateSpeed;
-        else Angle = 180;
+        if(Angle &gt; 0) Angle -= obj_LobbyMap.TileRotateSpeed;
+        else Angle = 0;
     }
 }
 </string>

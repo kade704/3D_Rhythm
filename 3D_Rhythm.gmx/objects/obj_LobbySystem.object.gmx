@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>10000001</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -27,26 +27,11 @@
             <kind>1</kind>
             <string>///변수 초기화
 
-PositionX = 0;
-PositionY = 0;
-PositionZ = 0;
+CubeRotateSpeed = 4;
+IsCubeRotating = false;
 
-ForwardX = 1;
-ForwardY = 0;
-ForwardZ = 0;
-
-RightX = 0;
-RightY = 1;
-RightZ = 0;
-
-UpX = 0;
-UpY = 0;
-UpZ = 1;
-
-Angle = 90;
-RotateSpeed = 4;
-
-IsRotating = false;
+CameraScale = 65;
+CameraSmoothSpeed = 0.02;
 </string>
           </argument>
         </arguments>
@@ -67,10 +52,79 @@ IsRotating = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// 모델 불러오기
+            <string>///카메라 위치 초기화
 
-Model = load_model("Model/Cube0.obj");
+obj_Camera.EyeX = -CameraScale;
+obj_Camera.EyeY =  CameraScale;
+obj_Camera.EyeZ =  CameraScale;
 
+obj_Camera.CenterX = 0;
+obj_Camera.CenterY = 0;
+obj_Camera.CenterZ = 0;
+
+obj_Camera.UpX = 0;
+obj_Camera.UpY = 0;
+obj_Camera.UpZ = 1;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///큐브 위치 초기화
+
+obj_Cube.PositionX = 0;
+obj_Cube.PositionY = 0;
+obj_Cube.PositionZ = 0;
+
+obj_Cube.ForwardX = 1;
+obj_Cube.ForwardY = 0;
+obj_Cube.ForwardZ = 0;
+
+obj_Cube.RightX = 0;
+obj_Cube.RightY = 1;
+obj_Cube.RightZ = 0;
+
+obj_Cube.UpX = 0;
+obj_Cube.UpY = 0;
+obj_Cube.UpZ = 1;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///큐브 회전 초기화
+
+obj_Cube.Angle = 0;
 </string>
           </argument>
         </arguments>
@@ -93,7 +147,40 @@ Model = load_model("Model/Cube0.obj");
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(!IsRotating &amp;&amp; mouse_check_button(mb_left))
+            <string>///큐브 회전
+
+if(obj_Cube.Angle &gt; 0) 
+{
+    obj_Cube.Angle -= CubeRotateSpeed;
+    IsCubeRotating = true;
+}
+else
+{
+    IsCubeRotating = false;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///큐브 이동
+
+if(!IsCubeRotating &amp;&amp; mouse_check_button(mb_left))
 {
     var dir = point_direction(window_get_width() / 2, window_get_height() / 2, mouse_x, mouse_y);    
     
@@ -121,44 +208,40 @@ Model = load_model("Model/Cube0.obj");
         velY = 1;
     }
     
-    if(instance_position_3d(PositionX + (velX * 10), PositionY + (velY * 10), PositionZ, obj_Tile) != noone)
+    if(instance_position_3d(obj_Cube.PositionX + (velX * 10), obj_Cube.PositionY + (velY * 10), obj_Cube.PositionZ, obj_Tile) != noone)
     {
-        PositionX += (velX * 10);
-        PositionY += (velY * 10);
+        obj_Cube.PositionX += (velX * 10);
+        obj_Cube.PositionY += (velY * 10);
     
-        ForwardX = velX;
-        ForwardY = velY;
-        ForwardZ = 0;
+        obj_Cube.ForwardX = velX;
+        obj_Cube.ForwardY = velY;
+        obj_Cube.ForwardZ = 0;
         
-        RightX = -velY;
-        RightY =  velX;
-        RightZ = 0;
+        obj_Cube.RightX = -velY;
+        obj_Cube.RightY =  velX;
+        obj_Cube.RightZ = 0;
         
-        UpX = 0;
-        UpZ = 0;
-        UpZ = 1;      
+        obj_Cube.UpX = 0;
+        obj_Cube.UpZ = 0;
+        obj_Cube.UpZ = 1;      
         
-        Angle = 0;
+        obj_Cube.Angle = 90;
         
-        var tile = instance_position_3d(PositionX, PositionY, PositionZ, obj_Tile);
+        var tile = instance_position_3d(obj_Cube.PositionX, obj_Cube.PositionY, obj_Cube.PositionZ, obj_Tile);
         if(tile.ModelIndex == 1)
         {
-            var index = (((PositionX - 40) / 40) * 2) + ((PositionY + 40) / 80);
-            var song = ds_grid_get(obj_System.Songs, 2, index) + " - " + ds_grid_get(obj_System.Songs, 3, index);
+            var index = (((obj_Cube.PositionX - 40) / 40) * 2) + ((obj_Cube.PositionY + 40) / 80);
+            var song = song_get_artist(index) + " - " + song_get_name(index);
             obj_LobbyHUD.Text = song;
             
-            obj_System.Selected = index;
+            obj_Jukebox.Selected = index;
             
-            audio_play_sound(snd_pn35a, 0, false);
-            
-            if(keyboard_check_pressed(vk_enter))
-            {
-                room_goto_next();
-            }
+            audio_play_sound(song_get_object(index), 0, false);
         } 
         else 
         {
             obj_LobbyHUD.Text = "";
+            audio_stop_all();
         }
     }
 }
@@ -182,23 +265,20 @@ Model = load_model("Model/Cube0.obj");
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// 각도 변환
+            <string>///메인 룸으로 이동
 
-if(Angle &lt; 90) 
+if(keyboard_check_pressed(vk_enter))
 {
-    Angle += RotateSpeed;
-    IsRotating = true;
-}
-else
-{
-    IsRotating = false;
+    var tile = instance_position_3d(obj_Cube.PositionX, obj_Cube.PositionY, obj_Cube.PositionZ, obj_Tile);
+    if(tile.ModelIndex == 1)
+    {
+        room_goto(Main);
+    } 
 }
 </string>
           </argument>
         </arguments>
       </action>
-    </event>
-    <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -215,28 +295,15 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///큐브 그리기
+            <string>///카메라 이동
 
-var pv = rotate_axis(ForwardX, ForwardY, ForwardZ, RightX, RightY, RightZ, Angle + 225);
-var px = PositionX + (ForwardX * -5) + (pv[0] * 5 * sqrt(2));
-var py = PositionY + (ForwardY * -5) + (pv[1] * 5 * sqrt(2));
-var pz = PositionZ + (ForwardZ * -5) + (pv[2] * 5 * sqrt(2));
+obj_Camera.CenterX = lerp(obj_Camera.CenterX, obj_Cube.PositionX, CameraSmoothSpeed);
+obj_Camera.CenterY = lerp(obj_Camera.CenterY, obj_Cube.PositionY, CameraSmoothSpeed);
+obj_Camera.CenterZ = lerp(obj_Camera.CenterZ, obj_Cube.PositionZ, CameraSmoothSpeed);
 
-var fv = rotate_axis(ForwardX, ForwardY, ForwardZ, RightX, RightY, RightZ, Angle);
-var fx = fv[0];
-var fy = fv[1];
-var fz = fv[2];
-
-var rx = RightX;
-var ry = RightY;
-var rz = RightZ;
-
-var uv = rotate_axis(UpX, UpY, UpZ, RightX, RightY, RightZ, Angle);
-var ux = uv[0];
-var uy = uv[1];
-var uz = uv[2];
-
-draw_model(px, py, pz, fx, fy, fz, rx, ry, rz, ux, uy, uz, Model, sprite_get_texture(spr_Cube0, 0), 5, 1);
+obj_Camera.EyeX = lerp(obj_Camera.EyeX, obj_Cube.PositionX - CameraScale, CameraSmoothSpeed);
+obj_Camera.EyeY = lerp(obj_Camera.EyeY, obj_Cube.PositionY + CameraScale, CameraSmoothSpeed);
+obj_Camera.EyeZ = lerp(obj_Camera.EyeZ, obj_Cube.PositionZ + CameraScale, CameraSmoothSpeed);
 </string>
           </argument>
         </arguments>

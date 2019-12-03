@@ -4,7 +4,7 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>0</depth>
-  <persistent>0</persistent>
+  <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -27,10 +27,31 @@
             <kind>1</kind>
             <string>///변수 초기화
 
+Model = noone;
+
+PositionX = 0;
+PositionY = 0;
+PositionZ = 0;
+
+ForwardX = 1;
+ForwardY = 0;
+ForwardZ = 0;
+
+RightX = 0;
+RightY = 1;
+RightZ = 0;
+
+UpX = 0;
+UpY = 0;
+UpZ = 1;
+
+Angle = 0;
 </string>
           </argument>
         </arguments>
       </action>
+    </event>
+    <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -47,15 +68,34 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///타일 생성
+            <string>///큐브 그리기
 
-for(var i = 0; i &lt; obj_MainSystem.DataLength; i++)
+if(Model != noone)
 {
-    var tile = instance_create_3d(obj_MainSystem.Positions[i, 0], obj_MainSystem.Positions[i, 1], obj_MainSystem.Positions[i, 2],
-                                  obj_MainSystem.Forwards[i, 0], obj_MainSystem.Forwards[i, 1], obj_MainSystem.Forwards[i, 2],
-                                  obj_MainSystem.Rights[i, 0], obj_MainSystem.Rights[i, 1], obj_MainSystem.Rights[i, 2],
-                                  obj_MainSystem.Ups[i, 0], obj_MainSystem.Ups[i, 1], obj_MainSystem.Ups[i, 2],
-                                  obj_Tile);
+    var pv = rotate_axis(ForwardX, ForwardY, ForwardZ, -RightX, -RightY, -RightZ, Angle + 45);
+    var px = PositionX + (ForwardX * -5) + (pv[0] * 5 * sqrt(2));
+    var py = PositionY + (ForwardY * -5) + (pv[1] * 5 * sqrt(2));
+    var pz = PositionZ + (ForwardZ * -5) + (pv[2] * 5 * sqrt(2));
+    
+    var fv = rotate_axis(ForwardX, ForwardY, ForwardZ, -RightX, -RightY, -RightZ, Angle);
+    var fx = fv[0];
+    var fy = fv[1];
+    var fz = fv[2];
+    
+    var rx = RightX;
+    var ry = RightY;
+    var rz = RightZ;
+    
+    var uv = rotate_axis(UpX, UpY, UpZ, -RightX, -RightY, -RightZ, Angle);
+    var ux = uv[0];
+    var uy = uv[1];
+    var uz = uv[2];
+    
+    draw_model(px, py, pz, fx, fy, fz, rx, ry, rz, ux, uy, uz, Model, sprite_get_texture(spr_Cube0, 0), 5, 1);
+}
+else
+{
+    Model = load_model("Model/Cube0.obj");
 }
 </string>
           </argument>

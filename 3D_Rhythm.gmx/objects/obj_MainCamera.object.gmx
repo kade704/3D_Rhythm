@@ -27,9 +27,12 @@
             <kind>1</kind>
             <string>/// 변수 초기화
 
-PositionX = 0;
-PositionY = 0;
-PositionZ = 0;
+Scale = 65;
+SmoothSpeed = 0.1;
+
+PositionX = -Scale;
+PositionY = Scale;
+PositionZ = Scale;
 
 TargetX = 0;
 TargetY = 0;
@@ -38,11 +41,6 @@ TargetZ = 0;
 UpX = 0;
 UpY = 0;
 UpZ = 0;
-
-Scale = 120;
-SmoothSpeed = 0.1;
-
-
 </string>
           </argument>
         </arguments>
@@ -70,12 +68,18 @@ display_reset(4, true);
 
 //d3d 시작
 d3d_start();
+
+//perspective 사용 
 d3d_set_perspective(true);
+
+//depth test 수행
 d3d_set_hidden(true);
 
+//양면 렌더링 끄기
 d3d_set_culling(true);
-d3d_set_shading(false);
-//draw_set_colour(c_white);
+
+//
+d3d_set_zwriteenable(true);
 </string>
           </argument>
         </arguments>
@@ -100,38 +104,37 @@ d3d_set_shading(false);
             <kind>1</kind>
             <string>///위치 변형하기
 
-var index = obj_Cube.Index;
+var index = obj_MainCube.Index;
 
-var px = obj_Data.Positions[index, 0];
-var py = obj_Data.Positions[index, 1];
-var pz = obj_Data.Positions[index, 2];
+var px = obj_MainData.Positions[index, 0];
+var py = obj_MainData.Positions[index, 1];
+var pz = obj_MainData.Positions[index, 2];
 
-var fx = obj_Data.Forwards[index, 0];
-var fy = obj_Data.Forwards[index, 1];
-var fz = obj_Data.Forwards[index, 2];
+var fx = obj_MainData.Forwards[index, 0];
+var fy = obj_MainData.Forwards[index, 1];
+var fz = obj_MainData.Forwards[index, 2];
 
-var rx = obj_Data.Rights[index, 0];
-var ry = obj_Data.Rights[index, 1];
-var rz = obj_Data.Rights[index, 2];
+var rx = obj_MainData.Rights[index, 0];
+var ry = obj_MainData.Rights[index, 1];
+var rz = obj_MainData.Rights[index, 2];
 
-var ux = obj_Data.Ups[index, 0];
-var uy = obj_Data.Ups[index, 1];
-var uz = obj_Data.Ups[index, 2];
-
-var d = rotate_axis(fx, fy, fz, rx, ry, rz, -45);
-d = rotate_axis(d[0], d[1], d[2], ux, uy, uz, 135);
+var ux = obj_MainData.Ups[index, 0];
+var uy = obj_MainData.Ups[index, 1];
+var uz = obj_MainData.Ups[index, 2];
 
 TargetX = lerp(TargetX, px, SmoothSpeed);
 TargetY = lerp(TargetY, py, SmoothSpeed);
 TargetZ = lerp(TargetZ, pz, SmoothSpeed);
 
-PositionX = lerp(PositionX, px + (d[0] * Scale), SmoothSpeed);
-PositionY = lerp(PositionY, py + (d[1] * Scale), SmoothSpeed);
-PositionZ = lerp(PositionZ, pz + (d[2] * Scale), SmoothSpeed);
+PositionX = lerp(PositionX, px - (fx * Scale) + (rx * Scale) + (ux * Scale), SmoothSpeed);
+PositionY = lerp(PositionY, py - (fy * Scale) + (ry * Scale) + (uy * Scale), SmoothSpeed);
+PositionZ = lerp(PositionZ, pz - (fz * Scale) + (rz * Scale) + (uz * Scale), SmoothSpeed);
 
-NormalX = lerp(NormalX, ux, SmoothSpeed);
-NormalY = lerp(NormalY, uy, SmoothSpeed);
-NormalZ = lerp(NormalZ, uz, SmoothSpeed);
+UpX = lerp(UpX, ux, SmoothSpeed);
+UpY = lerp(UpY, uy, SmoothSpeed);
+UpZ = lerp(UpZ, uz, SmoothSpeed);
+
+Scale = lerp(Scale, 80, SmoothSpeed);
 </string>
           </argument>
         </arguments>
@@ -158,7 +161,7 @@ NormalZ = lerp(NormalZ, uz, SmoothSpeed);
 
 var aspect = window_get_width() / window_get_height();
 
-d3d_set_projection_ext(PositionX, PositionY, PositionZ, TargetX, TargetY, TargetZ, NormalX, NormalY, NormalZ, 45, aspect, 0.1, 1000);
+d3d_set_projection_ext(PositionX, PositionY, PositionZ, TargetX, TargetY, TargetZ, UpX, UpY, UpZ, 45, aspect, 0.1, 1000);
 </string>
           </argument>
         </arguments>

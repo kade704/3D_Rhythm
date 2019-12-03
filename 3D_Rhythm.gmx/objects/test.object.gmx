@@ -8,7 +8,7 @@
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
-    <event eventtype="0" enumb="0">
+    <event eventtype="9" enumb="17">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -25,38 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///변수 초기화
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///타일 생성
-
-for(var i = 0; i &lt; obj_MainSystem.DataLength; i++)
-{
-    var tile = instance_create_3d(obj_MainSystem.Positions[i, 0], obj_MainSystem.Positions[i, 1], obj_MainSystem.Positions[i, 2],
-                                  obj_MainSystem.Forwards[i, 0], obj_MainSystem.Forwards[i, 1], obj_MainSystem.Forwards[i, 2],
-                                  obj_MainSystem.Rights[i, 0], obj_MainSystem.Rights[i, 1], obj_MainSystem.Rights[i, 2],
-                                  obj_MainSystem.Ups[i, 0], obj_MainSystem.Ups[i, 1], obj_MainSystem.Ups[i, 2],
-                                  obj_Tile);
-}
+            <string>room_goto(Lobby);
 </string>
           </argument>
         </arguments>
