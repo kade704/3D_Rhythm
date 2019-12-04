@@ -272,7 +272,9 @@ if(keyboard_check_pressed(vk_enter))
     var tile = instance_position_3d(obj_Cube.PositionX, obj_Cube.PositionY, obj_Cube.PositionZ, obj_Tile);
     if(tile.ModelIndex == 1)
     {
-        room_goto(Main);
+        //room_goto(Main);
+        with(obj_LobbyMap) event_user(0);
+        
     } 
 }
 </string>

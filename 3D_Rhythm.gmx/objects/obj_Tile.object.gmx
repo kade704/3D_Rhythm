@@ -32,8 +32,36 @@ ModelIndex = 0;
 Model = noone;
 Texture = noone;
 
-Alpha = 1;
+Alpha = 0;
+
 Angle = 0;
+AngleMax = 180;
+
+RotateSpeed = 8;
+FadeOutSpeed = 0.02;
+
+State = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///위치 초기화
 
 PositionX = 0;
 PositionY = 0;
@@ -50,6 +78,53 @@ RightZ = 0;
 UpX = 0;
 UpY = 0;
 UpZ = 1;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///형태 변환
+
+if(State == 1)
+{
+    Alpha = 1;
+    if(Angle &lt; AngleMax)
+    {
+        Angle += RotateSpeed;
+    }
+    else
+    {
+        Angle = AngleMax;
+    }
+}
+else if(State == 2)
+{
+    if(0 &lt; Alpha)
+    {
+        Alpha -= FadeOutSpeed;
+    }
+    else
+    {
+        Alpha = 0;
+    }
+}
 </string>
           </argument>
         </arguments>
@@ -74,12 +149,12 @@ UpZ = 1;
             <kind>1</kind>
             <string>if(Model != noone)
 {
-    var pv = rotate_axis(ForwardX, ForwardY, ForwardZ, -RightX, -RightY, -RightZ, Angle);
+    var pv = rotate_axis(ForwardX, ForwardY, ForwardZ, RightX, RightY, RightZ, Angle + 180);
     var px = PositionX + (ForwardX * -5) + (pv[0] * 5);
     var py = PositionY + (ForwardY * -5) + (pv[1] * 5);
     var pz = PositionZ + (ForwardZ * -5) + (pv[2] * 5);
     
-    var fv = rotate_axis(ForwardX, ForwardY, ForwardZ, -RightX, -RightY, -RightZ, Angle);
+    var fv = rotate_axis(ForwardX, ForwardY, ForwardZ, RightX, RightY, RightZ, Angle + 180);
     var fx = fv[0];
     var fy = fv[1];
     var fz = fv[2];
@@ -88,7 +163,7 @@ UpZ = 1;
     var ry = RightY;
     var rz = RightZ;
     
-    var uv = rotate_axis(UpX, UpY, UpZ, -RightX, -RightY, -RightZ, Angle);
+    var uv = rotate_axis(UpX, UpY, UpZ, RightX, RightY, RightZ, Angle + 180);
     var ux = uv[0];
     var uy = uv[1];
     var uz = uv[2];    

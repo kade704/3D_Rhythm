@@ -27,10 +27,11 @@
             <kind>1</kind>
             <string>///변수 초기화
 
-TimeCount = 0;
-SpawnRate = 8;
+Alarm0Count = 4;
+Alarm0Rate = 8;
 
-TileRotateSpeed = 8;
+Alarm1Count = 0;
+Alarm1Rate = 8;
 </string>
           </argument>
         </arguments>
@@ -54,15 +55,75 @@ TileRotateSpeed = 8;
             <string>///타일 생성
 
 Tiles = noone;
-TileCount = 0;
 
-for(var i = 0; i &lt;= 4; i++)
+for(var i = 0; i &lt; 4; i++)
 {
-    var tile = instance_create_3d(i * 10, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, obj_Tile);
-    tile.Angle = 0;
+    Tiles[i, 0] = instance_create_3d(i * 10, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, obj_Tile);
+    Tiles[i, 0].Angle = 180;
+    Tiles[i, 0].Alpha = 180;
 }
 
-alarm[0] = SpawnRate;
+for(var i = 4; i &lt; ceil(obj_Jukebox.Length / 2) * 4 + 4; i++)
+{
+    var index = 0;    
+
+    if(i &lt; ceil(obj_Jukebox.Length / 2) * 4 + 1)
+    {
+        Tiles[i, index] = instance_create_3d(i * 10, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, obj_Tile);
+        Tiles[i, index].Angle = 0;
+        index++;
+    }
+
+    Tiles[i, index] = instance_create_3d(floor(i / 4) * 40, (i % 4) * -10 + -10, 0, 0, -1, 0, 1, 0, 0, 0, 0, 1, obj_Tile);
+    Tiles[i, index].Angle = 0;
+    if(i % 4 == 3) Tiles[i, index].ModelIndex = 1;
+    index++;
+    
+    Tiles[i, index] = instance_create_3d(floor(i / 4) * 40, (i % 4) * 10 + 10, 0, 0, 1, 0, -1, 0, 0, 0, 0, 1, obj_Tile);
+    Tiles[i, index].Angle = 0;
+    if(i % 4 == 3) Tiles[i, index].ModelIndex = 1;
+}
+
+alarm[0] = Alarm0Rate;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>for(var i = 0; i &lt; array_height_2d(Tiles); i++)
+{
+    for(var j = 0; j &lt; array_length_2d(Tiles, i); j++)
+    {
+        var distance = point_distance_3d(Tiles[i, j].PositionX, Tiles[i, j].PositionY, Tiles[i, j].PositionZ, obj_Cube.PositionX, obj_Cube.PositionY, obj_Cube.PositionZ);
+    
+        if((Alarm1Count * 20) &lt;= distance &amp;&amp; distance &lt; ((Alarm1Count + 1) * 20))
+        {
+            Tiles[i, j].State = 2;
+            log(distance)
+        }
+    }
+}
+if((Alarm1Count++ * 20) &lt; 500) 
+{
+    alarm[1] = Alarm1Rate;
+}
 </string>
           </argument>
         </arguments>
@@ -85,34 +146,23 @@ alarm[0] = SpawnRate;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(TimeCount &lt; ceil(obj_Jukebox.Length / 2) * 4 - 4)
+            <string>///타일 회전 반복
+
+for(var i = 0; i &lt; array_length_2d(Tiles, Alarm0Count); i++)
 {
-    Tiles[TileCount] = instance_create_3d((TimeCount) * 10 + 50, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, obj_Tile);
-    Tiles[TileCount].Angle = 180;
-    TileCount++;
+    Tiles[Alarm0Count, i].State = 1;
 }
 
-Tiles[TileCount] = instance_create_3d(floor(TimeCount / 4) * 40 + 40, (TimeCount % 4) * -10 + -10, 0, 0, -1, 0, 1, 0, 0, 0, 0, 1, obj_Tile);
-Tiles[TileCount].Angle = 180;
-if(TimeCount % 4 == 3) Tiles[TileCount].ModelIndex = 1;
-TileCount++;
-
-Tiles[TileCount] = instance_create_3d(floor(TimeCount / 4) * 40 + 40, (TimeCount % 4) * 10 + 10, 0, 0, 1, 0, -1, 0, 0, 0, 0, 1, obj_Tile);
-Tiles[TileCount].Angle = 180;
-if(TimeCount % 4 == 3) Tiles[TileCount].ModelIndex = 1;
-TileCount++;
-
-
-TimeCount++;
-
-if(TimeCount &lt; ceil(obj_Jukebox.Length / 2) * 4)
-    alarm[0] = SpawnRate;
+if(Alarm0Count++ &lt; array_height_2d(Tiles)) 
+{
+    alarm[0] = Alarm0Rate;
+}
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="3" enumb="0">
+    <event eventtype="7" enumb="10">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -129,14 +179,7 @@ if(TimeCount &lt; ceil(obj_Jukebox.Length / 2) * 4)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>for(var i = 0; i &lt; TileCount; i++)
-{
-    with(Tiles[i])
-    {
-        if(Angle &gt; 0) Angle -= obj_LobbyMap.TileRotateSpeed;
-        else Angle = 0;
-    }
-}
+            <string>alarm[1] = Alarm1Rate;
 </string>
           </argument>
         </arguments>

@@ -30,10 +30,11 @@
 Index = 1;
 IsPlaying = false;
 SongStartTime = 0;
+
 IsHitted = noone;
 JudgementRate = 150;
 
-CameraScale = 80;
+CameraScale = 65;
 CameraSmoothSpeed = 0.02;
 </string>
           </argument>
