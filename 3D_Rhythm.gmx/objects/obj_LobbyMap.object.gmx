@@ -27,11 +27,15 @@
             <kind>1</kind>
             <string>///변수 초기화
 
-Alarm0Count = 4;
-Alarm0Rate = 8;
+TilesOpen = noone;
+TileOpenCount = 0;
+TileOpenTime = 0;
+TileOpenRate = 4;
 
-Alarm1Count = 0;
-Alarm1Rate = 8;
+TilesClose = noone;
+TileCloseCount = 0;
+TileCloseTime = 0;
+TileCloseRate = 4;
 </string>
           </argument>
         </arguments>
@@ -54,37 +58,100 @@ Alarm1Rate = 8;
             <kind>1</kind>
             <string>///타일 생성
 
-Tiles = noone;
-
-for(var i = 0; i &lt; 4; i++)
+for(var i = 0; i &lt; ceil(obj_Jukebox.Length / 2) * 4; i++)
 {
-    Tiles[i, 0] = instance_create_3d(i * 10, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, obj_Tile);
-    Tiles[i, 0].Angle = 180;
-    Tiles[i, 0].Alpha = 180;
-}
-
-for(var i = 4; i &lt; ceil(obj_Jukebox.Length / 2) * 4 + 4; i++)
-{
-    var index = 0;    
-
-    if(i &lt; ceil(obj_Jukebox.Length / 2) * 4 + 1)
+    if(i % 4 == 3)
     {
-        Tiles[i, index] = instance_create_3d(i * 10, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, obj_Tile);
-        Tiles[i, index].Angle = 0;
-        index++;
+        for(var j = -3; j &lt;= -1; j++)
+        {
+            var tile = instance_create_3d(i * 10, j * 10, 0, 0, -1, 0, 1, 0, 0, 0, 0, 1, obj_Tile);
+            if(j == -3) tile.ModelIndex = 1;
+        }
+        
+        for(var j = 1; j &lt;= 3; j++)
+        {
+            var tile = instance_create_3d(i * 10, j * 10, 0, 0, 1, 0, -1, 0, 0, 0, 0, 1, obj_Tile);
+            if(j == 3) tile.ModelIndex = 1;
+        }
     }
-
-    Tiles[i, index] = instance_create_3d(floor(i / 4) * 40, (i % 4) * -10 + -10, 0, 0, -1, 0, 1, 0, 0, 0, 0, 1, obj_Tile);
-    Tiles[i, index].Angle = 0;
-    if(i % 4 == 3) Tiles[i, index].ModelIndex = 1;
-    index++;
     
-    Tiles[i, index] = instance_create_3d(floor(i / 4) * 40, (i % 4) * 10 + 10, 0, 0, 1, 0, -1, 0, 0, 0, 0, 1, obj_Tile);
-    Tiles[i, index].Angle = 0;
-    if(i % 4 == 3) Tiles[i, index].ModelIndex = 1;
+    {
+        var tile = instance_create_3d(i * 10, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, obj_Tile);
+        if(i &lt; 4) 
+        {
+            tile.Angle = 180; 
+            tile.Alpha = 1;
+        }
+    }
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///타일 펼치는 순서를 기록
 
-alarm[0] = Alarm0Rate;
+TilesOpen[0, 0] = instance_position_3d(30, 0, 0, obj_Tile);
+    
+var count = 0;
+
+do
+{
+    count = 0;
+    
+    for(var i = 0; i &lt; array_length_2d(TilesOpen, TileOpenCount); i++)
+    {
+        var px = TilesOpen[TileOpenCount, i].PositionX;
+        var py = TilesOpen[TileOpenCount, i].PositionY;
+        var pz = TilesOpen[TileOpenCount, i].PositionZ;
+    
+        var tile = instance_position_3d(px + 10, py, pz, obj_Tile);
+        if(tile != noone &amp;&amp; !tile_exist(TilesOpen, tile))
+        {
+            TilesOpen[TileOpenCount + 1, count] = tile;
+            count++;
+        }
+            
+        var tile = instance_position_3d(px - 10, py, pz, obj_Tile);
+        if(tile != noone &amp;&amp; !tile_exist(TilesOpen, tile))
+        {
+            TilesOpen[TileOpenCount + 1, count] = tile;
+            count++;
+        }
+            
+        var tile = instance_position_3d(px, py + 10, pz, obj_Tile);
+        if(tile != noone &amp;&amp; !tile_exist(TilesOpen, tile))
+        {
+            TilesOpen[TileOpenCount + 1, count] = tile;
+            count++;
+        }
+            
+        var tile = instance_position_3d(px, py - 10, pz, obj_Tile);
+        if(tile != noone &amp;&amp; !tile_exist(TilesOpen, tile))
+        {
+            TilesOpen[TileOpenCount + 1, count] = tile;
+            count++;
+        }
+    }      
+    TileOpenCount++;
+} until(count == 0);
+
+alarm[0] = TileOpenRate;
 </string>
           </argument>
         </arguments>
@@ -107,22 +174,14 @@ alarm[0] = Alarm0Rate;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>for(var i = 0; i &lt; array_height_2d(Tiles); i++)
+            <string>for(var i = 0; i &lt; array_length_2d(TilesClose, TileCloseTime); i++)
 {
-    for(var j = 0; j &lt; array_length_2d(Tiles, i); j++)
-    {
-        var distance = point_distance_3d(Tiles[i, j].PositionX, Tiles[i, j].PositionY, Tiles[i, j].PositionZ, obj_Cube.PositionX, obj_Cube.PositionY, obj_Cube.PositionZ);
-    
-        if((Alarm1Count * 20) &lt;= distance &amp;&amp; distance &lt; ((Alarm1Count + 1) * 20))
-        {
-            Tiles[i, j].State = 2;
-            log(distance)
-        }
-    }
+    with(TilesClose[TileCloseTime, i]) event_user(1);
 }
-if((Alarm1Count++ * 20) &lt; 500) 
+
+if(TileCloseTime++ &lt; array_height_2d(TilesClose))
 {
-    alarm[1] = Alarm1Rate;
+    alarm[1] = TileCloseRate;
 }
 </string>
           </argument>
@@ -146,16 +205,14 @@ if((Alarm1Count++ * 20) &lt; 500)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///타일 회전 반복
-
-for(var i = 0; i &lt; array_length_2d(Tiles, Alarm0Count); i++)
+            <string>for(var i = 0; i &lt; array_length_2d(TilesOpen, TileOpenTime); i++)
 {
-    Tiles[Alarm0Count, i].State = 1;
+    with(TilesOpen[TileOpenTime, i]) event_user(0);
 }
 
-if(Alarm0Count++ &lt; array_height_2d(Tiles)) 
+if(TileOpenTime++ &lt; array_height_2d(TilesOpen) - 1)
 {
-    alarm[0] = Alarm0Rate;
+    alarm[0] = TileOpenRate;
 }
 </string>
           </argument>
@@ -179,7 +236,72 @@ if(Alarm0Count++ &lt; array_height_2d(Tiles))
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>alarm[1] = Alarm1Rate;
+            <string>TilesClose[0, 0] = instance_position_3d(obj_Cube.PositionX, obj_Cube.PositionY, obj_Cube.PositionZ, obj_Tile);
+
+var count = 0;
+
+do
+{
+    count = 0;
+    
+    for(var i = 0; i &lt; array_length_2d(TilesClose, TileCloseCount); i++)
+    {
+        var px = TilesClose[TileCloseCount, i].PositionX;
+        var py = TilesClose[TileCloseCount, i].PositionY;
+        var pz = TilesClose[TileCloseCount, i].PositionZ;
+    
+        var tile = instance_position_3d(px + 10, py, pz, obj_Tile);
+        if(tile != noone &amp;&amp; !tile_exist(TilesClose, tile))
+        {
+            TilesClose[TileCloseCount + 1, count] = tile;
+            count++;
+        }
+            
+        var tile = instance_position_3d(px - 10, py, pz, obj_Tile);
+        if(tile != noone &amp;&amp; !tile_exist(TilesClose, tile))
+        {
+            TilesClose[TileCloseCount + 1, count] = tile;
+            count++;
+        }
+            
+        var tile = instance_position_3d(px, py + 10, pz, obj_Tile);
+        if(tile != noone &amp;&amp; !tile_exist(TilesClose, tile))
+        {
+            TilesClose[TileCloseCount + 1, count] = tile;
+            count++;
+        }
+            
+        var tile = instance_position_3d(px, py - 10, pz, obj_Tile);
+        if(tile != noone &amp;&amp; !tile_exist(TilesClose, tile))
+        {
+            TilesClose[TileCloseCount + 1, count] = tile;
+            count++;
+        }
+    }      
+    TileCloseCount++;
+} until(count == 0);
+
+for(var i = 0; i &lt; array_height_2d(TilesClose) / 2; i++)
+{
+    if()
+    var temp = noone;
+    for(var j = 0; j &lt; array_length_2d(TilesClose, i); j++)
+    {
+        temp[j] = TilesClose[i, j];
+    }
+    
+    for(var j = 0; j &lt; array_length_2d((TilesClose - 1) - i, i); j++)
+    {
+        TilesClose[i, j] = TilesClose[(array_height_2d(TilesClose) - 1) - i, j];
+    }
+    
+    for(var j = 0; j &lt; array_length_1d(temp); j++)
+    {
+        TilesClose[(array_height_2d(TilesClose) - 1) - i, j] = temp[j];
+    }
+}
+
+alarm[1] = TileCloseRate;
 </string>
           </argument>
         </arguments>
