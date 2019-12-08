@@ -25,20 +25,10 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// 변수 초기화
+            <string>///변수 초기화
 
-EyeX = 0;
-EyeY = 0;
-EyeZ = 0;
-
-CenterX = 0;
-CenterY = 0;
-CenterZ = 0;
-
-UpX = 0;
-UpY = 0;
-UpZ = 1;
-
+Scale = 65;
+SmoothSpeed = 0.1;
 </string>
           </argument>
         </arguments>
@@ -59,7 +49,44 @@ UpZ = 1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// d3d 초기화
+            <string>///위치 초기화
+
+PositionX = 0;
+PositionY = 0;
+PositionZ = 0;
+
+ForwardX = 1;
+ForwardY = 0;
+ForwardZ = 0;
+
+RightX = 0;
+RightY = 1;
+RightZ = 0;
+
+UpX = 0;
+UpY = 0;
+UpZ = 1;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///d3d 초기화
 
 //anti-aliasing, v-sync 설정
 display_reset(4, true);
@@ -128,6 +155,18 @@ draw_text_transformed(30, window_get_height() - 30, string(fps), 0.5, 0.5, 0);
           <argument>
             <kind>1</kind>
             <string>///카메라 배치
+
+var  = lerp(CenterX, PositionX, SmoothSpeed);
+CenterY = lerp(CenterY, PositionY, SmoothSpeed);
+CenterZ = lerp(CenterZ, PositionZ, SmoothSpeed);
+
+EyeX = lerp(EyeX, PositionX - (ForwardX * Scale) + (RightX * Scale) + (UpX * Scale), SmoothSpeed);
+EyeY = lerp(EyeY, PositionY - (ForwardY * Scale) + (RightY * Scale) + (UpY * Scale), SmoothSpeed);
+EyeZ = lerp(EyeZ, PositionZ - (ForwardZ * Scale) + (RightZ * Scale) + (UpZ * Scale), SmoothSpeed);
+
+var ux = lerp(obj_Camera.UpX, ux, CameraSmoothSpeed);
+var uy = lerp(obj_Camera.UpY, uy, CameraSmoothSpeed);
+var uz = lerp(obj_Camera.UpZ, uz, CameraSmoothSpeed);
 
 var aspect = window_get_width() / window_get_height();
 

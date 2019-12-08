@@ -32,10 +32,7 @@ IsPlaying = false;
 SongStartTime = 0;
 
 IsHitted = noone;
-JudgementRate = 150;
-
-CameraScale = 65;
-CameraSmoothSpeed = 0.02;
+JudgementRate = 200;
 </string>
           </argument>
         </arguments>
@@ -58,17 +55,6 @@ CameraSmoothSpeed = 0.02;
             <kind>1</kind>
             <string>///카메라 위치 초기화
 
-obj_Camera.EyeX = -CameraScale;
-obj_Camera.EyeY =  CameraScale;
-obj_Camera.EyeZ =  CameraScale;
-
-obj_Camera.CenterX = 0;
-obj_Camera.CenterY = 0;
-obj_Camera.CenterZ = 0;
-
-obj_Camera.UpX = 0;
-obj_Camera.UpY = 0;
-obj_Camera.UpZ = 1;
 </string>
           </argument>
         </arguments>
@@ -361,8 +347,8 @@ for(var i = 1; i &lt; DataLength; i++)
             <kind>1</kind>
             <string>///노래 시작
 
+audio_master_gain(1.0);
 audio_play_sound(song_get_object(obj_Jukebox.Selected), 0, false);
-audio_master_gain(0.5);
 
 IsPlaying = true;
 SongStartTime = current_time;
@@ -460,14 +446,14 @@ obj_Cube.UpZ = Ups[Index, 2];
 
 if(IsPlaying)
 {
-    var key = keyboard_check_pressed(vk_anykey);
+    var hit = keyboard_check_pressed(vk_anykey) || mouse_check_button_pressed(mb_any);
     
     var lastNoteTime = Timeline[Index - 1];
     var currentNoteTime = Timeline[Index];
     
     if((lastNoteTime &lt; current_time - SongStartTime) &amp;&amp; (current_time - SongStartTime &lt; lastNoteTime + JudgementRate) &amp;&amp; Index &gt; 1)
     {
-        if(key &amp;&amp; IsHitted == false)
+        if(hit &amp;&amp; IsHitted == false)
         {
             IsHitted = true;
         }
@@ -479,7 +465,7 @@ if(IsPlaying)
         {
             room_restart();
         }
-        if(key)
+        if(hit)
         {
             room_restart();
         }
@@ -492,7 +478,7 @@ if(IsPlaying)
         {
             IsHitted = false;
         }
-        if(key &amp;&amp; IsHitted == false)
+        if(hit &amp;&amp; IsHitted == false)
         {
             IsHitted = true;
         }

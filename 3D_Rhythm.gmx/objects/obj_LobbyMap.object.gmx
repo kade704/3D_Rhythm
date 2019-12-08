@@ -30,12 +30,12 @@
 TilesOpen = noone;
 TileOpenCount = 0;
 TileOpenTime = 0;
-TileOpenRate = 4;
+TileOpenRate = 6;
 
 TilesClose = noone;
 TileCloseCount = 0;
 TileCloseTime = 0;
-TileCloseRate = 4;
+TileCloseRate = 3;
 </string>
           </argument>
         </arguments>
@@ -281,25 +281,15 @@ do
     TileCloseCount++;
 } until(count == 0);
 
-for(var i = 0; i &lt; array_height_2d(TilesClose) / 2; i++)
+var temp = noone;
+for(var i = 0; i &lt; array_height_2d(TilesClose); i++)
 {
-    if()
-    var temp = noone;
     for(var j = 0; j &lt; array_length_2d(TilesClose, i); j++)
     {
-        temp[j] = TilesClose[i, j];
-    }
-    
-    for(var j = 0; j &lt; array_length_2d((TilesClose - 1) - i, i); j++)
-    {
-        TilesClose[i, j] = TilesClose[(array_height_2d(TilesClose) - 1) - i, j];
-    }
-    
-    for(var j = 0; j &lt; array_length_1d(temp); j++)
-    {
-        TilesClose[(array_height_2d(TilesClose) - 1) - i, j] = temp[j];
+        temp[(array_height_2d(TilesClose) - 1) - i, j] = TilesClose[i, j];
     }
 }
+TilesClose = temp;
 
 alarm[1] = TileCloseRate;
 </string>

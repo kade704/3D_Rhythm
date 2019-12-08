@@ -38,6 +38,7 @@ Angle = 0;
 AngleMax = 180;
 
 RotateSpeed = 10;
+FadeOutSpeed = 0.15;
 </string>
           </argument>
         </arguments>
@@ -97,16 +98,15 @@ UpZ = 1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>Angle -= RotateSpeed;   
+            <string>Alpha -= FadeOutSpeed;   
 
-if(0 &lt; Angle)
+if(0 &lt; Alpha)
 {
     alarm[1] = 1;
 }
 else
 {
-    Angle = 0;
-    Alpha = 0;
+    instance_destroy();
 }
 </string>
           </argument>

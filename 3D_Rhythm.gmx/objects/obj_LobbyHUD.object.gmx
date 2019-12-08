@@ -28,7 +28,8 @@
             <string>///변수 초기화
 
 Text = "";
-TextWritingRate = 20;
+TextWritingRate = 6;
+TextWritingCount = 0;
 </string>
           </argument>
         </arguments>
@@ -50,6 +51,56 @@ TextWritingRate = 20;
           <argument>
             <kind>1</kind>
             <string>application_surface_draw_enable(false);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(TextWritingCount++ &lt; string_length(Text))
+{
+    alarm[0] = TextWritingRate;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="10">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>TextWritingCount = 0;
+alarm[0] = TextWritingRate;
 </string>
           </argument>
         </arguments>
@@ -99,9 +150,16 @@ shader_reset();
             <kind>1</kind>
             <string>draw_set_colour(make_colour_rgb(255, 0, 132));
 draw_set_font(ft_Dealerplate);
-draw_set_halign(fa_center);
-draw_set_valign(fa_middle);
-draw_text(window_get_width() / 2, (window_get_height() / 2) - 250, Text);
+
+for(var i = 0; i &lt; string_length(Text); i++)
+{
+    var c = "";
+
+    if(i &lt; TextWritingCount) c += string_char_at(Text, i + 1);
+    else c += chr(random_range(33, 126));
+    
+    draw_text((window_get_width() / 2) - (string_length(Text) * 10) + (i * 20), (window_get_height() / 2) - 250, c);
+}
 </string>
           </argument>
         </arguments>
