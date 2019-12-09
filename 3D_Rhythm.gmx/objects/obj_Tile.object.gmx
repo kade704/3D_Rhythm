@@ -35,10 +35,12 @@ Texture = noone;
 Alpha = 0;
 
 Angle = 0;
-AngleMax = 180;
+AngleStart = 180;
 
 RotateSpeed = 10;
 FadeOutSpeed = 0.15;
+
+
 </string>
           </argument>
         </arguments>
@@ -130,15 +132,15 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>Angle += RotateSpeed;   
+            <string>Angle -= RotateSpeed;   
 
-if(Angle &lt; AngleMax)
+if(0 &lt; Angle)
 {
     alarm[0] = 1;
 }
 else
 {
-    Angle = AngleMax;
+    Angle = 0;
 }
 </string>
           </argument>
@@ -186,6 +188,7 @@ else
           <argument>
             <kind>1</kind>
             <string>Alpha = 1;
+Angle = AngleStart;
 alarm[0] = 1;
 </string>
           </argument>
@@ -211,12 +214,12 @@ alarm[0] = 1;
             <kind>1</kind>
             <string>if(Model != noone)
 {
-    var pv = rotate_axis(ForwardX, ForwardY, ForwardZ, RightX, RightY, RightZ, Angle + 180);
+    var pv = rotate_axis(ForwardX, ForwardY, ForwardZ, RightX, RightY, RightZ, -Angle);
     var px = PositionX + (ForwardX * -5) + (pv[0] * 5);
     var py = PositionY + (ForwardY * -5) + (pv[1] * 5);
     var pz = PositionZ + (ForwardZ * -5) + (pv[2] * 5);
     
-    var fv = rotate_axis(ForwardX, ForwardY, ForwardZ, RightX, RightY, RightZ, Angle + 180);
+    var fv = rotate_axis(ForwardX, ForwardY, ForwardZ, RightX, RightY, RightZ, -Angle);
     var fx = fv[0];
     var fy = fv[1];
     var fz = fv[2];
@@ -225,11 +228,11 @@ alarm[0] = 1;
     var ry = RightY;
     var rz = RightZ;
     
-    var uv = rotate_axis(UpX, UpY, UpZ, RightX, RightY, RightZ, Angle + 180);
+    var uv = rotate_axis(UpX, UpY, UpZ, RightX, RightY, RightZ, -Angle);
     var ux = uv[0];
     var uy = uv[1];
     var uz = uv[2];    
-
+    
     draw_model(px, py, pz, fx, fy, fz, rx, ry, rz, ux, uy, uz, Model, Texture, 5, Alpha);
 }
 else

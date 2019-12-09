@@ -31,115 +31,9 @@ Index = 1;
 IsPlaying = false;
 SongStartTime = 0;
 
-IsHitted = noone;
+IsHitted = true;
+IsInMissJudgement = false;
 JudgementRate = 200;
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///카메라 위치 초기화
-
-obj_Camera.PositionX = 0;
-obj_Camera.PositionY = 0;
-obj_Camera.PositionZ = 0;
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///큐브 위치 초기화
-
-obj_Cube.PositionX = 0;
-obj_Cube.PositionY = 0;
-obj_Cube.PositionZ = 0;
-
-obj_Cube.ForwardX = 1;
-obj_Cube.ForwardY = 0;
-obj_Cube.ForwardZ = 0;
-
-obj_Cube.RightX = 0;
-obj_Cube.RightY = 1;
-obj_Cube.RightZ = 0;
-
-obj_Cube.UpX = 0;
-obj_Cube.UpY = 0;
-obj_Cube.UpZ = 1;
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///큐브 회전 초기화
-
-obj_Cube.Angle = 90;
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>audio_stop_all();
-alarm[0] = 100;
 </string>
           </argument>
         </arguments>
@@ -330,6 +224,96 @@ for(var i = 1; i &lt; DataLength; i++)
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///카메라 초기화
+
+obj_Camera.PositionX = 0;
+obj_Camera.PositionY = 0;
+obj_Camera.PositionZ = 0;
+
+obj_Camera.SmoothSpeed = 0.1;
+obj_Camera.TargetScale = 80;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///큐브 초기화
+
+obj_Cube.PositionX = 0;
+obj_Cube.PositionY = 0;
+obj_Cube.PositionZ = 0;
+
+obj_Cube.ForwardX = 1;
+obj_Cube.ForwardY = 0;
+obj_Cube.ForwardZ = 0;
+
+obj_Cube.RightX = 0;
+obj_Cube.RightY = 1;
+obj_Cube.RightZ = 0;
+
+obj_Cube.UpX = 0;
+obj_Cube.UpY = 0;
+obj_Cube.UpZ = 1;
+
+obj_Cube.Angle = 0;
+obj_Cube.RotateSpeed = 90 / (OneBeatRate / (delta_time * 0.001));
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>audio_stop_all();
+alarm[0] = 100;
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="2" enumb="0">
       <action>
@@ -383,10 +367,10 @@ if(IsPlaying)
 {
     if(Timeline[Index] &lt; current_time - SongStartTime &amp;&amp; Index &lt; DataLength - 1)
     {
+        obj_Cube.AngleStart = Data[Index, 1] * 90;
+        with(obj_Cube) event_user(0);
         Index++;
-        obj_Cube.Angle = 90;
     }
-    obj_Cube.Angle -= 90 / (OneBeatRate / (delta_time * 0.001));
 }
 </string>
           </argument>
@@ -449,41 +433,49 @@ obj_Cube.UpZ = Ups[Index, 2];
 
 if(IsPlaying)
 {
+    var currentTime = current_time - SongStartTime;
     var hit = keyboard_check_pressed(vk_anykey) || mouse_check_button_pressed(mb_any);
     
     var lastNoteTime = Timeline[Index - 1];
     var currentNoteTime = Timeline[Index];
     
-    if((lastNoteTime &lt; current_time - SongStartTime) &amp;&amp; (current_time - SongStartTime &lt; lastNoteTime + JudgementRate) &amp;&amp; Index &gt; 1)
+    if((lastNoteTime &lt; currentTime) &amp;&amp; (currentTime &lt; lastNoteTime + JudgementRate) &amp;&amp; Index &gt; 1)
     {
         if(hit &amp;&amp; IsHitted == false)
         {
             IsHitted = true;
+            with(obj_MainHUD) event_user(0);
         }
     }
     
-    if((lastNoteTime + JudgementRate &lt; current_time - SongStartTime) &amp;&amp; (current_time - SongStartTime &lt; currentNoteTime - JudgementRate))
+    if((lastNoteTime + JudgementRate &lt; currentTime) &amp;&amp; (currentTime &lt; currentNoteTime - JudgementRate))
     {
-        if(IsHitted == false)
+        if(!IsInMissJudgement)
         {
-            room_restart();
-        }
-        if(hit)
-        {
-            room_restart();
-        }
-        IsHitted = noone;
-    }
-    
-    if((currentNoteTime - JudgementRate &lt; current_time - SongStartTime) &amp;&amp; (current_time - SongStartTime &lt; currentNoteTime))
-    {
-        if(IsHitted == noone)
-        {
+            if(IsHitted == false)
+            {
+                //room_restart();
+            }
+            IsInMissJudgement = true;
             IsHitted = false;
         }
+        
+        if(hit)
+        {
+            //room_restart();
+        }
+    }
+    else
+    {
+        IsInMissJudgement = false;
+    }
+    
+    if((currentNoteTime - JudgementRate &lt; currentTime) &amp;&amp; (currentTime &lt; currentNoteTime))
+    {
         if(hit &amp;&amp; IsHitted == false)
         {
             IsHitted = true;
+            with(obj_MainHUD) event_user(0);
         }
     }
 }

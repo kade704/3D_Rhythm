@@ -158,7 +158,7 @@ for(var i = 0; i &lt; string_length(Text); i++)
     if(i &lt; TextWritingCount) c += string_char_at(Text, i + 1);
     else c += chr(random_range(33, 126));
     
-    draw_text((window_get_width() / 2) - (string_length(Text) * 10) + (i * 20), (window_get_height() / 2) - 250, c);
+    draw_text((window_get_width() / 2) - (string_length(Text) * 10) + (i * 20), 150, c);
 }
 </string>
           </argument>

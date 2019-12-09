@@ -28,6 +28,8 @@
             <string>///변수 초기화
 
 Scale = 65;
+TargetScale = 65;
+
 SmoothSpeed = 0.02;
 </string>
           </argument>
@@ -143,7 +145,9 @@ d3d_set_zwriteenable(true);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>PositionX = lerp(PositionX, TargetPositionX, SmoothSpeed);
+            <string>Scale = lerp(Scale, TargetScale, SmoothSpeed)
+
+PositionX = lerp(PositionX, TargetPositionX, SmoothSpeed);
 PositionY = lerp(PositionY, TargetPositionY, SmoothSpeed);
 PositionZ = lerp(PositionZ, TargetPositionZ, SmoothSpeed);
 
@@ -182,6 +186,7 @@ UpZ = lerp(UpZ, TargetUpZ, SmoothSpeed);
             <kind>1</kind>
             <string>draw_set_font(ft_Dealerplate);
 draw_set_colour(c_white);
+draw_set_alpha(1);
 draw_set_halign(fa_left);
 draw_set_valign(fa_bottom);
 draw_text_transformed(30, window_get_height() - 30, string(fps), 0.5, 0.5, 0);

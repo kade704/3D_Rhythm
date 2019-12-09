@@ -60,29 +60,19 @@ TileCloseRate = 3;
 
 for(var i = 0; i &lt; ceil(obj_Jukebox.Length / 2) * 4; i++)
 {
-    if(i % 4 == 3)
+    for(var j = -3; j &lt;= -1; j++)
     {
-        for(var j = -3; j &lt;= -1; j++)
-        {
-            var tile = instance_create_3d(i * 10, j * 10, 0, 0, -1, 0, 1, 0, 0, 0, 0, 1, obj_Tile);
-            if(j == -3) tile.ModelIndex = 1;
-        }
-        
-        for(var j = 1; j &lt;= 3; j++)
-        {
-            var tile = instance_create_3d(i * 10, j * 10, 0, 0, 1, 0, -1, 0, 0, 0, 0, 1, obj_Tile);
-            if(j == 3) tile.ModelIndex = 1;
-        }
+        var tile = instance_create_3d(i * 10, j * 10, 0, 0, -1, 0, 1, 0, 0, 0, 0, 1, obj_Tile);
+        if(j == -3 &amp;&amp; i % 4 == 3) tile.ModelIndex = 1;
     }
     
+    for(var j = 1; j &lt;= 3; j++)
     {
-        var tile = instance_create_3d(i * 10, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, obj_Tile);
-        if(i &lt; 4) 
-        {
-            tile.Angle = 180; 
-            tile.Alpha = 1;
-        }
+        var tile = instance_create_3d(i * 10, j * 10, 0, 0, 1, 0, -1, 0, 0, 0, 0, 1, obj_Tile);
+        if(j == 3 &amp;&amp; i % 4 == 3) tile.ModelIndex = 1;
     }
+    
+    var tile = instance_create_3d(i * 10, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, obj_Tile);
 }
 </string>
           </argument>
@@ -106,7 +96,7 @@ for(var i = 0; i &lt; ceil(obj_Jukebox.Length / 2) * 4; i++)
             <kind>1</kind>
             <string>///타일 펼치는 순서를 기록
 
-TilesOpen[0, 0] = instance_position_3d(30, 0, 0, obj_Tile);
+TilesOpen[0, 0] = instance_position_3d(0, 0, 0, obj_Tile);
     
 var count = 0;
 

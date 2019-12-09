@@ -58,7 +58,7 @@ SongVolumeChagingSpeed = 0.01;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///큐브 위치 초기화
+            <string>///큐브 초기화
 
 obj_Cube.PositionX = 0;
 obj_Cube.PositionY = 0;
@@ -75,27 +75,6 @@ obj_Cube.RightZ = 0;
 obj_Cube.UpX = 0;
 obj_Cube.UpY = 0;
 obj_Cube.UpZ = 1;
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///큐브 회전 초기화
 
 obj_Cube.Angle = 0;
 </string>
@@ -120,40 +99,9 @@ obj_Cube.Angle = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///큐브 회전
-
-if(obj_Cube.Angle &gt; 0) 
-{
-    obj_Cube.Angle -= CubeRotateSpeed;
-    IsCubeRotating = true;
-}
-else
-{
-    IsCubeRotating = false;
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>///큐브 이동
 
-if(!IsCubeRotating &amp;&amp; mouse_check_button(mb_left) &amp;&amp; !IsSongStarted)
+if(obj_Cube.Angle == 0 &amp;&amp; mouse_check_button(mb_left) &amp;&amp; !IsSongStarted)
 {
     var dir = point_direction(window_get_width() / 2, window_get_height() / 2, mouse_x, mouse_y);    
     
@@ -198,7 +146,8 @@ if(!IsCubeRotating &amp;&amp; mouse_check_button(mb_left) &amp;&amp; !IsSongStar
         obj_Cube.UpZ = 0;
         obj_Cube.UpZ = 1;      
         
-        obj_Cube.Angle = 90;
+        obj_Cube.AngleStart = 90;
+        with(obj_Cube) event_user(0);
         
         var tile = instance_position_3d(obj_Cube.PositionX, obj_Cube.PositionY, obj_Cube.PositionZ, obj_Tile);
         if(tile.ModelIndex == 1)
@@ -330,7 +279,6 @@ else
 }
 
 audio_master_gain(SongVolume);
-log(SongVolume)
 
 
 </string>
