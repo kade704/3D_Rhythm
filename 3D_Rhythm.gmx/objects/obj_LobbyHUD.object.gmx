@@ -106,31 +106,6 @@ alarm[0] = TextWritingRate;
         </arguments>
       </action>
     </event>
-    <event eventtype="8" enumb="74">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>shader_set(shd_PostProcessing);
-draw_surface(application_surface, 0, 0);
-shader_reset();
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
@@ -150,16 +125,13 @@ shader_reset();
             <kind>1</kind>
             <string>draw_set_colour(make_colour_rgb(255, 0, 132));
 draw_set_font(ft_Dealerplate);
+draw_set_halign(fa_center);
+draw_set_valign(fa_middle);
 
-for(var i = 0; i &lt; string_length(Text); i++)
-{
-    var c = "";
-
-    if(i &lt; TextWritingCount) c += string_char_at(Text, i + 1);
-    else c += chr(random_range(33, 126));
+var s = string_copy(Text, 1, TextWritingCount + 1);
+if(TextWritingCount &lt; string_length(Text) - 1) s += chr(random_range(33, 126));
     
-    draw_text((window_get_width() / 2) - (string_length(Text) * 10) + (i * 20), 150, c);
-}
+draw_text(window_get_width() / 2, 150, s);
 </string>
           </argument>
         </arguments>

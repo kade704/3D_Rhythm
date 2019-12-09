@@ -29,9 +29,6 @@
 
 TileOpenTime = 0;
 TileOpenRate = 6;
-
-TileCloseTime = 0;
-TileCloseRate = 6;
 </string>
           </argument>
         </arguments>
@@ -62,10 +59,6 @@ for(var i = 0; i &lt; obj_MainSystem.DataLength; i++)
                                   obj_MainSystem.Ups[i, 0], obj_MainSystem.Ups[i, 1], obj_MainSystem.Ups[i, 2],
                                   obj_Tile);
 }
-
-var tile = instance_position_3d(0, 0, 0, obj_Tile);
-tile.Alpha = 1;
-tile.Angle = 180;
 
 alarm[0] = TileOpenRate;
 </string>

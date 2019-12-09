@@ -80,6 +80,7 @@
   <NewExtensions/>
   <sounds name="sound">
     <sound>sound\snd_pn35a</sound>
+    <sound>sound\snd_hihat</sound>
   </sounds>
   <sprites name="sprites">
     <sprite>sprites\spr_Cube0</sprite>
@@ -108,6 +109,8 @@
       <script>scripts\song_get_name.gml</script>
       <script>scripts\song_get_bpm.gml</script>
       <script>scripts\song_get_path.gml</script>
+      <script>scripts\song_get_startTime.gml</script>
+      <script>scripts\song_get_highlightTime.gml</script>
     </scripts>
     <script>scripts\load_model.gml</script>
     <script>scripts\draw_model.gml</script>

@@ -16,13 +16,14 @@ void main()
 //######################_==_YOYO_SHADER_MARKER_==_######################@~varying vec2 v_vTexcoord;
 varying vec4 v_vColour;
 
+uniform float _minRadius;
+uniform float _maxRadius;
+
 void main()
 {
     vec3 _baseColour = (v_vColour * texture2D( gm_BaseTexture, v_vTexcoord)).rgb;
     
     //Vignette
-    float _minRadius = 0.2;
-    float _maxRadius = 0.9;
     float _radius = smoothstep(_minRadius, _maxRadius, distance(vec2(0.5), v_vTexcoord));
     vec3 _vignette = _baseColour * (1.0 - _radius);
     

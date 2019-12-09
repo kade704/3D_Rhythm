@@ -57,88 +57,6 @@ TextFadeOutSpeed = 0.02;
         </arguments>
       </action>
     </event>
-    <event eventtype="2" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>Alpha -= TextFadeOutSpeed;
-
-if(0 &lt; Alpha)
-{
-    alarm[0] = 1;
-}
-else
-{
-    Alpha = 0;
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="7" enumb="10">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>Text = "Perfect";
-Alpha = 1;
-alarm[0] = 1;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="74">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>shader_set(shd_PostProcessing);
-draw_surface(application_surface, 0, 0);
-shader_reset();
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
@@ -157,11 +75,11 @@ shader_reset();
           <argument>
             <kind>1</kind>
             <string>draw_set_colour(make_colour_rgb(255, 0, 132));
-draw_set_alpha(Alpha);
+draw_set_alpha(1);
 draw_set_font(ft_Dealerplate);
 draw_set_halign(fa_center);
 draw_set_valign(fa_center);
-draw_text(window_get_width() / 2, (window_get_height() / 2) - 250, Text);
+draw_text(window_get_width() / 2, (window_get_height() / 2) - 150, Text);
 </string>
           </argument>
         </arguments>

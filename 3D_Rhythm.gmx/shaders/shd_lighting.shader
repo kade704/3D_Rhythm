@@ -43,8 +43,8 @@ void main()
     
     vec3 _baseCol = texture2D(gm_BaseTexture, v_vTexcoord).rgb;
     
-    float _minIntensity = 0.85;
-    float _maxIntensity = 1.0;
+    float _minIntensity = 0.7;
+    float _maxIntensity = 0.95;
     
     float _intensity = abs(dot(normalize(v_vNormal), normalize(_lightDir)));
     

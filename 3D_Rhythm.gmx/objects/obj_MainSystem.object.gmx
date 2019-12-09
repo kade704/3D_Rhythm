@@ -28,12 +28,16 @@
             <string>///변수 초기화
 
 Index = 1;
-IsPlaying = false;
+IsSongPlaying = false;
 SongStartTime = 0;
+IsGamePlaying = false;
+GameStartTime = 0;
 
 IsHitted = true;
 IsInMissJudgement = false;
-JudgementRate = 200;
+JudgementRate = 100;
+
+log("restart");
 </string>
           </argument>
         </arguments>
@@ -246,8 +250,39 @@ obj_Camera.PositionX = 0;
 obj_Camera.PositionY = 0;
 obj_Camera.PositionZ = 0;
 
+obj_Camera.ForwardX = 1;
+obj_Camera.ForwardY = 0;
+obj_Camera.ForwardZ = 0;
+
+obj_Camera.RightX = 0;
+obj_Camera.RightY = 1;
+obj_Camera.RightZ = 0;
+
+obj_Camera.UpX = 0;
+obj_Camera.UpY = 0;
+obj_Camera.UpZ = 1;
+
+obj_Camera.TargetPositionX = 0;
+obj_Camera.TargetPositionY = 0;
+obj_Camera.TargetPositionZ = 0;
+
+obj_Camera.TargetForwardX = 1;
+obj_Camera.TargetForwardY = 0;
+obj_Camera.TargetForwardZ = 0;
+
+obj_Camera.TargetRightX = 0;
+obj_Camera.TargetRightY = 1;
+obj_Camera.TargetRightZ = 0;
+
+obj_Camera.TargetUpX = 0;
+obj_Camera.TargetUpY = 0;
+obj_Camera.TargetUpZ = 1;
+
 obj_Camera.SmoothSpeed = 0.1;
 obj_Camera.TargetScale = 80;
+
+obj_Camera.TargetVignetteRadiusMin = 0.2;
+obj_Camera.TargetVignetteRadiusMax = 0.9;
 </string>
           </argument>
         </arguments>
@@ -286,7 +321,7 @@ obj_Cube.UpX = 0;
 obj_Cube.UpY = 0;
 obj_Cube.UpZ = 1;
 
-obj_Cube.Angle = 0;
+obj_Cube.Angle = 90;
 obj_Cube.RotateSpeed = 90 / (OneBeatRate / (delta_time * 0.001));
 </string>
           </argument>
@@ -337,8 +372,10 @@ alarm[0] = 100;
 audio_master_gain(1.0);
 audio_play_sound(song_get_object(obj_Jukebox.Selected), 0, false);
 
-IsPlaying = true;
+IsSongPlaying = true;
 SongStartTime = current_time;
+
+
 </string>
           </argument>
         </arguments>
@@ -361,17 +398,23 @@ SongStartTime = current_time;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///큐브 회전
+            <string>/// 인덱스 증가
 
-if(IsPlaying)
+if(IsGamePlaying)
 {
-    if(Timeline[Index] &lt; current_time - SongStartTime &amp;&amp; Index &lt; DataLength - 1)
+    if(Timeline[Index] &lt; current_time - GameStartTime &amp;&amp; Index &lt; DataLength - 1)
     {
+        var tile = instance_position_3d(Positions[Index, 0], Positions[Index, 1], Positions[Index, 2], obj_Tile);
+        tile.FadeOutSpeed = 0.05;
+        with(tile) event_user(1);
+    
+        Index++;
+        
         obj_Cube.AngleStart = Data[Index, 1] * 90;
         with(obj_Cube) event_user(0);
-        Index++;
     }
 }
+
 </string>
           </argument>
         </arguments>
@@ -431,12 +474,13 @@ obj_Cube.UpZ = Ups[Index, 2];
             <kind>1</kind>
             <string>///노트 판정
 
-if(IsPlaying)
+if(IsGamePlaying)
 {
-    var currentTime = current_time - SongStartTime;
+    var currentTime = current_time - GameStartTime;
     var hit = keyboard_check_pressed(vk_anykey) || mouse_check_button_pressed(mb_any);
     
     var lastNoteTime = Timeline[Index - 1];
+    
     var currentNoteTime = Timeline[Index];
     
     if((lastNoteTime &lt; currentTime) &amp;&amp; (currentTime &lt; lastNoteTime + JudgementRate) &amp;&amp; Index &gt; 1)
@@ -444,7 +488,9 @@ if(IsPlaying)
         if(hit &amp;&amp; IsHitted == false)
         {
             IsHitted = true;
-            with(obj_MainHUD) event_user(0);
+            
+            with(obj_Camera) event_user(0);
+            audio_play_sound(snd_hihat, 0, false);
         }
     }
     
@@ -454,7 +500,7 @@ if(IsPlaying)
         {
             if(IsHitted == false)
             {
-                //room_restart();
+                room_restart();
             }
             IsInMissJudgement = true;
             IsHitted = false;
@@ -462,7 +508,7 @@ if(IsPlaying)
         
         if(hit)
         {
-            //room_restart();
+            room_restart();
         }
     }
     else
@@ -475,7 +521,9 @@ if(IsPlaying)
         if(hit &amp;&amp; IsHitted == false)
         {
             IsHitted = true;
-            with(obj_MainHUD) event_user(0);
+            
+            with(obj_Camera) event_user(0);
+            audio_play_sound(snd_hihat, 0, false);
         }
     }
 }
@@ -516,6 +564,65 @@ obj_Camera.TargetRightZ = Rights[Index, 2];
 obj_Camera.TargetUpX = Ups[Index, 0];
 obj_Camera.TargetUpY = Ups[Index, 1];
 obj_Camera.TargetUpZ = Ups[Index, 2];
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///게임 시작
+
+var currentTime = current_time - SongStartTime;
+
+if(IsSongPlaying &amp;&amp; !IsGamePlaying &amp;&amp; song_get_startTime(obj_Jukebox.Selected) &lt; currentTime)
+{
+    obj_Cube.AngleStart = Data[0, 1] * 90;
+    with(obj_Cube) event_user(0);
+
+    IsGamePlaying = true;
+    GameStartTime = current_time;
+    
+    var tile = instance_position_3d(0, 0, 0, obj_Tile);
+    tile.FadeOutSpeed = 0.05;
+    with(tile) event_user(1);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="82">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>room_restart();
 </string>
           </argument>
         </arguments>
