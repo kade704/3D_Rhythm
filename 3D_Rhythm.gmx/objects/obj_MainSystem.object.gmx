@@ -55,6 +55,9 @@ JudgementRate = 200;
             <kind>1</kind>
             <string>///카메라 위치 초기화
 
+obj_Camera.PositionX = 0;
+obj_Camera.PositionY = 0;
+obj_Camera.PositionZ = 0;
 </string>
           </argument>
         </arguments>
@@ -506,33 +509,21 @@ if(IsPlaying)
             <kind>1</kind>
             <string>///카메라 이동
 
-var px = Positions[Index, 0];
-var py = Positions[Index, 1];
-var pz = Positions[Index, 2];
+obj_Camera.TargetPositionX = Positions[Index, 0];
+obj_Camera.TargetPositionY = Positions[Index, 1];
+obj_Camera.TargetPositionZ = Positions[Index, 2];
 
-var fx = Forwards[Index, 0];
-var fy = Forwards[Index, 1];
-var fz = Forwards[Index, 2];
+obj_Camera.TargetForwardX = Forwards[Index, 0];
+obj_Camera.TargetForwardY = Forwards[Index, 1];
+obj_Camera.TargetForwardZ = Forwards[Index, 2];
 
-var rx = Rights[Index, 0];
-var ry = Rights[Index, 1];
-var rz = Rights[Index, 2];
+obj_Camera.TargetRightX = Rights[Index, 0];
+obj_Camera.TargetRightY = Rights[Index, 1];
+obj_Camera.TargetRightZ = Rights[Index, 2];
 
-var ux = Ups[Index, 0];
-var uy = Ups[Index, 1];
-var uz = Ups[Index, 2];
-
-obj_Camera.CenterX = lerp(obj_Camera.CenterX, px, CameraSmoothSpeed);
-obj_Camera.CenterY = lerp(obj_Camera.CenterY, py, CameraSmoothSpeed);
-obj_Camera.CenterZ = lerp(obj_Camera.CenterZ, pz, CameraSmoothSpeed);
-
-obj_Camera.EyeX = lerp(obj_Camera.EyeX, px - (fx * CameraScale) + (rx * CameraScale) + (ux * CameraScale), CameraSmoothSpeed);
-obj_Camera.EyeY = lerp(obj_Camera.EyeY, py - (fy * CameraScale) + (ry * CameraScale) + (uy * CameraScale), CameraSmoothSpeed);
-obj_Camera.EyeZ = lerp(obj_Camera.EyeZ, pz - (fz * CameraScale) + (rz * CameraScale) + (uz * CameraScale), CameraSmoothSpeed);
-
-obj_Camera.UpX = lerp(obj_Camera.UpX, ux, CameraSmoothSpeed);
-obj_Camera.UpY = lerp(obj_Camera.UpY, uy, CameraSmoothSpeed);
-obj_Camera.UpZ = lerp(obj_Camera.UpZ, uz, CameraSmoothSpeed);
+obj_Camera.TargetUpX = Ups[Index, 0];
+obj_Camera.TargetUpY = Ups[Index, 1];
+obj_Camera.TargetUpZ = Ups[Index, 2];
 </string>
           </argument>
         </arguments>

@@ -28,7 +28,7 @@
             <string>///변수 초기화
 
 Scale = 65;
-SmoothSpeed = 0.1;
+SmoothSpeed = 0.02;
 </string>
           </argument>
         </arguments>
@@ -66,6 +66,22 @@ RightZ = 0;
 UpX = 0;
 UpY = 0;
 UpZ = 1;
+
+TargetPositionX = 0;
+TargetPositionY = 0;
+TargetPositionZ = 0;
+
+TargetForwardX = 1;
+TargetForwardY = 0;
+TargetForwardZ = 0;
+
+TargetRightX = 0;
+TargetRightY = 1;
+TargetRightZ = 0;
+
+TargetUpX = 0;
+TargetUpY = 0;
+TargetUpZ = 1;
 </string>
           </argument>
         </arguments>
@@ -105,6 +121,43 @@ d3d_set_culling(true);
 
 //
 d3d_set_zwriteenable(true);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>PositionX = lerp(PositionX, TargetPositionX, SmoothSpeed);
+PositionY = lerp(PositionY, TargetPositionY, SmoothSpeed);
+PositionZ = lerp(PositionZ, TargetPositionZ, SmoothSpeed);
+
+ForwardX = lerp(ForwardX, TargetForwardX, SmoothSpeed);
+ForwardY = lerp(ForwardY, TargetForwardY, SmoothSpeed);
+ForwardZ = lerp(ForwardZ, TargetForwardZ, SmoothSpeed);
+
+RightX = lerp(RightX, TargetRightX, SmoothSpeed);
+RightY = lerp(RightY, TargetRightY, SmoothSpeed);
+RightZ = lerp(RightZ, TargetRightZ, SmoothSpeed);
+
+UpX = lerp(UpX, TargetUpX, SmoothSpeed);
+UpY = lerp(UpY, TargetUpY, SmoothSpeed);
+UpZ = lerp(UpZ, TargetUpZ, SmoothSpeed);
 </string>
           </argument>
         </arguments>
@@ -156,21 +209,21 @@ draw_text_transformed(30, window_get_height() - 30, string(fps), 0.5, 0.5, 0);
             <kind>1</kind>
             <string>///카메라 배치
 
-var  = lerp(CenterX, PositionX, SmoothSpeed);
-CenterY = lerp(CenterY, PositionY, SmoothSpeed);
-CenterZ = lerp(CenterZ, PositionZ, SmoothSpeed);
+var ex = PositionX - (ForwardX * Scale) + (RightX * Scale) + (UpX * Scale);
+var ey = PositionY - (ForwardY * Scale) + (RightY * Scale) + (UpY * Scale);
+var ez = PositionZ - (ForwardZ * Scale) + (RightZ * Scale) + (UpZ * Scale);
 
-EyeX = lerp(EyeX, PositionX - (ForwardX * Scale) + (RightX * Scale) + (UpX * Scale), SmoothSpeed);
-EyeY = lerp(EyeY, PositionY - (ForwardY * Scale) + (RightY * Scale) + (UpY * Scale), SmoothSpeed);
-EyeZ = lerp(EyeZ, PositionZ - (ForwardZ * Scale) + (RightZ * Scale) + (UpZ * Scale), SmoothSpeed);
+var cx = PositionX;
+var cy = PositionY;
+var cz = PositionZ;
 
-var ux = lerp(obj_Camera.UpX, ux, CameraSmoothSpeed);
-var uy = lerp(obj_Camera.UpY, uy, CameraSmoothSpeed);
-var uz = lerp(obj_Camera.UpZ, uz, CameraSmoothSpeed);
+var ux = UpX;
+var uy = UpY;
+var uz = UpZ;
 
 var aspect = window_get_width() / window_get_height();
 
-d3d_set_projection_ext(EyeX, EyeY, EyeZ, CenterX, CenterY, CenterZ, UpX, UpY, UpZ, 45, aspect, 0.1, 1000);
+d3d_set_projection_ext(ex, ey, ez, cx, cy, cz, ux, uy, uz, 45, aspect, 0.1, 1000);
 </string>
           </argument>
         </arguments>

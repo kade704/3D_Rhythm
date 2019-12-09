@@ -58,39 +58,6 @@ SongVolumeChagingSpeed = 0.01;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///카메라 위치 초기화
-
-obj_Camera.EyeX = -CameraScale;
-obj_Camera.EyeY =  CameraScale;
-obj_Camera.EyeZ =  CameraScale;
-
-obj_Camera.CenterX = 0;
-obj_Camera.CenterY = 0;
-obj_Camera.CenterZ = 0;
-
-obj_Camera.UpX = 0;
-obj_Camera.UpY = 0;
-obj_Camera.UpZ = 1;
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>///큐브 위치 초기화
 
 obj_Cube.PositionX = 0;
@@ -314,13 +281,9 @@ if(instance_number(obj_Tile) == 0)
             <kind>1</kind>
             <string>///카메라 이동
 
-obj_Camera.CenterX = lerp(obj_Camera.CenterX, obj_Cube.PositionX, CameraSmoothSpeed);
-obj_Camera.CenterY = lerp(obj_Camera.CenterY, obj_Cube.PositionY, CameraSmoothSpeed);
-obj_Camera.CenterZ = lerp(obj_Camera.CenterZ, obj_Cube.PositionZ, CameraSmoothSpeed);
-
-obj_Camera.EyeX = lerp(obj_Camera.EyeX, obj_Cube.PositionX - CameraScale, CameraSmoothSpeed);
-obj_Camera.EyeY = lerp(obj_Camera.EyeY, obj_Cube.PositionY + CameraScale, CameraSmoothSpeed);
-obj_Camera.EyeZ = lerp(obj_Camera.EyeZ, obj_Cube.PositionZ + CameraScale, CameraSmoothSpeed);
+obj_Camera.TargetPositionX = obj_Cube.PositionX;
+obj_Camera.TargetPositionY = obj_Cube.PositionY;
+obj_Camera.TargetPositionZ = obj_Cube.PositionZ;
 </string>
           </argument>
         </arguments>
