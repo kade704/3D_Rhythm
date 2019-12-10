@@ -286,9 +286,6 @@ obj_Camera.TargetUpZ = 1;
 
 obj_Camera.SmoothSpeed = 0.1;
 obj_Camera.TargetScale = 80;
-
-obj_Camera.TargetVignetteRadiusMin = 0.2;
-obj_Camera.TargetVignetteRadiusMax = 0.9;
 </string>
           </argument>
         </arguments>
@@ -351,6 +348,30 @@ obj_Cube.RotateSpeed = 90 / (OneBeatRate / (delta_time * 0.001));
             <kind>1</kind>
             <string>audio_stop_all();
 alarm[0] = 100;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///HUD 초기화
+
+obj_HUD.TargetVignetteRadiusMin = 0.2;
+obj_HUD.TargetVignetteRadiusMax = 0.9;
 </string>
           </argument>
         </arguments>
@@ -538,7 +559,7 @@ if(IsGamePlaying &amp;&amp; CubeIndex &gt; 0)
         {
             if(IsHitted == false)
             {
-                room_restart();
+                //room_restart();
             }
             IsInMissJudgement = true;
             IsHitted = false;
@@ -546,7 +567,7 @@ if(IsGamePlaying &amp;&amp; CubeIndex &gt; 0)
         
         if(hit)
         {
-            room_restart();
+            //room_restart();
         }
     }
     else
@@ -683,7 +704,8 @@ if(IsSongPlaying &amp;&amp; IsTileOpening &amp;&amp; !IsGamePlaying &amp;&amp; s
 var hit = keyboard_check_pressed(vk_anykey) || mouse_check_button_pressed(mb_any);
 if(hit)
 {
-    with(obj_Camera) event_user(0);
+    obj_HUD.VignetteRadiusMin = 0.3;
+    obj_HUD.VignetteRadiusMax = 1.1;
     audio_play_sound(snd_hihat, 0, false);
 }
 </string>

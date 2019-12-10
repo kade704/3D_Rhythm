@@ -32,12 +32,7 @@ TargetScale = 65;
 
 SmoothSpeed = 0.02;
 
-VignetteRadiusMin = 2.0;
-VignetteRadiusMax = 2.0;
-TargetVignetteRadiusMin = 2.0;
-TargetVignetteRadiusMax = 2.0;
 
-VignetteSmooth = 0.07;
 </string>
           </argument>
         </arguments>
@@ -171,109 +166,6 @@ RightZ = lerp(RightZ, TargetRightZ, SmoothSpeed);
 UpX = lerp(UpX, TargetUpX, SmoothSpeed);
 UpY = lerp(UpY, TargetUpY, SmoothSpeed);
 UpZ = lerp(UpZ, TargetUpZ, SmoothSpeed);
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// 포스트 프로세싱 업데이트
-
-VignetteRadiusMin = lerp(VignetteRadiusMin, TargetVignetteRadiusMin, VignetteSmooth);
-VignetteRadiusMax = lerp(VignetteRadiusMax, TargetVignetteRadiusMax, VignetteSmooth);
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="7" enumb="10">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>VignetteRadiusMin = 0.3;
-VignetteRadiusMax = 1.1;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="74">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>shader_set(shd_PostProcessing);
-shader_set_uniform_float(shd_PostProcessing, "_minRadius", VignetteRadiusMin);
-shader_set_uniform_float(shd_PostProcessing, "_maxRadius", VignetteRadiusMax);
-draw_surface(application_surface, 0, 0);
-shader_reset();
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="64">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>draw_set_font(ft_Dealerplate);
-draw_set_colour(c_white);
-draw_set_alpha(1);
-draw_set_halign(fa_left);
-draw_set_valign(fa_bottom);
-draw_text_transformed(30, window_get_height() - 30, string(fps), 0.5, 0.5, 0);
 </string>
           </argument>
         </arguments>

@@ -77,6 +77,90 @@ obj_Cube.UpY = 0;
 obj_Cube.UpZ = 1;
 
 obj_Cube.Angle = 0;
+obj_Cube.AngleStart = 180;
+
+obj_Cube.RotateSpeed = 3.5;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///카메라 초기화
+
+obj_Camera.PositionX = 0;
+obj_Camera.PositionY = 0;
+obj_Camera.PositionZ = 0;
+
+obj_Camera.ForwardX = 1;
+obj_Camera.ForwardY = 0;
+obj_Camera.ForwardZ = 0;
+
+obj_Camera.RightX = 0;
+obj_Camera.RightY = 1;
+obj_Camera.RightZ = 0;
+
+obj_Camera.UpX = 0;
+obj_Camera.UpY = 0;
+obj_Camera.UpZ = 1;
+
+obj_Camera.TargetPositionX = 0;
+obj_Camera.TargetPositionY = 0;
+obj_Camera.TargetPositionZ = 0;
+
+obj_Camera.TargetForwardX = 1;
+obj_Camera.TargetForwardY = 0;
+obj_Camera.TargetForwardZ = 0;
+
+obj_Camera.TargetRightX = 0;
+obj_Camera.TargetRightY = 1;
+obj_Camera.TargetRightZ = 0;
+
+obj_Camera.TargetUpX = 0;
+obj_Camera.TargetUpY = 0;
+obj_Camera.TargetUpZ = 1;
+
+obj_Camera.SmoothSpeed = 0.02;
+obj_Camera.TargetScale = 65;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///HUD 초기화
+
+obj_HUD.Text = "";
+obj_HUD.TargetVignetteRadiusMin = 2.0;
+obj_HUD.TargetVignetteRadiusMax = 2.0;
 </string>
           </argument>
         </arguments>
@@ -152,10 +236,11 @@ if(obj_Cube.Angle == 0 &amp;&amp; mouse_check_button(mb_left) &amp;&amp; !IsSong
         var tile = instance_position_3d(obj_Cube.PositionX, obj_Cube.PositionY, obj_Cube.PositionZ, obj_Tile);
         if(tile.ModelIndex == 1)
         {
-            var index = (((obj_Cube.PositionX - 40) / 40) * 2) + ((obj_Cube.PositionY + 40) / 80);
+            var index = (((obj_Cube.PositionX - 30) / 30) * 2) + ((obj_Cube.PositionY + 30) / 60);
+            
             var song = song_get_artist(index) + " - " + song_get_name(index);
-            obj_LobbyHUD.Text = song;
-            with(obj_LobbyHUD) event_user(0);
+            obj_HUD.Text = song;
+            with(obj_HUD) event_user(0);
             
             obj_Jukebox.Selected = index;
             
@@ -167,7 +252,7 @@ if(obj_Cube.Angle == 0 &amp;&amp; mouse_check_button(mb_left) &amp;&amp; !IsSong
         } 
         else 
         {
-            obj_LobbyHUD.Text = "";
+            obj_HUD.Text = "";
             IsSongPlaying = false;
         }
     }

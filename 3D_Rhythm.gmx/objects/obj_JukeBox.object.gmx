@@ -54,6 +54,7 @@ Selected = 0;
 
 Songs = ds_grid_create(8, 10);
 song_add(0, snd_pn35a, "Virtual Riot", "PN35A", 200, "Song/pn35a.txt", 21300, 22);
+song_add(1, snd_earofthepig, "Gill Chang", "Ear of the Pig", 200, "Song/earofthepig.txt", 9300, 20);
 
 Length = ds_grid_height(Songs);
 
@@ -62,22 +63,6 @@ Length = ds_grid_height(Songs);
 </string>
           </argument>
         </arguments>
-      </action>
-    </event>
-    <event eventtype="9" enumb="27">
-      <action>
-        <libid>1</libid>
-        <id>331</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_restart_game</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
       </action>
     </event>
   </events>

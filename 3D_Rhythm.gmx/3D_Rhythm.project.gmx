@@ -3,8 +3,8 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
-  <datafiles number="34" name="datafiles">
-    <datafiles number="34" name="Song">
+  <datafiles number="35" name="datafiles">
+    <datafiles number="35" name="Song">
       <datafile>
         <name>pn35a.txt</name>
         <exists>-1</exists>
@@ -22,8 +22,25 @@
         </ConfigOptions>
         <filename>pn35a.txt</filename>
       </datafile>
+      <datafile>
+        <name>earofthepig.txt</name>
+        <exists>-1</exists>
+        <size>0</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>earofthepig.txt</filename>
+      </datafile>
     </datafiles>
-    <datafiles number="34" name="Model">
+    <datafiles number="35" name="Model">
       <datafile>
         <name>Cube0.obj</name>
         <exists>-1</exists>
@@ -81,6 +98,7 @@
   <sounds name="sound">
     <sound>sound\snd_pn35a</sound>
     <sound>sound\snd_hihat</sound>
+    <sound>sound\snd_earofthepig</sound>
   </sounds>
   <sprites name="sprites">
     <sprite>sprites\spr_Cube0</sprite>
@@ -132,17 +150,16 @@
     <objects name="Lobby">
       <object>objects\obj_LobbySystem</object>
       <object>objects\obj_LobbyMap</object>
-      <object>objects\obj_LobbyHUD</object>
     </objects>
     <objects name="Main">
       <object>objects\obj_MainSystem</object>
       <object>objects\obj_MainMap</object>
-      <object>objects\obj_MainHUD</object>
     </objects>
     <object>objects\obj_Tile</object>
     <object>objects\obj_Cube</object>
     <object>objects\obj_Camera</object>
     <object>objects\obj_Jukebox</object>
+    <object>objects\obj_HUD</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\Init</room>

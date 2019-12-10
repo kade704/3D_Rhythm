@@ -30,7 +30,7 @@
 TilesOpen = noone;
 TileOpenCount = 0;
 TileOpenTime = 0;
-TileOpenRate = 12;
+TileOpenRate = 6;
 
 TilesClose = noone;
 TileCloseCount = 0;
