@@ -26,11 +26,6 @@
           <argument>
             <kind>1</kind>
             <string>///변수 초기화
-
-Text = "";
-Alpha = 0;
-
-TextFadeOutSpeed = 0.02;
 </string>
           </argument>
         </arguments>
@@ -75,11 +70,12 @@ TextFadeOutSpeed = 0.02;
           <argument>
             <kind>1</kind>
             <string>draw_set_colour(make_colour_rgb(255, 0, 132));
-draw_set_alpha(1);
 draw_set_font(ft_Dealerplate);
 draw_set_halign(fa_center);
-draw_set_valign(fa_center);
-draw_text(window_get_width() / 2, (window_get_height() / 2) - 150, Text);
+draw_set_valign(fa_middle);
+
+var s = song_get_artist(obj_Jukebox.Selected) + " - " + song_get_name(obj_Jukebox.Selected);
+draw_text(window_get_width() / 2, 150, s);
 </string>
           </argument>
         </arguments>

@@ -53,7 +53,7 @@ Selected = 0;
             <string>///노래 정보 초기화
 
 Songs = ds_grid_create(8, 10);
-song_add(0, snd_pn35a, "Virtual Riot", "PN35A", 200, "Song/pn35a.txt", 21300, 21300);
+song_add(0, snd_pn35a, "Virtual Riot", "PN35A", 200, "Song/pn35a.txt", 21300, 22);
 
 Length = ds_grid_height(Songs);
 

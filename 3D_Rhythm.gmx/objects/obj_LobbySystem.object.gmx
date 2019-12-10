@@ -160,7 +160,8 @@ if(obj_Cube.Angle == 0 &amp;&amp; mouse_check_button(mb_left) &amp;&amp; !IsSong
             obj_Jukebox.Selected = index;
             
             audio_stop_all();
-            audio_play_sound(song_get_object(index), 0, false);
+            var snd = audio_play_sound(song_get_object(index), 0, false);
+            audio_sound_set_track_position(snd, song_get_highlightTime(index));
             
             IsSongPlaying = true;
         } 
@@ -204,7 +205,7 @@ if(keyboard_check_pressed(vk_enter))
     } 
 }
 
-if(instance_number(obj_Tile) == 0)
+if(instance_number(obj_Tile) == 1)
 {
     room_goto(Main);
 }

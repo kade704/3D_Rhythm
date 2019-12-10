@@ -30,7 +30,7 @@
 TilesOpen = noone;
 TileOpenCount = 0;
 TileOpenTime = 0;
-TileOpenRate = 6;
+TileOpenRate = 12;
 
 TilesClose = noone;
 TileCloseCount = 0;
@@ -272,7 +272,7 @@ do
 } until(count == 0);
 
 var temp = noone;
-for(var i = 0; i &lt; array_height_2d(TilesClose); i++)
+for(var i = 1; i &lt; array_height_2d(TilesClose); i++)
 {
     for(var j = 0; j &lt; array_length_2d(TilesClose, i); j++)
     {
