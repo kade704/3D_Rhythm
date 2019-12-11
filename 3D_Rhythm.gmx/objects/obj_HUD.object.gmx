@@ -28,15 +28,17 @@
             <string>///변수 초기화
 
 Text = "";
-TextWritingRate = 4;
-TextWritingCount = 0;
+TextTypingRate = 4;
+TextTypingCount = 0;
+
+IsTyping = false;
 
 VignetteRadiusMin = 2.0;
 VignetteRadiusMax = 2.0;
 TargetVignetteRadiusMin = 2.0;
 TargetVignetteRadiusMax = 2.0;
 
-VignetteSmooth = 0.07;
+VignetteSmooth = 0.1;
 </string>
           </argument>
         </arguments>
@@ -63,6 +65,32 @@ VignetteSmooth = 0.07;
         </arguments>
       </action>
     </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(0 &lt; TextTypingCount-- &amp;&amp; !IsTyping)
+{
+    alarm[1] = TextTypingRate;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="2" enumb="0">
       <action>
         <libid>1</libid>
@@ -80,9 +108,9 @@ VignetteSmooth = 0.07;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(TextWritingCount++ &lt; string_length(Text))
+            <string>if(TextTypingCount++ &lt; string_length(Text) &amp;&amp; IsTyping)
 {
-    alarm[0] = TextWritingRate;
+    alarm[0] = TextTypingRate;
 }
 </string>
           </argument>
@@ -115,6 +143,32 @@ VignetteRadiusMax = lerp(VignetteRadiusMax, TargetVignetteRadiusMax, VignetteSmo
         </arguments>
       </action>
     </event>
+    <event eventtype="7" enumb="11">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>IsTyping = false;
+TargetVignetteRadiusMin = 1.2;
+TargetVignetteRadiusMax = 1.2;
+alarm[1] = TextTypingRate;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="7" enumb="10">
       <action>
         <libid>1</libid>
@@ -132,8 +186,11 @@ VignetteRadiusMax = lerp(VignetteRadiusMax, TargetVignetteRadiusMax, VignetteSmo
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>TextWritingCount = 0;
-alarm[0] = TextWritingRate;
+            <string>TextTypingCount = 0;
+IsTyping = true;
+TargetVignetteRadiusMin = 0.2;
+TargetVignetteRadiusMax = 0.9;
+alarm[0] = TextTypingRate;
 </string>
           </argument>
         </arguments>
@@ -156,7 +213,9 @@ alarm[0] = TextWritingRate;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>shader_set(shd_PostProcessing);
+            <string>///포스트 프로세싱
+
+shader_set(shd_PostProcessing);
 shader_set_uniform_float(shd_PostProcessing, "_minRadius", VignetteRadiusMin);
 shader_set_uniform_float(shd_PostProcessing, "_maxRadius", VignetteRadiusMax);
 draw_surface(application_surface, 0, 0);
@@ -183,12 +242,17 @@ shader_reset();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_font(ft_Dealerplate);
-draw_set_colour(c_white);
-draw_set_alpha(1);
-draw_set_halign(fa_left);
-draw_set_valign(fa_bottom);
-draw_text_transformed(30, window_get_height() - 30, string(fps), 0.5, 0.5, 0);
+            <string>/// 노래 제목 표시
+
+draw_set_colour(make_colour_rgb(255, 0, 132));
+draw_set_font(ft_Square);
+draw_set_halign(fa_center);
+draw_set_valign(fa_middle);
+
+var s = string_copy(Text, 1, TextTypingCount + 1);
+if(0 &lt; TextTypingCount &amp;&amp; TextTypingCount &lt; string_length(Text) - 1) s += chr(random_range(33, 126));
+    
+draw_text(window_get_width() / 2, 150, s);
 </string>
           </argument>
         </arguments>
@@ -209,15 +273,14 @@ draw_text_transformed(30, window_get_height() - 30, string(fps), 0.5, 0.5, 0);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_colour(make_colour_rgb(255, 0, 132));
-draw_set_font(ft_Dealerplate);
-draw_set_halign(fa_center);
-draw_set_valign(fa_middle);
+            <string>///fps 표시
 
-var s = string_copy(Text, 1, TextWritingCount + 1);
-if(TextWritingCount &lt; string_length(Text) - 1) s += chr(random_range(33, 126));
-    
-draw_text(window_get_width() / 2, 150, s);
+draw_set_font(ft_Square);
+draw_set_colour(c_white);
+draw_set_alpha(1);
+draw_set_halign(fa_left);
+draw_set_valign(fa_bottom);
+draw_text_transformed(30, window_get_height() - 30, string(fps), 0.5, 0.5, 0);
 </string>
           </argument>
         </arguments>

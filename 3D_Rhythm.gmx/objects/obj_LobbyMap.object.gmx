@@ -58,21 +58,13 @@ TileCloseRate = 3;
             <kind>1</kind>
             <string>///타일 생성
 
-for(var i = 0; i &lt; ceil(obj_Jukebox.Length / 2) * 4; i++)
+for(var i = 0; i &lt; 17; i++)
 {
-    for(var j = -3; j &lt;= -1; j++)
+    for(var j = -3; j &lt;= 3; j++)
     {
         var tile = instance_create_3d(i * 10, j * 10, 0, 0, -1, 0, 1, 0, 0, 0, 0, 1, obj_Tile);
-        if(j == -3 &amp;&amp; i % 4 == 3) tile.ModelIndex = 1;
+        if((j == -3 || j == 3) &amp;&amp; (i % 4 == 0)) tile.ModelIndex = 1;
     }
-    
-    for(var j = 1; j &lt;= 3; j++)
-    {
-        var tile = instance_create_3d(i * 10, j * 10, 0, 0, 1, 0, -1, 0, 0, 0, 0, 1, obj_Tile);
-        if(j == 3 &amp;&amp; i % 4 == 3) tile.ModelIndex = 1;
-    }
-    
-    var tile = instance_create_3d(i * 10, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, obj_Tile);
 }
 </string>
           </argument>
@@ -113,6 +105,10 @@ do
         var tile = instance_position_3d(px + 10, py, pz, obj_Tile);
         if(tile != noone &amp;&amp; !tile_exist(TilesOpen, tile))
         {
+            tile.ForwardX = 1; tile.ForwardY = 0; tile.ForwardZ = 0;
+            tile.RightX = 0; tile.RightY = 1; tile.RightZ = 0;
+            tile.UpX = 0; tile.UpY = 0; tile.UpZ = 1; 
+            
             TilesOpen[TileOpenCount + 1, count] = tile;
             count++;
         }
@@ -120,6 +116,10 @@ do
         var tile = instance_position_3d(px - 10, py, pz, obj_Tile);
         if(tile != noone &amp;&amp; !tile_exist(TilesOpen, tile))
         {
+            tile.ForwardX = -1; tile.ForwardY = 0; tile.ForwardZ = 0;
+            tile.RightX = 0; tile.RightY = -1; tile.RightZ = 0;
+            tile.UpX = 0; tile.UpY = 0; tile.UpZ = 1; 
+            
             TilesOpen[TileOpenCount + 1, count] = tile;
             count++;
         }
@@ -127,6 +127,10 @@ do
         var tile = instance_position_3d(px, py + 10, pz, obj_Tile);
         if(tile != noone &amp;&amp; !tile_exist(TilesOpen, tile))
         {
+            tile.ForwardX = 0; tile.ForwardY = 1; tile.ForwardZ = 0;
+            tile.RightX = -1; tile.RightY = 0; tile.RightZ = 0;
+            tile.UpX = 0; tile.UpY = 0; tile.UpZ = 1; 
+        
             TilesOpen[TileOpenCount + 1, count] = tile;
             count++;
         }
@@ -134,6 +138,10 @@ do
         var tile = instance_position_3d(px, py - 10, pz, obj_Tile);
         if(tile != noone &amp;&amp; !tile_exist(TilesOpen, tile))
         {
+            tile.ForwardX = 0; tile.ForwardY = -1; tile.ForwardZ = 0;
+            tile.RightX = 1; tile.RightY = 0; tile.RightZ = 0;
+            tile.UpX = 0; tile.UpY = 0; tile.UpZ = 1; 
+        
             TilesOpen[TileOpenCount + 1, count] = tile;
             count++;
         }

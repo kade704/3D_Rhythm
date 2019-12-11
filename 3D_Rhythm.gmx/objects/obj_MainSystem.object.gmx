@@ -42,8 +42,6 @@ TileOpenTimeOffset = 3000;
 IsHitted = true;
 IsInMissJudgement = false;
 JudgementRate = 100;
-
-log("restart");
 </string>
           </argument>
         </arguments>
@@ -70,6 +68,7 @@ var path = song_get_path(obj_Jukebox.Selected);
 
 Data[0, 0] = 0;
 Data[0, 1] = 1;
+Data[0, 2] = 1;
 
 if(file_exists(path))
 {
@@ -79,6 +78,7 @@ if(file_exists(path))
     {
         Data[i, 0] = file_text_read_real(file);
         Data[i, 1] = file_text_read_real(file);
+        Data[i, 2] = file_text_read_real(file);
         file_text_readln(file);
     }
     file_text_close(file);
@@ -227,7 +227,7 @@ var currentTime = 0;
 Timeline[0] = 0;
 for(var i = 1; i &lt; DataLength; i++)
 {
-    currentTime += (OneBeatRate * Data[i, 1]);
+    currentTime += (OneBeatRate * Data[i, 1] * Data[i, 2]);
     Timeline[i] = currentTime;
 }
 </string>
@@ -285,7 +285,7 @@ obj_Camera.TargetUpY = 0;
 obj_Camera.TargetUpZ = 1;
 
 obj_Camera.SmoothSpeed = 0.1;
-obj_Camera.TargetScale = 80;
+obj_Camera.TargetScale = 65;
 </string>
           </argument>
         </arguments>
@@ -325,7 +325,6 @@ obj_Cube.UpY = 0;
 obj_Cube.UpZ = 1;
 
 obj_Cube.Angle = 0;
-obj_Cube.RotateSpeed = 90 / (OneBeatRate / (delta_time * 0.001));
 </string>
           </argument>
         </arguments>
@@ -348,30 +347,6 @@ obj_Cube.RotateSpeed = 90 / (OneBeatRate / (delta_time * 0.001));
             <kind>1</kind>
             <string>audio_stop_all();
 alarm[0] = 100;
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///HUD 초기화
-
-obj_HUD.TargetVignetteRadiusMin = 0.2;
-obj_HUD.TargetVignetteRadiusMax = 0.9;
 </string>
           </argument>
         </arguments>
@@ -434,8 +409,8 @@ if(IsTileOpening)
         TileIndex++;
         
         var tile = instance_position_3d(Positions[TileIndex, 0], Positions[TileIndex, 1], Positions[TileIndex, 2], obj_Tile);
-        tile.RotateSpeed = 180 / (OneBeatRate / (delta_time * 0.001));
-        tile.AngleStart = 90 + (Data[CubeIndex, 1] * 90);
+        tile.AngleStart = 90 + (Data[TileIndex, 1] * 90);
+        tile.RotateSpeed = tile.AngleStart / (OneBeatRate / (1000 / fps) * Data[TileIndex, 1] * Data[TileIndex, 2]);
         with(tile) event_user(0);
     }
 }
@@ -473,6 +448,7 @@ if(IsGamePlaying)
         CubeIndex++;
         
         obj_Cube.AngleStart = Data[CubeIndex, 1] * 90;
+        obj_Cube.RotateSpeed = obj_Cube.AngleStart / (OneBeatRate / (1000 / fps) * Data[CubeIndex, 1] * Data[CubeIndex, 2]);
         with(obj_Cube) event_user(0);
     }
 }
@@ -706,6 +682,7 @@ if(hit)
 {
     obj_HUD.VignetteRadiusMin = 0.3;
     obj_HUD.VignetteRadiusMax = 1.1;
+    obj_Camera.Scale = 80;
     audio_play_sound(snd_hihat, 0, false);
 }
 </string>

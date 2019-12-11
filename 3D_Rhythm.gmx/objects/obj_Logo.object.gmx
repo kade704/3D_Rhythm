@@ -26,23 +26,10 @@
           <argument>
             <kind>1</kind>
             <string>///변수 초기화
-
-ModelIndex = 0;
-
 Model = noone;
-Texture = noone;
-
-IsVisible = false;
-
+Size = 15;
 Alpha = 1;
-
-Angle = 0;
-AngleStart = 180;
-
-RotateSpeed = 10;
-FadeOutSpeed = 0.15;
-
-
+FadeOutSpeed = 0.05;
 </string>
           </argument>
         </arguments>
@@ -66,52 +53,21 @@ FadeOutSpeed = 0.15;
             <string>///위치 초기화
 
 PositionX = 0;
-PositionY = 0;
+PositionY = -50;
 PositionZ = 0;
 
-ForwardX = 1;
-ForwardY = 0;
+ForwardX = 0;
+ForwardY = 1;
 ForwardZ = 0;
 
-RightX = 0;
-RightY = 1;
+RightX = -1;
+RightY = 0;
 RightZ = 0;
 
 UpX = 0;
 UpY = 0;
 UpZ = 1;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="2" enumb="1">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>Alpha -= FadeOutSpeed;   
 
-if(0 &lt; Alpha)
-{
-    alarm[1] = 1;
-}
-else
-{
-    instance_destroy();
-}
 </string>
           </argument>
         </arguments>
@@ -134,39 +90,16 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>Angle -= RotateSpeed;   
+            <string>Alpha -= FadeOutSpeed;   
 
-if(0 &lt; Angle)
+if(0 &lt; Alpha)
 {
     alarm[0] = 1;
 }
 else
 {
-    Angle = 0;
+    instance_destroy();
 }
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="7" enumb="11">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>alarm[1] = 1;
 </string>
           </argument>
         </arguments>
@@ -189,9 +122,7 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>IsVisible = true;
-Angle = AngleStart;
-alarm[0] = 1;
+            <string>alarm[0] = 1;
 </string>
           </argument>
         </arguments>
@@ -214,38 +145,19 @@ alarm[0] = 1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///타일 그리기
+            <string>///로고 그리기
 
 if(Model != noone)
 {
-    var pv = rotate_axis(ForwardX, ForwardY, ForwardZ, RightX, RightY, RightZ, -Angle);
-    var px = PositionX + (ForwardX * -5) + (pv[0] * 5);
-    var py = PositionY + (ForwardY * -5) + (pv[1] * 5);
-    var pz = PositionZ + (ForwardZ * -5) + (pv[2] * 5);
-    
-    var fv = rotate_axis(ForwardX, ForwardY, ForwardZ, RightX, RightY, RightZ, -Angle);
-    var fx = fv[0];
-    var fy = fv[1];
-    var fz = fv[2];
-    
-    var rx = RightX;
-    var ry = RightY;
-    var rz = RightZ;
-    
-    var uv = rotate_axis(UpX, UpY, UpZ, RightX, RightY, RightZ, -Angle);
-    var ux = uv[0];
-    var uy = uv[1];
-    var uz = uv[2];    
-    
-    if(IsVisible)
-    {
-        draw_model(px, py, pz, fx, fy, fz, rx, ry, rz, ux, uy, uz, Model, Texture, 5, Alpha);
-    }
+    draw_model(PositionX, PositionY, PositionZ,
+               ForwardX, ForwardY, ForwardZ,
+               RightX, RightY, RightZ,
+               UpX, UpY, UpZ,
+               Model, sprite_get_texture(spr_Logo, 0), Size, Alpha);
 }
 else
 {
-    Model = load_model("Model/Tile" + string(ModelIndex) + ".obj");
-    Texture = sprite_get_texture(asset_get_index("spr_Tile" + string(ModelIndex)), 0);
+    Model = load_model("Model/Logo.obj");
 }
 </string>
           </argument>

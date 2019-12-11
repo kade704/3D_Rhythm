@@ -26,9 +26,6 @@
           <argument>
             <kind>1</kind>
             <string>///변수 초기화
-
-TileOpenTime = 0;
-TileOpenRate = 12;
 </string>
           </argument>
         </arguments>
@@ -61,8 +58,17 @@ for(var i = 0; i &lt; obj_MainSystem.DataLength; i++)
     if(i == 0) 
     {
         tile.ModelIndex = 1;
-        tile.Alpha = 1;
+        tile.IsVisible = true;
         tile.Angle = 0;
+    }
+    
+    if(i &lt; obj_MainSystem.DataLength - 1 &amp;&amp; (obj_MainSystem.Data[i, 2] &gt; obj_MainSystem.Data[i + 1, 2]))
+    {
+        tile.ModelIndex = 2;
+    }
+    if(i &lt; obj_MainSystem.DataLength - 1 &amp;&amp; (obj_MainSystem.Data[i, 2] &lt; obj_MainSystem.Data[i + 1, 2]))
+    {
+        tile.ModelIndex = 3;
     }
 }
 

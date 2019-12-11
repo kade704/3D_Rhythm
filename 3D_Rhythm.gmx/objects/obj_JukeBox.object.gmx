@@ -54,7 +54,7 @@ Selected = 0;
 
 Songs = ds_grid_create(8, 10);
 song_add(0, snd_pn35a, "Virtual Riot", "PN35A", 200, "Song/pn35a.txt", 21300, 22);
-song_add(1, snd_earofthepig, "Gill Chang", "Ear of the Pig", 200, "Song/earofthepig.txt", 9300, 20);
+song_add(1, snd_earofthepig, "Gill Chang", "Ear of the Pig", 100, "Song/earofthepig.txt", 9300, 20);
 
 Length = ds_grid_height(Songs);
 

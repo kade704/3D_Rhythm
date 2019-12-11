@@ -3,8 +3,8 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
-  <datafiles number="35" name="datafiles">
-    <datafiles number="35" name="Song">
+  <datafiles number="40" name="datafiles">
+    <datafiles number="40" name="Song">
       <datafile>
         <name>pn35a.txt</name>
         <exists>-1</exists>
@@ -40,7 +40,7 @@
         <filename>earofthepig.txt</filename>
       </datafile>
     </datafiles>
-    <datafiles number="35" name="Model">
+    <datafiles number="40" name="Model">
       <datafile>
         <name>Cube0.obj</name>
         <exists>-1</exists>
@@ -61,7 +61,7 @@
       <datafile>
         <name>Tile0.obj</name>
         <exists>-1</exists>
-        <size>10227</size>
+        <size>2150</size>
         <exportAction>2</exportAction>
         <exportDir></exportDir>
         <overwrite>0</overwrite>
@@ -78,7 +78,7 @@
       <datafile>
         <name>Tile1.obj</name>
         <exists>-1</exists>
-        <size>13138</size>
+        <size>2610</size>
         <exportAction>2</exportAction>
         <exportDir></exportDir>
         <overwrite>0</overwrite>
@@ -92,6 +92,57 @@
         </ConfigOptions>
         <filename>Tile1.obj</filename>
       </datafile>
+      <datafile>
+        <name>Logo.obj</name>
+        <exists>-1</exists>
+        <size>43359</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>Logo.obj</filename>
+      </datafile>
+      <datafile>
+        <name>Tile2.obj</name>
+        <exists>-1</exists>
+        <size>101036</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>Tile2.obj</filename>
+      </datafile>
+      <datafile>
+        <name>Tile3.obj</name>
+        <exists>-1</exists>
+        <size>100320</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>Tile3.obj</filename>
+      </datafile>
     </datafiles>
   </datafiles>
   <NewExtensions/>
@@ -101,9 +152,12 @@
     <sound>sound\snd_earofthepig</sound>
   </sounds>
   <sprites name="sprites">
-    <sprite>sprites\spr_Cube0</sprite>
     <sprite>sprites\spr_Tile0</sprite>
+    <sprite>sprites\spr_Cube0</sprite>
     <sprite>sprites\spr_Tile1</sprite>
+    <sprite>sprites\spr_Logo</sprite>
+    <sprite>sprites\spr_Tile2</sprite>
+    <sprite>sprites\spr_Tile3</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -144,12 +198,13 @@
     <shader type="GLSLES">shaders\shd_PostProcessing.shader</shader>
   </shaders>
   <fonts name="fonts">
-    <font>fonts\ft_Dealerplate</font>
+    <font>fonts\ft_Square</font>
   </fonts>
   <objects name="objects">
     <objects name="Lobby">
       <object>objects\obj_LobbySystem</object>
       <object>objects\obj_LobbyMap</object>
+      <object>objects\obj_Logo</object>
     </objects>
     <objects name="Main">
       <object>objects\obj_MainSystem</object>
