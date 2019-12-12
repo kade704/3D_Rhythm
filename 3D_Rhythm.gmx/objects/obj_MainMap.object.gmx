@@ -62,11 +62,11 @@ for(var i = 0; i &lt; obj_MainSystem.DataLength; i++)
         tile.Angle = 0;
     }
     
-    if(i &lt; obj_MainSystem.DataLength - 1 &amp;&amp; (obj_MainSystem.Data[i, 2] &gt; obj_MainSystem.Data[i + 1, 2]))
+    if(i &lt; obj_MainSystem.DataLength - 1 &amp;&amp; (obj_MainSystem.Data[i, 2] &lt; obj_MainSystem.Data[i + 1, 2]))
     {
         tile.ModelIndex = 2;
     }
-    if(i &lt; obj_MainSystem.DataLength - 1 &amp;&amp; (obj_MainSystem.Data[i, 2] &lt; obj_MainSystem.Data[i + 1, 2]))
+    if(i &lt; obj_MainSystem.DataLength - 1 &amp;&amp; (obj_MainSystem.Data[i, 2] &gt; obj_MainSystem.Data[i + 1, 2]))
     {
         tile.ModelIndex = 3;
     }

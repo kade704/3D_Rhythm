@@ -200,11 +200,11 @@ if(Model != noone)
     var uy = uv[1];
     var uz = uv[2];
     
-    draw_model(px, py, pz, fx, fy, fz, rx, ry, rz, ux, uy, uz, Model, sprite_get_texture(spr_Cube0, 0), 5, 1);
+    draw_model(px, py, pz, fx, fy, fz, rx, ry, rz, ux, uy, uz, Model, sprite_get_texture(spr_Cube, 0), 2, 1);
 }
 else
 {
-    Model = load_model("Model/Cube0.obj");
+    Model = load_model("Model/Cube.obj");
 }
 </string>
           </argument>

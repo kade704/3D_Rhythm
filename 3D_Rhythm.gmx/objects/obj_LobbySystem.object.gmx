@@ -37,7 +37,7 @@ CameraSmoothSpeed = 0.02;
 IsSongPlaying = false;
 
 SongVolume = 0;
-SongVolumeChagingSpeed = 0.01;
+SongVolumeChagingSpeed = 0.02;
 </string>
           </argument>
         </arguments>
@@ -242,6 +242,7 @@ if(obj_Cube.Angle == 0 &amp;&amp; mouse_check_button(mb_left) &amp;&amp; !IsSong
             var song = song_get_artist(index) + " - " + song_get_name(index);
             obj_HUD.Text = song;
             with(obj_HUD) event_user(0);
+            obj_Camera.TargetScale = 50;
             
             audio_stop_all();
             var snd = audio_play_sound(song_get_object(index), 0, false);
@@ -252,6 +253,7 @@ if(obj_Cube.Angle == 0 &amp;&amp; mouse_check_button(mb_left) &amp;&amp; !IsSong
         else 
         {
             with(obj_HUD) event_user(1);
+            obj_Camera.TargetScale = 65;
             IsSongPlaying = false;
         }
     }
