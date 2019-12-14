@@ -36,11 +36,14 @@ TileOpenTime = 0;
 IsGamePlaying = false;
 GameStartTime = 0;
 
-TileOpenTimeOffset = 3000;
-
 IsHitted = true;
 IsInMissJudgement = false;
-JudgementRate = 100;
+JudgementRate = 120;
+
+for(var i = 0; i &lt; 4; i++)
+{
+    IsTicked[i] = false;
+}
 </string>
           </argument>
         </arguments>
@@ -130,7 +133,7 @@ Ups[0, 2] = 1;
 
 for(var i = 1; i &lt; DataLength; i++)
 {
-    if(Data[i, 0] == -1) //좌회전 진행
+    if(Data[i, 0] == 1) //좌회전 진행
     {   
         var angle = (90 * Data[i, 1]) - 90;
         
@@ -152,30 +155,9 @@ for(var i = 1; i &lt; DataLength; i++)
         Ups[i, 1] = u[1];
         Ups[i, 2] = u[2];
     }
-    else if(Data[i, 0] == 1) //우회전 진행
+    else if(Data[i, 0] == 2) //직진 진행 
     {   
-        var angle = 90 - (90 * Data[i, 1]);
-        
-        var d = rotate_axis(Rights[i - 1, 0], Rights[i - 1, 1], Rights[i - 1, 2], Forwards[i - 1, 0], Forwards[i - 1, 1], Forwards[i - 1, 2], angle);
-        Positions[i, 0] = Positions[i - 1, 0] + (Rights[i - 1, 0] * 5) + (d[0] * 5);
-        Positions[i, 1] = Positions[i - 1, 1] + (Rights[i - 1, 1] * 5) + (d[1] * 5);
-        Positions[i, 2] = Positions[i - 1, 2] + (Rights[i - 1, 2] * 5) + (d[2] * 5);
-        
-        Forwards[i, 0] = d[0];
-        Forwards[i, 1] = d[1];
-        Forwards[i, 2] = d[2];
-        
-        Rights[i, 0] = -Forwards[i - 1, 0];
-        Rights[i, 1] = -Forwards[i - 1, 1];
-        Rights[i, 2] = -Forwards[i - 1, 2];
-        
-        var u = rotate_axis(Ups[i - 1, 0], Ups[i - 1, 1], Ups[i - 1, 2], Forwards[i - 1, 0], Forwards[i - 1, 1], Forwards[i - 1, 2], angle);
-        Ups[i, 0] = u[0];
-        Ups[i, 1] = u[1];
-        Ups[i, 2] = u[2];
-    }
-    else //직진 진행
-    {
+    
         var angle = (90 * Data[i, 1] - 90);
         
         var d = rotate_axis(Forwards[i - 1, 0], Forwards[i - 1, 1], Forwards[i - 1, 2], Rights[i - 1, 0], Rights[i - 1, 1], Rights[i - 1, 2], angle);
@@ -192,6 +174,29 @@ for(var i = 1; i &lt; DataLength; i++)
         Rights[i, 2] = Rights[i - 1, 2];
         
         var u = rotate_axis(Ups[i - 1, 0], Ups[i - 1, 1], Ups[i - 1, 2], Rights[i - 1, 0], Rights[i - 1, 1], Rights[i - 1, 2], angle);
+        Ups[i, 0] = u[0];
+        Ups[i, 1] = u[1];
+        Ups[i, 2] = u[2];
+    
+    }
+    else if(Data[i, 0] == 3) //우회전 진행
+    {
+        var angle = 90 - (90 * Data[i, 1]);
+        
+        var d = rotate_axis(Rights[i - 1, 0], Rights[i - 1, 1], Rights[i - 1, 2], Forwards[i - 1, 0], Forwards[i - 1, 1], Forwards[i - 1, 2], angle);
+        Positions[i, 0] = Positions[i - 1, 0] + (Rights[i - 1, 0] * 5) + (d[0] * 5);
+        Positions[i, 1] = Positions[i - 1, 1] + (Rights[i - 1, 1] * 5) + (d[1] * 5);
+        Positions[i, 2] = Positions[i - 1, 2] + (Rights[i - 1, 2] * 5) + (d[2] * 5);
+        
+        Forwards[i, 0] = d[0];
+        Forwards[i, 1] = d[1];
+        Forwards[i, 2] = d[2];
+        
+        Rights[i, 0] = -Forwards[i - 1, 0];
+        Rights[i, 1] = -Forwards[i - 1, 1];
+        Rights[i, 2] = -Forwards[i - 1, 2];
+        
+        var u = rotate_axis(Ups[i - 1, 0], Ups[i - 1, 1], Ups[i - 1, 2], Forwards[i - 1, 0], Forwards[i - 1, 1], Forwards[i - 1, 2], angle);
         Ups[i, 0] = u[0];
         Ups[i, 1] = u[1];
         Ups[i, 2] = u[2];
@@ -349,7 +354,7 @@ obj_Cube.Angle = 0;
 audio_stop_all();
 
 audio_master_gain(1.0);
-audio_play_sound(song_get_object(obj_Jukebox.Selected), 0, false);
+Song = audio_play_sound(song_get_object(obj_Jukebox.Selected), 0, false);
 
 SongStartTime = current_time;
 
@@ -380,7 +385,7 @@ SongStartTime = current_time;
 
 if(IsTileOpening)
 {
-    if(Timeline[TileIndex] &lt; current_time - TileOpenTime &amp;&amp; TileIndex &lt; DataLength - 1)
+    if(Timeline[TileIndex] &lt; current_time - TileOpenTime &amp;&amp; TileIndex &lt; DataLength - 2)
     {
         TileIndex++;
         
@@ -415,7 +420,7 @@ if(IsTileOpening)
 
 if(IsGamePlaying)
 {
-    if(Timeline[CubeIndex] &lt; current_time - GameStartTime &amp;&amp; CubeIndex &lt; DataLength - 1)
+    if(Timeline[CubeIndex] &lt; current_time - GameStartTime &amp;&amp; CubeIndex &lt; DataLength - 2)
     {
         var tile = instance_position_3d(Positions[CubeIndex, 0], Positions[CubeIndex, 1], Positions[CubeIndex, 2], obj_Tile);
         tile.FadeOutSpeed = 0.05;
@@ -511,7 +516,7 @@ if(IsGamePlaying &amp;&amp; CubeIndex &gt; 0)
         {
             if(IsHitted == false)
             {
-                //room_restart();
+                room_restart();
             }
             IsInMissJudgement = true;
             IsHitted = false;
@@ -519,7 +524,7 @@ if(IsGamePlaying &amp;&amp; CubeIndex &gt; 0)
         
         if(hit)
         {
-            //room_restart();
+            room_restart();
         }
     }
     else
@@ -532,7 +537,6 @@ if(IsGamePlaying &amp;&amp; CubeIndex &gt; 0)
         if(hit &amp;&amp; IsHitted == false)
         {
             IsHitted = true;
-
         }
     }
 }
@@ -593,15 +597,84 @@ obj_Camera.TargetUpZ = Ups[CubeIndex, 2];
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///노트 펼치기 시작
+            <string>///타일 펼치기 시작
 
 var currentTime = current_time - SongStartTime;
 
-if(!IsTileOpening &amp;&amp; song_get_startTime(obj_Jukebox.Selected) - TileOpenTimeOffset &lt; currentTime)
+if(!IsTileOpening &amp;&amp; song_get_startTime(obj_Jukebox.Selected) - (OneBeatRate * 8) &lt; currentTime)
 {
     IsTileOpening = true;
     TileOpenTime = current_time;
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///키 입력
+
+var hit = keyboard_check_pressed(vk_anykey) || mouse_check_button_pressed(mb_any);
+
+if(hit)
+{
+    obj_HUD.VignetteRadiusMin = 0.3;
+    obj_HUD.VignetteRadiusMax = 1.1;
+    obj_Camera.Scale = 57;
+    audio_play_sound(snd_hihat, 0, false);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///메트로놈
+
+var currentTime = current_time - SongStartTime;
+
+for(var i = 0; i &lt; 4; i++)
+{
+    if(!IsTicked[i] &amp;&amp; song_get_startTime(obj_Jukebox.Selected) - (OneBeatRate * (3 - i)) &lt; currentTime)
+    {
+        IsTicked[i] = true;
+        if(i == 0) audio_play_sound(snd_tick1, 0, false);
+        else audio_play_sound(snd_tick2, 0, false);
+        
+        if(i == 3) obj_HUD.AssistanceText = "START!";
+        else obj_HUD.AssistanceText = string(3 - i);
+    }
+}
+
+if(CubeIndex == 2) obj_HUD.AssistanceText = "";
 </string>
           </argument>
         </arguments>
@@ -651,15 +724,12 @@ if(IsTileOpening &amp;&amp; !IsGamePlaying &amp;&amp; song_get_startTime(obj_Juk
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///키 입력
+            <string>///클리어
 
-var hit = keyboard_check_pressed(vk_anykey) || mouse_check_button_pressed(mb_any);
-if(hit)
+if(CubeIndex == DataLength - 1)
 {
-    obj_HUD.VignetteRadiusMin = 0.3;
-    obj_HUD.VignetteRadiusMax = 1.1;
-    obj_Camera.Scale = 57;
-    audio_play_sound(snd_hihat, 0, false);
+    obj_HUD.AssistanceText = "Clear!";
+    IsGamePlaying = false;
 }
 </string>
           </argument>

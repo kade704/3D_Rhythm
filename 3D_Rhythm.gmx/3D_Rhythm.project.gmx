@@ -148,8 +148,10 @@
   <NewExtensions/>
   <sounds name="sound">
     <sound>sound\snd_pn35a</sound>
-    <sound>sound\snd_hihat</sound>
     <sound>sound\snd_earofthepig</sound>
+    <sound>sound\snd_hihat</sound>
+    <sound>sound\snd_tick1</sound>
+    <sound>sound\snd_tick2</sound>
   </sounds>
   <sprites name="sprites">
     <sprite>sprites\spr_Tile0</sprite>
