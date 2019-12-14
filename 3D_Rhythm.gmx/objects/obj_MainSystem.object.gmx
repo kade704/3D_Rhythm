@@ -420,17 +420,23 @@ if(IsTileOpening)
 
 if(IsGamePlaying)
 {
-    if(Timeline[CubeIndex] &lt; current_time - GameStartTime &amp;&amp; CubeIndex &lt; DataLength - 2)
+    if(Timeline[CubeIndex] &lt; current_time - GameStartTime &amp;&amp; CubeIndex &lt; DataLength - 1)
     {
-        var tile = instance_position_3d(Positions[CubeIndex, 0], Positions[CubeIndex, 1], Positions[CubeIndex, 2], obj_Tile);
-        tile.FadeOutSpeed = 0.05;
-        with(tile) event_user(1);
-    
+        if(CubeIndex &lt; DataLength - 2)
+        {
+            var tile = instance_position_3d(Positions[CubeIndex, 0], Positions[CubeIndex, 1], Positions[CubeIndex, 2], obj_Tile);
+            tile.FadeOutSpeed = 0.05;
+            with(tile) event_user(1);
+        }
+        
         CubeIndex++;
         
-        obj_Cube.AngleStart = Data[CubeIndex, 1] * 90;
-        obj_Cube.RotateSpeed = obj_Cube.AngleStart / (OneBeatRate / (1000 / fps) * Data[CubeIndex, 1] * Data[CubeIndex, 2]);
-        with(obj_Cube) event_user(0);
+        if(CubeIndex &lt; DataLength - 1)
+        {
+            obj_Cube.AngleStart = Data[CubeIndex, 1] * 90;
+            obj_Cube.RotateSpeed = obj_Cube.AngleStart / (OneBeatRate / (1000 / fps) * Data[CubeIndex, 1] * Data[CubeIndex, 2]);
+            with(obj_Cube) event_user(0);
+        }
     }
 }
 
@@ -456,21 +462,24 @@ if(IsGamePlaying)
             <kind>1</kind>
             <string>///큐브 이동
 
-obj_Cube.PositionX = Positions[CubeIndex, 0];
-obj_Cube.PositionY = Positions[CubeIndex, 1];
-obj_Cube.PositionZ = Positions[CubeIndex, 2];
-
-obj_Cube.ForwardX = Forwards[CubeIndex, 0];
-obj_Cube.ForwardY = Forwards[CubeIndex, 1];
-obj_Cube.ForwardZ = Forwards[CubeIndex, 2];
-
-obj_Cube.RightX = Rights[CubeIndex, 0];
-obj_Cube.RightY = Rights[CubeIndex, 1];
-obj_Cube.RightZ = Rights[CubeIndex, 2];
-
-obj_Cube.UpX = Ups[CubeIndex, 0];
-obj_Cube.UpY = Ups[CubeIndex, 1];
-obj_Cube.UpZ = Ups[CubeIndex, 2];
+if(CubeIndex &lt; DataLength - 1)
+{
+    obj_Cube.PositionX = Positions[CubeIndex, 0];
+    obj_Cube.PositionY = Positions[CubeIndex, 1];
+    obj_Cube.PositionZ = Positions[CubeIndex, 2];
+    
+    obj_Cube.ForwardX = Forwards[CubeIndex, 0];
+    obj_Cube.ForwardY = Forwards[CubeIndex, 1];
+    obj_Cube.ForwardZ = Forwards[CubeIndex, 2];
+    
+    obj_Cube.RightX = Rights[CubeIndex, 0];
+    obj_Cube.RightY = Rights[CubeIndex, 1];
+    obj_Cube.RightZ = Rights[CubeIndex, 2];
+    
+    obj_Cube.UpX = Ups[CubeIndex, 0];
+    obj_Cube.UpY = Ups[CubeIndex, 1];
+    obj_Cube.UpZ = Ups[CubeIndex, 2];
+}
 </string>
           </argument>
         </arguments>
@@ -562,21 +571,24 @@ if(IsGamePlaying &amp;&amp; CubeIndex &gt; 0)
             <kind>1</kind>
             <string>///카메라 이동
 
-obj_Camera.TargetPositionX = Positions[CubeIndex, 0];
-obj_Camera.TargetPositionY = Positions[CubeIndex, 1];
-obj_Camera.TargetPositionZ = Positions[CubeIndex, 2];
-
-obj_Camera.TargetForwardX = Forwards[CubeIndex, 0];
-obj_Camera.TargetForwardY = Forwards[CubeIndex, 1];
-obj_Camera.TargetForwardZ = Forwards[CubeIndex, 2];
-
-obj_Camera.TargetRightX = Rights[CubeIndex, 0];
-obj_Camera.TargetRightY = Rights[CubeIndex, 1];
-obj_Camera.TargetRightZ = Rights[CubeIndex, 2];
-
-obj_Camera.TargetUpX = Ups[CubeIndex, 0];
-obj_Camera.TargetUpY = Ups[CubeIndex, 1];
-obj_Camera.TargetUpZ = Ups[CubeIndex, 2];
+if(CubeIndex &lt; DataLength - 1)
+{
+    obj_Camera.TargetPositionX = Positions[CubeIndex, 0];
+    obj_Camera.TargetPositionY = Positions[CubeIndex, 1];
+    obj_Camera.TargetPositionZ = Positions[CubeIndex, 2];
+    
+    obj_Camera.TargetForwardX = Forwards[CubeIndex, 0];
+    obj_Camera.TargetForwardY = Forwards[CubeIndex, 1];
+    obj_Camera.TargetForwardZ = Forwards[CubeIndex, 2];
+    
+    obj_Camera.TargetRightX = Rights[CubeIndex, 0];
+    obj_Camera.TargetRightY = Rights[CubeIndex, 1];
+    obj_Camera.TargetRightZ = Rights[CubeIndex, 2];
+    
+    obj_Camera.TargetUpX = Ups[CubeIndex, 0];
+    obj_Camera.TargetUpY = Ups[CubeIndex, 1];
+    obj_Camera.TargetUpZ = Ups[CubeIndex, 2];
+}
 </string>
           </argument>
         </arguments>
