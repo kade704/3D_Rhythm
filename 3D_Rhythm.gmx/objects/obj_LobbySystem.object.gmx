@@ -161,6 +161,7 @@ obj_Camera.TargetScale = 65;
 obj_HUD.Text = "";
 obj_HUD.TargetVignetteRadiusMin = 2.0;
 obj_HUD.TargetVignetteRadiusMax = 2.0;
+obj_HUD.AssistanceText = "";
 </string>
           </argument>
         </arguments>
